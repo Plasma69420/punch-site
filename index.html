@@ -189,8 +189,6 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 .caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);margin-left:3px;vertical-align:-.18em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .card{position:relative}
-.card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(232,163,92,.16),transparent 45%)}
-.card:hover::before{opacity:1}
 .tile,.presence{will-change:transform}
 #tabs{position:relative}
 #tabs a.active{border-color:transparent}
@@ -642,13 +640,6 @@ const trackEl = $("track"); trackEl.innerHTML += trackEl.innerHTML;
 
 // mouse effects (desktop only)
 if (fineHover && !reduceMotion) {
-  // spotlight follows the cursor on every card
-  document.addEventListener("pointermove", e => {
-    const c = e.target.closest && e.target.closest(".card"); if (!c) return;
-    const r = c.getBoundingClientRect();
-    c.style.setProperty("--mx", (e.clientX - r.left) + "px");
-    c.style.setProperty("--my", (e.clientY - r.top) + "px");
-  });
   // 3D tilt on the project cards and the Discord card
   document.querySelectorAll(".tile, .presence").forEach(el => {
     el.addEventListener("pointermove", e => {
