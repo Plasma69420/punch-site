@@ -453,17 +453,28 @@ function show(id) {
   const m = document.getElementById("mini");
   if (m) m.classList.toggle("on", id !== "home" && !window.noAudio);
 }
-// works even when the URL hash can't change (file previews, data: URLs)
-document.addEventListener("click", e => {
-  const a = e.target.closest('a[href^="#"]');
-  if (!a) return;
-  e.preventDefault();
+// clean URLs: /about instead of /#about (404.html sends direct links back here)
+const pathOf = id => id === "home" ? "/" : "/" + id;
+const idOfPath = () => { const p = location.pathname.replace(/^\/+|\/+$/g, ""); return views.includes(p) ? p : "home"; };
+(function () {
+  const q = new URLSearchParams(location.search).get("p"), hh = location.hash.slice(1);
+  const want = views.includes(q) ? q : views.includes(hh) ? hh : null;
+  if (want) { try { history.replaceState(null, "", pathOf(want)); } catch (_) {} }
+})();
+document.querySelectorAll('a[href^="#"]').forEach(a => {
   const id = a.getAttribute("href").slice(1);
-  show(id);
-  try { history.replaceState(null, "", "#" + id); } catch (_) {}
+  a.dataset.route = id; a.setAttribute("href", pathOf(id));
 });
-addEventListener("hashchange", () => show(location.hash.slice(1)));
-show(location.hash.slice(1));
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[data-route]");
+  if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+  e.preventDefault();
+  const id = a.dataset.route;
+  show(id);
+  try { history.pushState(null, "", pathOf(id)); } catch (_) {}
+});
+addEventListener("popstate", () => show(idOfPath()));
+show(idOfPath());
 
 /* ---------- live Discord presence via Lanyard ---------- */
 const $ = id => document.getElementById(id);

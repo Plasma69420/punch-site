@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Punch</title>
+<meta name="robots" content="noindex">
+<script>
+  // GitHub Pages has no /about file, so send the visitor to the home page with the tab name;
+  // index.html then puts the clean URL back and opens that tab.
+  var l = location;
+  l.replace(l.protocol + "//" + l.host + "/?p=" + encodeURIComponent(l.pathname.replace(/^\/+|\/+$/g, "")));
+</script>
+</head>
+<body style="background:#0b0b0d"></body>
+</html>
