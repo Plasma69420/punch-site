@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Punch | Rec Room Projects</title>
+<meta name="description" content="Punch, 16. I make Rec Room projects like Coffee.Net. DMs always open.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b0d; --panel:#131316; --line:#232328; --text:#f2f1ee; --muted:#8d8d95;
+  --accent:#e8a35c; --accent-ink:#1a1206;
+  --green:#3ba55d; --yellow:#faa61a; --red:#ed4245; --grey:#747f8d;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+main{flex:1}
+.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
+.glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(700px 400px at 20% 5%,rgba(232,163,92,.09),transparent 70%),radial-gradient(500px 400px at 90% 40%,rgba(232,163,92,.05),transparent 70%);z-index:-1}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Space Grotesk',sans-serif;letter-spacing:.08em;font-weight:600}
+.muted{color:var(--muted)} .small{font-size:.8rem}
+
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:28px 0 20px;border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:1.6rem;letter-spacing:-.04em}
+.logo i{color:var(--accent);font-style:normal}
+#tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+#tabs a{padding:8px 12px;color:var(--muted);font-size:.95rem;border-bottom:2px solid transparent;transition:.15s}
+#tabs a:hover{color:var(--text)}
+#tabs a.active{color:var(--text);border-color:var(--accent)}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:14px 22px;border-radius:10px;font-weight:600;font-size:.95rem;transition:transform .15s,background .15s,border-color .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-sm{padding:10px 16px;font-size:.9rem}
+.btn-solid{background:var(--accent);color:var(--accent-ink)}
+.btn-solid:hover{background:#f1b674}
+.btn-ghost{border:1px solid var(--line);background:var(--panel)}
+.btn-ghost:hover{border-color:var(--accent)}
+
+.view{padding:64px 0 72px;animation:in .35s ease both}
+.view[hidden]{display:none}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.eyebrow{color:var(--accent);font-size:.78rem;letter-spacing:.14em;margin-bottom:22px;display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(59,165,93,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1,h2,h3,.logo,.p-name{font-family:'Space Grotesk','DM Sans',sans-serif}
+h1{font-size:clamp(2.6rem,6.5vw,4.8rem);line-height:1.02;letter-spacing:-.035em;font-weight:700}
+h1 em{color:var(--accent);font-style:normal}
+.h-md{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:20px}
+.lead{color:#b3b3ba;font-size:1.15rem;max-width:56ch;margin:22px 0 30px}
+.lead b{color:var(--text)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.mt{margin-top:48px}
+
+.hero{display:grid;grid-template-columns:1.3fr .8fr;gap:56px;align-items:center;margin-bottom:96px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px}
+
+/* presence */
+.presence{padding:18px;box-shadow:0 30px 60px -30px #000}
+.card-top{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-bottom:16px}
+.p-head{display:flex;gap:14px;align-items:center}
+.avatar-wrap{position:relative;width:72px;height:72px;flex:none}
+.avatar-wrap img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#262a33}
+.dot{position:absolute;right:-1px;bottom:-1px;width:20px;height:20px;border-radius:50%;border:4px solid var(--panel);background:var(--grey)}
+.dot.online{background:var(--green)} .dot.idle{background:var(--yellow)} .dot.dnd{background:var(--red)}
+.p-name{font-size:1.35rem;font-weight:700;letter-spacing:-.02em}
+.p-status{margin-top:16px;display:flex;flex-direction:column;gap:2px;font-weight:600}
+.p-status .muted{font-weight:400;font-size:.9rem}
+.p-activity{margin-top:14px;padding:12px;border-radius:12px;background:#0e0e11;border:1px solid var(--line);display:flex;gap:12px;align-items:center;font-size:.88rem}
+.p-activity[hidden]{display:none}
+.p-activity img{width:48px;height:48px;border-radius:8px;object-fit:cover}
+.p-activity b{display:block;font-size:.92rem}
+.p-activity span{color:var(--muted)}
+.p-activity div{min-width:0}
+.p-activity div *{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.p-link{display:flex;justify-content:space-between;margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-weight:600;font-size:.9rem}
+.p-link:hover span{color:var(--accent)}
+
+.section-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+.section-head h2{font-size:1.5rem;letter-spacing:-.03em}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+.grid2.mt{margin-top:48px}
+.tile{padding:24px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s}
+a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
+.tile .tag{color:var(--accent);font-size:.7rem}
+.tile h3{font-size:1.4rem;letter-spacing:-.03em;display:flex;justify-content:space-between}
+.tile h3 i{font-style:normal;color:var(--muted)}
+.tile p{color:#a6a6ae;font-size:.95rem}
+
+.about{display:grid;grid-template-columns:1.4fr .6fr;gap:40px;margin-top:36px;align-items:start}
+.prose p{color:#b8b8bf;font-size:1.1rem;margin-bottom:18px}
+.prose b{color:var(--text)}
+.facts{padding:8px 22px}
+.facts div{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.facts div:last-child{border:0}
+.facts b{font-size:1.05rem}
+
+.foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:28px 0 36px;border-top:1px solid var(--line)}
+.foot .logo{font-size:1.3rem}
+
+@media(max-width:860px){
+  .nav{flex-wrap:wrap}
+  #tabs{order:3;width:100%;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}
+  #tabs a{white-space:nowrap}
+  .hero,.about,.grid3,.grid2{grid-template-columns:1fr}
+  .hero{gap:40px;margin-bottom:64px}
+  .view{padding-top:40px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+
+<header class="wrap nav">
+  <a class="logo" href="#home">punch<i>.</i></a>
+  <nav id="tabs" aria-label="Main">
+    <a href="#home" data-tab="home">Home</a>
+    <a href="#development" data-tab="development">Development</a>
+    <a href="#coffeenet" data-tab="coffeenet">Coffee.Net</a>
+    <a href="#larpcentral" data-tab="larpcentral">Larp Central</a>
+    <a href="#about" data-tab="about">About</a>
+  </nav>
+  <a class="btn btn-solid btn-sm" href="https://discord.gg/coffeenet" target="_blank" rel="noopener">Join Coffee.Net ↗</a>
+</header>
+
+<main class="wrap">
+
+<!-- HOME -->
+<section class="view" id="view-home">
+  <div class="hero">
+    <div class="hero-text">
+      <p class="eyebrow"><span class="pulse"></span> DMs always open</p>
+      <h1>Hey, I’m <em>Punch.</em><br>I make Rec Room<br>projects.</h1>
+      <p class="lead">I’m 16 and I make Rec Room projects, like <b>Coffee.Net</b>. I work on a few things at once, I keep everything professional, and my DMs are always open if you want to talk.</p>
+      <div class="actions">
+        <a class="btn btn-solid" href="#development">See my work</a>
+        <a class="btn btn-ghost" href="#about">About me</a>
+      </div>
+      <p class="mono muted small">16 years old / 4 years on Discord</p>
+    </div>
+
+    <aside class="card presence" id="presence" aria-live="polite">
+      <div class="card-top mono"><span>LIVE DISCORD STATUS</span><span id="conn">CONNECTING</span></div>
+      <div class="p-head">
+        <div class="avatar-wrap">
+          <img id="p-avatar" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Crect width='4' height='4' fill='%23262a33'/%3E%3C/svg%3E">
+          <span class="dot offline" id="p-dot"></span>
+        </div>
+        <div>
+          <div class="p-name" id="p-name">Punch</div>
+          <div class="mono muted small" id="p-user">@trustedsellerof2026</div>
+        </div>
+      </div>
+      <div class="p-status"><span id="p-state">Offline</span><span class="muted" id="p-custom"></span></div>
+      <div class="p-activity" id="p-activity" hidden></div>
+      <a class="p-link" href="https://discord.gg/coffeenet" target="_blank" rel="noopener">Message me on Discord <span>↗</span></a>
+    </aside>
+  </div>
+
+  <div class="section-head"><h2>My stuff</h2><span class="mono muted small">PROJECTS</span></div>
+  <div class="grid3">
+    <a class="card tile" href="#coffeenet"><span class="mono tag">01 / PROJECT</span><h3>Coffee.Net <i>↗</i></h3><p>The Rec Room project I put the most time into. It has its own website and its own Discord server.</p></a>
+    <a class="card tile" href="#development"><span class="mono tag">02 / DEVELOPMENT</span><h3>Development <i>↗</i></h3><p>I make Rec Room projects and I’m usually working on more than one at a time. This is where it all breaks down.</p></a>
+    <a class="card tile" href="#larpcentral"><span class="mono tag">03 / COMMUNITY</span><h3>Larp Central <i>↗</i></h3><p>Larp Central is a community I founded. It’s all about larping videos and related content, and it’s something I started myself.</p></a>
+  </div>
+</section>
+
+<!-- DEVELOPMENT -->
+<section class="view" id="view-development" hidden>
+  <p class="eyebrow mono">DEVELOPMENT</p>
+  <h1 class="h-md">Rec Room <em>projects.</em></h1>
+  <p class="lead">I’m 16 and I make Rec Room projects. I usually work on multiple things at once, and Coffee.Net is the main one. Here’s how I work and where to find everything.</p>
+  <div class="grid2">
+    <div class="card tile"><span class="mono tag">FOCUS</span><h3>Rec Room</h3><p>Everything I make is for Rec Room. I don’t just play it, I make projects for it, and Coffee.Net is the biggest one so far.</p></div>
+    <div class="card tile"><span class="mono tag">MAIN PROJECT</span><h3>Coffee.Net</h3><p>Coffee.Net is the project I put most of my time into. It has a website at coffeenet.site and a Discord server you can join.</p></div>
+    <div class="card tile"><span class="mono tag">HOW I WORK</span><h3>Professional</h3><p>I keep things professional. If you message me about a project or an idea, you’ll get a proper reply.</p></div>
+    <div class="card tile"><span class="mono tag">CONTACT</span><h3>DMs open</h3><p>My DMs are always open. If you have a question, an idea, or want to work on something, message me on Discord anytime.</p></div>
+  </div>
+</section>
+
+<!-- COFFEE.NET -->
+<section class="view" id="view-coffeenet" hidden>
+  <p class="eyebrow mono">PROJECT</p>
+  <h1 class="h-md"><em>Coffee.Net</em></h1>
+  <p class="lead">Coffee.Net is a Rec Room project that I work on. It’s the biggest thing I’m working on right now. You can check out the website or join the Discord server to see what it’s about.</p>
+  <div class="actions">
+    <a class="btn btn-solid" href="https://coffeenet.site" target="_blank" rel="noopener">Visit coffeenet.site ↗</a>
+    <a class="btn btn-ghost" href="https://discord.gg/coffeenet" target="_blank" rel="noopener">discord.gg/coffeenet ↗</a>
+  </div>
+  <div class="grid3 mt">
+    <div class="card tile"><span class="mono tag">WEBSITE</span><h3>coffeenet.site</h3><p>The official Coffee.Net website. Go here to see what Coffee.Net is and find out more about it.</p></div>
+    <div class="card tile"><span class="mono tag">COMMUNITY</span><h3>Discord</h3><p>The Coffee.Net Discord server at discord.gg/coffeenet. Join it to be part of the community.</p></div>
+    <div class="card tile"><span class="mono tag">MY PART</span><h3>Development</h3><p>I work on Coffee.Net as a developer. I make the project and help keep it going.</p></div>
+  </div>
+</section>
+
+<!-- LARP CENTRAL -->
+<section class="view" id="view-larpcentral" hidden>
+  <p class="eyebrow mono">COMMUNITY</p>
+  <h1 class="h-md"><em>Larp Central</em></h1>
+  <p class="lead">Larp Central is a community I founded. It’s all about larping videos and related content, and it’s something I started myself.</p>
+  <div class="grid2 mt">
+    <div class="card tile"><span class="mono tag">FOUNDER</span><h3>Started by me</h3><p>I’m the founder. I came up with Larp Central and I’m the one who set it up and runs it.</p></div>
+    <div class="card tile"><span class="mono tag">WHAT’S THERE</span><h3>Larping videos</h3><p>The community is centered on larping videos and related content, so if that’s your thing, it’s the place to be.</p></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="view" id="view-about" hidden>
+  <p class="eyebrow mono">ABOUT ME</p>
+  <h1 class="h-md">Hi, I’m <em>Punch.</em></h1>
+  <div class="about">
+    <div class="prose">
+      <p>I’m 16 and I make Rec Room projects, like <b>Coffee.Net</b>. I work on multiple things at once, so there’s usually something going on. Coffee.Net is the main one, and I also founded a community called Larp Central.</p>
+      <p>I’ve been on Discord for 4 years, even though I got terminated once. Discord gave me random limitations because of how bad the platform has become.</p>
+      <p>I keep things professional and my DMs are always open, so feel free to message me about a project, a question, or anything else. You can also see my live Discord status on the home page.</p>
+    </div>
+    <div class="card facts">
+      <div><span class="mono muted small">AGE</span><b>16</b></div>
+      <div><span class="mono muted small">ON DISCORD</span><b>4 years</b></div>
+      <div><span class="mono muted small">MAKES</span><b>Rec Room projects</b></div>
+      <div><span class="mono muted small">DMS</span><b>Always open</b></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap foot">
+  <a class="logo" href="#home">punch<i>.</i></a>
+  <span class="muted small">© 2026 Punch</span>
+  <a class="muted small" href="https://discord.gg/coffeenet" target="_blank" rel="noopener">Discord ↗</a>
+</footer>
+
+<script>
+/* ============ CONFIG ============
+   1. Join https://discord.gg/lanyard  (required, it's what lets the site see your status)
+   2. Paste your Discord user ID below (Discord > Settings > Advanced > Developer Mode,
+      then right-click your profile > Copy User ID)                                        */
+const DISCORD_ID = "1495161901330464801";
+
+/* ---------- tabs (hash routing) ---------- */
+const views = ["home", "development", "coffeenet", "larpcentral", "about"];
+function show(id) {
+  if (!views.includes(id)) id = "home";
+  views.forEach(v => document.getElementById("view-" + v).hidden = v !== id);
+  document.querySelectorAll("#tabs a").forEach(a => a.classList.toggle("active", a.dataset.tab === id));
+  window.scrollTo(0, 0);
+}
+// works even when the URL hash can't change (file previews, data: URLs)
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  e.preventDefault();
+  const id = a.getAttribute("href").slice(1);
+  show(id);
+  try { history.replaceState(null, "", "#" + id); } catch (_) {}
+});
+addEventListener("hashchange", () => show(location.hash.slice(1)));
+show(location.hash.slice(1));
+
+/* ---------- live Discord presence via Lanyard ---------- */
+const $ = id => document.getElementById(id);
+const LABELS = { online: "Online", idle: "Idle", dnd: "Do not disturb", offline: "Offline" };
+
+function render(d) {
+  const u = d.discord_user || {};
+  $("p-name").textContent = u.global_name || u.display_name || u.username || "Punch";
+  $("p-user").textContent = u.username ? "@" + u.username : "";
+  if (u.avatar) {
+    const ext = u.avatar.startsWith("a_") ? "gif" : "png";
+    $("p-avatar").src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${ext}?size=256`;
+  }
+  const s = d.discord_status || "offline";
+  $("p-dot").className = "dot " + s;
+  $("p-state").textContent = LABELS[s] || s;
+
+  const acts = d.activities || [];
+  const custom = acts.find(a => a.type === 4);
+  $("p-custom").textContent = custom ? [custom.emoji && custom.emoji.name, custom.state].filter(Boolean).join(" ") : "";
+
+  const box = $("p-activity");
+  const spotify = d.listening_to_spotify && d.spotify;
+  const game = acts.find(a => a.type === 0);
+  box.replaceChildren();
+  if (spotify) {
+    box.hidden = false;
+    box.append(img(spotify.album_art_url), text("Listening to Spotify", spotify.song, spotify.artist));
+  } else if (game) {
+    box.hidden = false;
+    const id = game.application_id;
+    const asset = game.assets && game.assets.large_image;
+    const src = asset && (asset.startsWith("mp:external/") ? "https://media.discordapp.net/external/" + asset.slice(12) : `https://cdn.discordapp.com/app-assets/${id}/${asset}.png`);
+    if (src) box.append(img(src));
+    box.append(text("Playing", game.name, game.details || game.state || ""));
+  } else box.hidden = true;
+}
+function img(src) { const i = document.createElement("img"); i.src = src; i.alt = ""; return i; }
+function text(kind, title, sub) {
+  const d = document.createElement("div");
+  const k = document.createElement("span"); k.textContent = kind;
+  const b = document.createElement("b"); b.textContent = title;
+  const s = document.createElement("span"); s.textContent = sub;
+  d.append(k, b, s);
+  return d;
+}
+const setConn = t => $("conn").textContent = t;
+
+function start() {
+  if (!DISCORD_ID) { setConn("NOT SET UP"); $("p-state").textContent = "Status not connected"; $("p-custom").textContent = "Add your Discord ID in index.html"; return; }
+
+  let ws, hb, retry = 1000;
+  const rest = () => fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => {});
+  rest();
+
+  function connect() {
+    ws = new WebSocket("wss://api.lanyard.rest/socket");
+    ws.onmessage = e => {
+      const m = JSON.parse(e.data);
+      if (m.op === 1) {
+        ws.send(JSON.stringify({ op: 2, d: { subscribe_to_id: DISCORD_ID } }));
+        clearInterval(hb);
+        hb = setInterval(() => ws.readyState === 1 && ws.send(JSON.stringify({ op: 3 })), m.d.heartbeat_interval);
+      } else if (m.op === 0) {
+        retry = 1000;
+        setConn("LIVE");
+        render(m.d[DISCORD_ID] || m.d);
+      }
+    };
+    ws.onclose = () => { clearInterval(hb); setConn("RECONNECTING"); setTimeout(connect, retry = Math.min(retry * 2, 30000)); };
+  }
+  connect();
+}
+start();
+
+</script>
+</body>
+</html>
