@@ -176,6 +176,50 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 .faq details[open] summary::after{content:"–"}
 .faq p{color:#b3b3ba;margin-top:12px}
 @media(max-width:860px){.player{right:16px;bottom:12px}}
+
+/* ===== motion ===== */
+.glow{background:none!important;overflow:hidden}
+.glow::before,.glow::after{content:"";position:absolute;border-radius:50%;filter:blur(90px)}
+.glow::before{width:55vmax;height:55vmax;left:-15vmax;top:-22vmax;background:radial-gradient(circle,rgba(232,163,92,.30),transparent 65%);animation:drift1 22s ease-in-out infinite alternate}
+.glow::after{width:45vmax;height:45vmax;right:-14vmax;top:28vh;background:radial-gradient(circle,rgba(210,95,60,.20),transparent 65%);animation:drift2 28s ease-in-out infinite alternate}
+@keyframes drift1{to{transform:translate(18vmax,12vmax) scale(1.2)}}
+@keyframes drift2{to{transform:translate(-14vmax,-10vmax) scale(1.15)}}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:radial-gradient(ellipse at 50% 25%,#000,transparent 70%);mask-image:radial-gradient(ellipse at 50% 25%,#000,transparent 70%)}
+@keyframes up{from{opacity:0;transform:translateY(26px);filter:blur(6px)}}
+@keyframes rise{from{transform:translateY(112%) rotate(4deg)}}
+.view>:not(.grid3):not(.grid2):not(.faq){animation:up .8s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--d,0)*80ms)}
+.grid3>*,.grid2>*,.faq>*{animation:up .8s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc((var(--d,0) + 1)*80ms + var(--k,0)*90ms)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.04em .02em .16em;margin:-.04em -.02em -.16em}
+.w>span{display:inline-block;animation:rise .9s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i)*90ms + 120ms)}
+.role{margin-top:20px;font-size:1.15rem;color:var(--muted);font-family:'Space Grotesk',sans-serif;min-height:1.6em}
+.role b{color:var(--accent);font-weight:600}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);margin-left:3px;vertical-align:-.18em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.card{position:relative}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(232,163,92,.16),transparent 45%)}
+.card:hover::before{opacity:1}
+.tile,.presence{will-change:transform}
+#tabs{position:relative}
+#tabs a.active{border-color:transparent}
+.ind{position:absolute;left:0;bottom:0;height:2px;border-radius:2px;background:var(--accent);box-shadow:0 0 14px var(--accent);transition:transform .45s cubic-bezier(.4,0,.2,1),width .45s cubic-bezier(.4,0,.2,1)}
+.logo i{display:inline-block}
+.logo:hover i{animation:hop .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes hop{40%{transform:translateY(-.35em)}}
+.marquee{overflow:hidden;margin:-30px 0 72px;padding:18px 0;border-block:1px solid var(--line);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.track{display:flex;width:max-content;animation:scroll 38s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span,.track i{margin-right:38px;white-space:nowrap}
+.track span{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:600;color:#6e6e77;transition:color .2s}
+.track span:hover{color:var(--accent)}
+.track i{color:var(--accent);font-style:normal}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.eq{position:absolute;left:10px;bottom:10px;display:flex;gap:3px;align-items:flex-end;height:20px;opacity:0;transition:opacity .3s}
+.mp.playing .eq{opacity:1}
+.eq i{display:block;width:3px;height:30%;border-radius:2px;background:var(--accent);animation:eq .9s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}.eq i:nth-child(4){animation-delay:-.15s}
+@keyframes eq{50%{height:100%}}
+.mp.playing .mp-play{animation:ring 1.8s ease-out infinite}
+@keyframes ring{from{box-shadow:0 0 0 0 rgba(232,163,92,.55)}to{box-shadow:0 0 0 16px rgba(232,163,92,0)}}
 </style>
 </head>
 <body>
@@ -203,6 +247,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
     <div class="hero-text">
       <p class="eyebrow"><span class="pulse"></span> DMs always open</p>
       <h1>Hey, I’m <em>Punch.</em><br>I make Rec Room<br>projects.</h1>
+      <p class="role">I’m a <b id="role"></b><i class="caret"></i></p>
       <p class="lead">I’m 16 and I make Rec Room projects, like <b>Coffee.Net</b>. I work on a few things at once, I keep everything professional, and my DMs are always open if you want to talk.</p>
       <div class="actions">
         <a class="btn btn-solid" href="#development">See my work</a>
@@ -230,7 +275,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
     </aside>
 
       <div class="card mp" id="player" role="region" aria-label="Music player">
-        <div class="mp-art"><div class="mp-cov"><img src="music/cover.png" alt="Cover art for Neoperreo (Super Slowed)"></div></div>
+        <div class="mp-art"><div class="mp-cov"><img src="music/cover.png" alt="Cover art for Neoperreo (Super Slowed)"><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div></div>
         <div class="mp-top">
           <div class="mp-meta"><div class="mp-title">Neoperreo (Super Slowed)</div><div class="mp-artist">Secret Society</div></div>
           <button class="mp-ic" id="mp-heart" aria-label="Like" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path class="fill" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
@@ -250,6 +295,10 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
       </div>
     </div>
   </div>
+
+  <div class="marquee" aria-hidden="true"><div class="track" id="track">
+    <span>Rec Room</span><i>✦</i><span>Coffee.Net</span><i>✦</i><span>Larp Central</span><i>✦</i><span>C#</span><i>✦</i><span>C++</span><i>✦</i><span>Python</span><i>✦</i><span>JavaScript</span><i>✦</i><span>Moderation</span><i>✦</i><span>Paper trading</span><i>✦</i><span>History</span><i>✦</i>
+  </div></div>
 
   <div class="section-head"><h2>My stuff</h2><span class="mono muted small">PROJECTS</span></div>
   <div class="grid3">
@@ -509,6 +558,99 @@ const heart = $("mp-heart");
 try { if (localStorage.getItem("punch-like") === "1") { heart.classList.add("on"); heart.setAttribute("aria-pressed", "true"); } } catch (_) {}
 heart.onclick = () => { const on = heart.classList.toggle("on"); heart.setAttribute("aria-pressed", on); try { localStorage.setItem("punch-like", on ? "1" : "0"); } catch (_) {} };
 au.onerror = () => { pl.hidden = true; window.noAudio = true; mini.classList.remove("on"); };
+
+/* ---------- motion ---------- */
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const fineHover = matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+// headline: words rise in one by one (replays every time a tab opens)
+function splitWords(h) {
+  let n = 0;
+  h.setAttribute("aria-label", h.textContent);
+  (function walk(node) {
+    [...node.childNodes].forEach(c => {
+      if (c.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(t => {
+          if (!t) return;
+          if (/^\s+$/.test(t)) { frag.append(t); return; }
+          const w = document.createElement("span"); w.className = "w"; w.setAttribute("aria-hidden", "true");
+          const s = document.createElement("span"); s.style.setProperty("--i", n++); s.textContent = t;
+          w.append(s); frag.append(w);
+        });
+        c.replaceWith(frag);
+      } else if (c.nodeType === 1 && c.tagName !== "BR") walk(c);
+    });
+  })(h);
+}
+document.querySelectorAll("h1").forEach(splitWords);
+
+// stagger indexes for the section / card entrance
+document.querySelectorAll(".view").forEach(v => {
+  [...v.children].forEach((c, i) => c.style.setProperty("--d", i));
+  v.querySelectorAll(".grid3, .grid2, .faq").forEach(g => [...g.children].forEach((c, i) => c.style.setProperty("--k", i)));
+});
+
+// sliding tab underline
+const tabsEl = $("tabs"), ind = document.createElement("span");
+ind.className = "ind"; tabsEl.append(ind);
+function moveInd() {
+  const a = tabsEl.querySelector("a.active"); if (!a) return;
+  ind.style.width = a.offsetWidth + "px";
+  ind.style.transform = "translateX(" + a.offsetLeft + "px)";
+}
+const _show = show;
+show = function (id) { _show(id); moveInd(); };
+moveInd(); addEventListener("resize", moveInd);
+if (document.fonts) document.fonts.ready.then(moveInd);
+
+// typing role line
+const roleEl = $("role"), roles = ["Rec Room creator", "developer", "moderator", "paper trader", "history nerd", "tech nerd"];
+if (reduceMotion) { roleEl.textContent = roles[0]; }
+else {
+  let wi = 0, ci = 0, del = false;
+  (function tick() {
+    const w = roles[wi];
+    roleEl.textContent = w.slice(0, ci);
+    if (!del && ci === w.length) { del = true; return setTimeout(tick, 1700); }
+    if (del && ci === 0) { del = false; wi = (wi + 1) % roles.length; }
+    ci += del ? -1 : 1;
+    setTimeout(tick, del ? 38 : 80);
+  })();
+}
+
+// marquee: duplicate the strip so it loops seamlessly
+const trackEl = $("track"); trackEl.innerHTML += trackEl.innerHTML;
+
+// mouse effects (desktop only)
+if (fineHover && !reduceMotion) {
+  // spotlight follows the cursor on every card
+  document.addEventListener("pointermove", e => {
+    const c = e.target.closest && e.target.closest(".card"); if (!c) return;
+    const r = c.getBoundingClientRect();
+    c.style.setProperty("--mx", (e.clientX - r.left) + "px");
+    c.style.setProperty("--my", (e.clientY - r.top) + "px");
+  });
+  // 3D tilt on the project cards and the Discord card
+  document.querySelectorAll(".tile, .presence").forEach(el => {
+    el.addEventListener("pointermove", e => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transition = "transform .12s ease-out, border-color .2s";
+      el.style.transform = "perspective(900px) rotateX(" + (-y * 7) + "deg) rotateY(" + (x * 7) + "deg) translateY(-3px)";
+    });
+    el.addEventListener("pointerleave", () => { el.style.transition = "transform .5s cubic-bezier(.2,.8,.2,1), border-color .2s"; el.style.transform = ""; });
+  });
+  // magnetic buttons
+  document.querySelectorAll(".btn").forEach(b => {
+    b.addEventListener("pointermove", e => {
+      const r = b.getBoundingClientRect();
+      const x = (e.clientX - (r.left + r.width / 2)) * 0.22, y = (e.clientY - (r.top + r.height / 2)) * 0.32;
+      b.style.transform = "translate(" + x + "px," + y + "px)";
+    });
+    b.addEventListener("pointerleave", () => { b.style.transform = ""; });
+  });
+}
 </script>
 </body>
 </html>
