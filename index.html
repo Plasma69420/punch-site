@@ -3,8 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Punch | Rec Room Projects</title>
-<meta name="description" content="Punch, 16. I make Rec Room projects like Coffee.Net. DMs always open.">
+<title>Punch</title>
+<meta name="description" content="Hey, I’m Punch. I’m 16 and I make Rec Room projects like Coffee.Net, and I founded Larp Central. Live Discord status, and my DMs are always open.">
+<meta name="theme-color" content="#e8a35c">
+<meta name="author" content="Punch">
+<link rel="canonical" href="https://heyimpunch.xyz/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Punch">
+<meta property="og:title" content="Punch">
+<meta property="og:description" content="I’m 16 and I make Rec Room projects like Coffee.Net, and I founded Larp Central. Check my live Discord status and reach out, my DMs are always open.">
+<meta property="og:url" content="https://heyimpunch.xyz/">
+<meta property="og:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=512">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Punch">
+<meta name="twitter:description" content="I’m 16 and I make Rec Room projects like Coffee.Net, and I founded Larp Central. My DMs are always open.">
+<meta name="twitter:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=512">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -113,6 +126,35 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
+
+/* music player */
+.player{position:fixed;right:24px;bottom:24px;z-index:50;width:min(360px,100% - 32px);padding:14px;display:grid;grid-template-columns:56px 1fr;gap:10px 14px;align-items:center;background:rgba(19,19,22,.92);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 50px -20px #000}
+.player[hidden]{display:none}
+.cover{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#e8a35c,#7a3b1d 60%,#1a1206);display:grid;place-items:center;font-size:1.5rem;color:#1a1206}
+.player.playing .cover{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:scale(1.07) rotate(-3deg)}}
+.pl-meta{min-width:0}
+.pl-title{font-weight:600;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-artist{font-size:.8rem;color:var(--muted)}
+.pl-row{grid-column:1/-1;display:flex;align-items:center;gap:10px}
+.pl-btn{flex:none;width:38px;height:38px;border-radius:50%;border:0;background:var(--accent);color:var(--accent-ink);font-size:.9rem;cursor:pointer;transition:transform .15s}
+.pl-btn:hover{transform:scale(1.08)}
+.pl-btn.ghost{background:transparent;color:var(--muted);width:30px;height:30px;font-size:1.2rem;margin-left:auto}
+.pl-time{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;min-width:32px;font-family:'Space Grotesk',sans-serif;letter-spacing:.06em}
+.pl-row input[type=range]{flex:1;min-width:0;accent-color:var(--accent);cursor:pointer}
+.pl-row .pl-vol{flex:0 0 110px}
+.player.min .pl-row.vol{display:none}
+.foot{padding-bottom:120px}
+/* links + faq */
+.faq{margin-top:36px;max-width:820px}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:12px;transition:border-color .2s}
+.faq details[open],.faq details:hover{border-color:var(--accent)}
+.faq summary{cursor:pointer;font-weight:600;font-size:1.1rem;font-family:'Space Grotesk',sans-serif;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-size:1.3rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:#b3b3ba;margin-top:12px}
+@media(max-width:860px){.player{right:16px;bottom:12px}}
 </style>
 </head>
 <body>
@@ -126,6 +168,8 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
     <a href="#coffeenet" data-tab="coffeenet">Coffee.Net</a>
     <a href="#larpcentral" data-tab="larpcentral">Larp Central</a>
     <a href="#about" data-tab="about">About</a>
+    <a href="#links" data-tab="links">Links</a>
+    <a href="#faq" data-tab="faq">FAQ</a>
   </nav>
   <a class="btn btn-solid btn-sm" href="https://discord.gg/coffeenet" target="_blank" rel="noopener">Join Coffee.Net ↗</a>
 </header>
@@ -231,6 +275,34 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
   </div>
 </section>
 
+
+<!-- LINKS -->
+<section class="view" id="view-links" hidden>
+  <p class="eyebrow mono">LINKS</p>
+  <h1 class="h-md">Find <em>me.</em></h1>
+  <p class="lead">Everything in one place. If you want to talk to me, Discord is the fastest way, and my DMs are always open.</p>
+  <div class="grid3 mt">
+    <a class="card tile" href="https://discord.gg/coffeenet" target="_blank" rel="noopener"><span class="mono tag">DISCORD</span><h3>Coffee.Net server <i>↗</i></h3><p>Join the Coffee.Net Discord server at discord.gg/coffeenet.</p></a>
+    <a class="card tile" href="https://coffeenet.site" target="_blank" rel="noopener"><span class="mono tag">WEBSITE</span><h3>coffeenet.site <i>↗</i></h3><p>The official Coffee.Net website.</p></a>
+    <a class="card tile" href="#larpcentral"><span class="mono tag">COMMUNITY</span><h3>Larp Central <i>↗</i></h3><p>The community I founded for larping videos and related content.</p></a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="view" id="view-faq" hidden>
+  <p class="eyebrow mono">FAQ</p>
+  <h1 class="h-md">Quick <em>answers.</em></h1>
+  <div class="faq">
+    <details open><summary>How old are you?</summary><p>I’m 16.</p></details>
+    <details><summary>What do you make?</summary><p>I make Rec Room projects, like Coffee.Net. I usually work on multiple things at once.</p></details>
+    <details><summary>What is Coffee.Net?</summary><p>Coffee.Net is a Rec Room project that I work on. It has a website at coffeenet.site and a Discord server at discord.gg/coffeenet.</p></details>
+    <details><summary>What is Larp Central?</summary><p>A community I founded. It’s all about larping videos and related content.</p></details>
+    <details><summary>Can I DM you?</summary><p>Yes. My DMs are always open, so message me on Discord anytime.</p></details>
+    <details><summary>How long have you been on Discord?</summary><p>4 years. I did get terminated once, because Discord gave me random limitations due to how bad the platform has become.</p></details>
+    <details><summary>Do you keep things professional?</summary><p>Yes. I keep everything professional.</p></details>
+  </div>
+</section>
+
 </main>
 
 <footer class="wrap foot">
@@ -238,6 +310,23 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
   <span class="muted small">© 2026 Punch</span>
   <a class="muted small" href="https://discord.gg/coffeenet" target="_blank" rel="noopener">Discord ↗</a>
 </footer>
+
+<audio id="au" src="music/neoperreo.mp3" preload="metadata" loop></audio>
+<div class="player" id="player" role="region" aria-label="Music player">
+  <div class="cover" aria-hidden="true">♪</div>
+  <div class="pl-meta"><div class="pl-title">Neoperreo (Super Slowed)</div><div class="pl-artist">Secret Society</div></div>
+  <div class="pl-row">
+    <button class="pl-btn" id="pl-play" aria-label="Play">▶</button>
+    <span class="pl-time" id="pl-cur">0:00</span>
+    <input id="pl-seek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek">
+    <span class="pl-time" id="pl-dur">0:00</span>
+  </div>
+  <div class="pl-row vol">
+    <span class="pl-time">VOL</span>
+    <input class="pl-vol" id="pl-vol" type="range" min="0" max="1" step="0.01" value="0.5" aria-label="Volume">
+    <button class="pl-btn ghost" id="pl-min" aria-label="Collapse player">–</button>
+  </div>
+</div>
 
 <script>
 /* ============ CONFIG ============
@@ -247,7 +336,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 const DISCORD_ID = "1495161901330464801";
 
 /* ---------- tabs (hash routing) ---------- */
-const views = ["home", "development", "coffeenet", "larpcentral", "about"];
+const views = ["home", "development", "coffeenet", "larpcentral", "about", "links", "faq"];
 function show(id) {
   if (!views.includes(id)) id = "home";
   views.forEach(v => document.getElementById("view-" + v).hidden = v !== id);
@@ -340,6 +429,25 @@ function start() {
 }
 start();
 
+
+/* ---------- music player (never autoplays, you press play) ---------- */
+const au = $("au"), pl = $("player"), playBtn = $("pl-play"), seek = $("pl-seek");
+const fmt = s => isFinite(s) ? Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0") : "0:00";
+au.volume = 0.5;
+try { const sv = localStorage.getItem("punch-vol"); if (sv !== null) { au.volume = +sv; $("pl-vol").value = sv; } } catch (_) {}
+function syncPlayer() {
+  playBtn.textContent = au.paused ? "▶" : "❚❚";
+  playBtn.setAttribute("aria-label", au.paused ? "Play" : "Pause");
+  pl.classList.toggle("playing", !au.paused);
+}
+playBtn.onclick = () => au.paused ? au.play().catch(() => {}) : au.pause();
+au.onplay = au.onpause = syncPlayer;
+au.onloadedmetadata = () => { seek.max = au.duration; $("pl-dur").textContent = fmt(au.duration); };
+au.ontimeupdate = () => { seek.value = au.currentTime; $("pl-cur").textContent = fmt(au.currentTime); };
+seek.oninput = () => { au.currentTime = seek.value; };
+$("pl-vol").oninput = e => { au.volume = e.target.value; try { localStorage.setItem("punch-vol", e.target.value); } catch (_) {} };
+$("pl-min").onclick = () => pl.classList.toggle("min");
+au.onerror = () => { pl.hidden = true; };
 </script>
 </body>
 </html>
