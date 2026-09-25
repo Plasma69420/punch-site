@@ -131,9 +131,9 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 .hero-side{display:flex;flex-direction:column;gap:18px}
 .mp{padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:0 30px 60px -30px #000}
 .mp[hidden]{display:none}
-.mp-art{border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:#0e0e11}
-.mp-art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
-.mp.playing .mp-art img{transform:scale(1.05)}
+.mp-art{border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:#000;display:grid;place-items:center}
+.mp-cov{height:100%;aspect-ratio:1;position:relative;overflow:hidden}
+.mp-cov img{position:absolute;width:178.571%;max-width:none;left:-39.2857%;top:-39.2857%;display:block}
 .mp-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .mp-meta{min-width:0}
 .mp-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.25rem;letter-spacing:-.02em}
@@ -228,16 +228,16 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
     </aside>
 
       <div class="card mp" id="player" role="region" aria-label="Music player">
-        <div class="mp-art"><img src="music/cover.png" alt="Cover art for Neoperreo (Super Slowed)"></div>
+        <div class="mp-art"><div class="mp-cov"><img src="music/cover.png" alt="Cover art for Neoperreo (Super Slowed)"></div></div>
         <div class="mp-top">
           <div class="mp-meta"><div class="mp-title">Neoperreo (Super Slowed)</div><div class="mp-artist">Secret Society</div></div>
           <button class="mp-ic" id="mp-heart" aria-label="Like" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path class="fill" d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
         </div>
         <div class="mp-seek"><span id="pl-cur">0:00</span><input id="pl-seek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek"><span id="pl-dur">0:00</span></div>
         <div class="mp-ctrl">
-          <button class="mp-ic" id="mp-prev" aria-label="Back to start"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+          <button class="mp-ic" id="mp-prev" aria-label="Back 10 seconds" title="Back 10 seconds"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
           <button class="mp-play" id="pl-play" aria-label="Play"></button>
-          <button class="mp-ic" id="mp-next" aria-label="Restart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+          <button class="mp-ic" id="mp-next" aria-label="Forward 10 seconds" title="Forward 10 seconds"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
           <button class="mp-ic" id="mp-loop" aria-label="Repeat" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"/></svg></button>
         </div>
         <div class="mp-foot">
@@ -304,6 +304,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
   <div class="about">
     <div class="prose">
       <p>I’m 16 and I make Rec Room projects, like <b>Coffee.Net</b>. I work on multiple things at once, so there’s usually something going on. Coffee.Net is the main one, and I also founded a community called Larp Central.</p>
+      <p>I started out making Roblox scripts. Since then I’ve made hundreds of servers.</p>
       <p>I’ve been on Discord for 4 years, even though I got terminated once. Discord gave me random limitations because of how bad the platform has become.</p>
       <p>I keep things professional and my DMs are always open, so feel free to message me about a project, a question, or anything else. You can also see my live Discord status on the home page.</p>
     </div>
@@ -312,6 +313,8 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
       <div><span class="mono muted small">ON DISCORD</span><b>4 years</b></div>
       <div><span class="mono muted small">MAKES</span><b>Rec Room projects</b></div>
       <div><span class="mono muted small">DMS</span><b>Always open</b></div>
+      <div><span class="mono muted small">STARTED WITH</span><b>Roblox scripts</b></div>
+      <div><span class="mono muted small">SERVERS MADE</span><b>Hundreds</b></div>
     </div>
   </div>
 </section>
@@ -340,6 +343,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
     <details><summary>What is Larp Central?</summary><p>A community I founded. It’s all about larping videos and related content.</p></details>
     <details><summary>Can I DM you?</summary><p>Yes. My DMs are always open, so message me on Discord anytime.</p></details>
     <details><summary>How long have you been on Discord?</summary><p>4 years. I did get terminated once, because Discord gave me random limitations due to how bad the platform has become.</p></details>
+    <details><summary>How did you get started?</summary><p>I started out making Roblox scripts, and I’ve made hundreds of servers since.</p></details>
     <details><summary>Do you keep things professional?</summary><p>Yes. I keep everything professional.</p></details>
   </div>
 </section>
@@ -480,10 +484,14 @@ $("pl-play").onclick = $("mini-play").onclick = togglePlay;
 au.onplay = au.onpause = syncPlayer;
 syncPlayer();
 au.onloadedmetadata = () => { seek.max = au.duration; $("pl-dur").textContent = fmt(au.duration); };
-au.ontimeupdate = () => { seek.value = au.currentTime; $("pl-cur").textContent = fmt(au.currentTime); fill(seek, au.currentTime / (au.duration || 1)); };
-seek.oninput = () => { au.currentTime = seek.value; fill(seek, seek.value / (au.duration || 1)); };
+let dragging = false;
+seek.addEventListener("pointerdown", () => { dragging = true; });
+addEventListener("pointerup", () => { dragging = false; });
+au.ontimeupdate = () => { if (dragging) return; seek.value = au.currentTime; $("pl-cur").textContent = fmt(au.currentTime); fill(seek, au.currentTime / (au.duration || 1)); };
+seek.oninput = () => { au.currentTime = seek.value; $("pl-cur").textContent = fmt(+seek.value); fill(seek, seek.value / (au.duration || 1)); };
 vol.oninput = () => { au.volume = vol.value; fill(vol, vol.value); try { localStorage.setItem("punch-vol", vol.value); } catch (_) {} };
-$("mp-prev").onclick = $("mp-next").onclick = () => { au.currentTime = 0; };
+$("mp-prev").onclick = () => { au.currentTime = Math.max(0, au.currentTime - 10); };
+$("mp-next").onclick = () => { au.currentTime = Math.min(au.duration || 0, au.currentTime + 10); };
 $("mp-loop").onclick = e => { au.loop = !au.loop; e.currentTarget.setAttribute("aria-pressed", au.loop); };
 const heart = $("mp-heart");
 try { if (localStorage.getItem("punch-like") === "1") { heart.classList.add("on"); heart.setAttribute("aria-pressed", "true"); } } catch (_) {}
