@@ -131,8 +131,8 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 .hero-side{display:flex;flex-direction:column;gap:18px}
 .mp{padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:0 30px 60px -30px #000}
 .mp[hidden]{display:none}
-.mp-art{border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:#000;display:grid;place-items:center}
-.mp-cov{height:100%;aspect-ratio:1;position:relative;overflow:hidden}
+.mp-art{height:250px;display:flex;justify-content:center;align-items:center;border-radius:12px;background:radial-gradient(circle at 50% 60%,rgba(232,163,92,.14),transparent 70%)}
+.mp-cov{height:100%;aspect-ratio:1;position:relative;overflow:hidden;border-radius:16px;box-shadow:0 22px 44px -14px #000,0 0 0 1px rgba(255,255,255,.08)}
 .mp-cov img{position:absolute;width:178.571%;max-width:none;left:-39.2857%;top:-39.2857%;display:block}
 .mp-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .mp-meta{min-width:0}
@@ -198,13 +198,13 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 .logo i{display:inline-block}
 .logo:hover i{animation:hop .55s cubic-bezier(.3,1.6,.5,1)}
 @keyframes hop{40%{transform:translateY(-.35em)}}
-.marquee{overflow:hidden;margin:-30px 0 72px;padding:18px 0;border-block:1px solid var(--line);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marquee{overflow:hidden;margin:-30px 0 72px;padding:14px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
 .track{display:flex;width:max-content;animation:scroll 38s linear infinite}
 .marquee:hover .track{animation-play-state:paused}
 .track span,.track i{margin-right:38px;white-space:nowrap}
-.track span{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:600;color:#6e6e77;transition:color .2s}
+.track span{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:600;color:#6e6e77;transition:color .2s}
 .track span:hover{color:var(--accent)}
-.track i{color:var(--accent);font-style:normal}
+.track i{flex:none;width:5px;height:5px;border-radius:50%;background:#3a3a42;align-self:center}
 @keyframes scroll{to{transform:translateX(-50%)}}
 .eq{position:absolute;left:10px;bottom:10px;display:flex;gap:3px;align-items:flex-end;height:20px;opacity:0;transition:opacity .3s}
 .mp.playing .eq{opacity:1}
@@ -225,6 +225,15 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 @keyframes ripple{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
 .mp-ic.on svg{animation:pop .45s cubic-bezier(.3,1.8,.5,1)}
 @keyframes pop{from{transform:scale(.5)}}
+
+/* stats */
+.stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.stat{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);background:var(--panel);border-radius:999px;font-size:.88rem;color:var(--muted)}
+.stat[hidden]{display:none}
+.stat b{color:var(--text);font-variant-numeric:tabular-nums}
+.stat b.bump{animation:bump .45s ease}
+@keyframes bump{50%{transform:translateY(-3px);color:var(--accent)}}
+.ld{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(59,165,93,.6);animation:pulse 2s infinite}
 </style>
 </head>
 <body>
@@ -259,6 +268,10 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
         <a class="btn btn-ghost" href="#about">About me</a>
       </div>
       <p class="mono muted small">16 years old / 4 years on Discord</p>
+      <div class="stats" aria-live="polite">
+        <span class="stat" id="stat-live" hidden><i class="ld"></i><b id="live-n">1</b> <span id="live-l">online now</span></span>
+        <span class="stat" id="stat-visits" hidden><b id="visit-n">0</b> visits</span>
+      </div>
     </div>
 
     <div class="hero-side">
@@ -302,7 +315,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
   </div>
 
   <div class="marquee" aria-hidden="true"><div class="track" id="track">
-    <span>Rec Room</span><i>✦</i><span>Coffee.Net</span><i>✦</i><span>Larp Central</span><i>✦</i><span>C#</span><i>✦</i><span>C++</span><i>✦</i><span>Python</span><i>✦</i><span>JavaScript</span><i>✦</i><span>Moderation</span><i>✦</i><span>Paper trading</span><i>✦</i><span>History</span><i>✦</i>
+    <span>Rec Room</span><i></i><span>Coffee.Net</span><i></i><span>Larp Central</span><i></i><span>C#</span><i></i><span>C++</span><i></i><span>Python</span><i></i><span>JavaScript</span><i></i><span>Moderation</span><i></i><span>Paper trading</span><i></i><span>History</span><i></i>
   </div></div>
 
   <div class="section-head"><h2>My stuff</h2><span class="mono muted small">PROJECTS</span></div>
@@ -667,6 +680,48 @@ document.addEventListener("pointerdown", e => {
   s.style.width = s.style.height = d + "px";
   s.style.left = (e.clientX - r.left) + "px"; s.style.top = (e.clientY - r.top) + "px";
   t.append(s); setTimeout(() => s.remove(), 700);
+});
+
+/* ---------- visit counter + people online now ---------- */
+function setNum(id, n) {
+  const el = $(id), txt = Number(n).toLocaleString();
+  if (el.textContent === txt) return;
+  el.textContent = txt; el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump");
+}
+// visits: counted once per browser session, only on the real site
+(async () => {
+  try {
+    let first = false;
+    try { first = location.hostname === "heyimpunch.xyz" && !sessionStorage.getItem("hp-visit"); } catch (_) {}
+    const r = await fetch("https://abacus.jasoncameron.dev/" + (first ? "hit" : "get") + "/heyimpunch-xyz/visits");
+    const j = await r.json();
+    if (typeof j.value !== "number") throw 0;
+    try { if (first) sessionStorage.setItem("hp-visit", "1"); } catch (_) {}
+    setNum("visit-n", j.value); $("stat-visits").hidden = false;
+  } catch (_) { /* counter unavailable, keep it hidden */ }
+})();
+
+// online now: every open tab checks in on a free public MQTT broker (no account, no personal data)
+function startLive() {
+  if (!window.mqtt) return;
+  const BASE = "heyimpunch-xyz/live/", me = Math.random().toString(36).slice(2, 10), seen = new Map();
+  const c = mqtt.connect("wss://broker.emqx.io:8084/mqtt", { clientId: "hp_" + me, keepalive: 30, reconnectPeriod: 5000, will: { topic: BASE + me, payload: "", retain: true } });
+  const alive = () => { const now = Date.now(); let n = 0; seen.forEach(t => { if (now - t < 90000) n++; }); return Math.max(n, 1); };
+  const paint = () => { const n = alive(); setNum("live-n", n); $("live-l").textContent = n === 1 ? "online now (just you)" : "online now"; $("stat-live").hidden = false; };
+  const beat = () => { seen.set(me, Date.now()); if (c.connected) c.publish(BASE + me, String(Date.now()), { retain: true }); paint(); };
+  c.on("connect", () => { c.subscribe(BASE + "+"); beat(); });
+  c.on("message", (topic, buf) => {
+    const id = topic.slice(BASE.length), s = buf.toString();
+    if (!s) seen.delete(id); else seen.set(id, +s || Date.now());
+    paint();
+  });
+  setInterval(beat, 30000);
+  addEventListener("pagehide", () => { try { c.publish(BASE + me, "", { retain: true }); c.end(true); } catch (_) {} });
+}
+addEventListener("load", () => {
+  const s = document.createElement("script");
+  s.src = "https://cdn.jsdelivr.net/npm/mqtt@5.16.0/dist/mqtt.min.js";
+  s.onload = startLive; document.head.append(s);
 });
 </script>
 </body>
