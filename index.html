@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Punch</title>
-<meta name="description" content="Hey, I’m Punch. I’m 16 and I make Rec Room projects like Coffee.Net, and I founded Larp Central. Live Discord status, and my DMs are always open.">
+<meta name="description" content="Hey, I’m Punch. I’m 16 and I make Rec Room projects like Coffee.Net, and I founded Larp Hub. Live Discord status, and my DMs are always open.">
 <meta name="referrer" content="no-referrer">
-<meta name="theme-color" content="#e8a35c">
+<meta name="theme-color" content="#9b7bff">
 <meta name="author" content="Punch">
 <link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Punch">
 <meta property="og:title" content="Punch">
-<meta property="og:description" content="I’m 16 and I make Rec Room projects like Coffee.Net, and I founded Larp Central. Check my live Discord status and reach out, my DMs are always open.">
+<meta property="og:description" content="I’m 16 and I make Rec Room projects like Coffee.Net, and I founded Larp Hub. Check my live Discord status and reach out, my DMs are always open.">
 <meta property="og:url" content="https://heyimpunch.xyz/">
 <meta property="og:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=512">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Punch">
-<meta name="twitter:description" content="I’m 16 and I make Rec Room projects like Coffee.Net, and I founded Larp Central. My DMs are always open.">
+<meta name="twitter:description" content="I’m 16 and I make Rec Room projects like Coffee.Net, and I founded Larp Hub. My DMs are always open.">
 <meta name="twitter:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=512">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +25,7 @@
 <style>
 :root{
   --bg:#0b0b0d; --panel:#131316; --line:#232328; --text:#f2f1ee; --muted:#8d8d95;
-  --accent:#e8a35c; --accent-ink:#1a1206;
+  --accent:#9b7bff; --accent-ink:#120a26;
   --green:#3ba55d; --yellow:#faa61a; --red:#ed4245; --grey:#747f8d;
 }
 *{box-sizing:border-box;margin:0}
@@ -33,7 +33,7 @@ html{scroll-behavior:smooth;font-size:clamp(16px,.25vw + 12px,18px)}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
 main{flex:1}
 .wrap{width:min(1560px,100% - 64px);margin-inline:auto}
-.glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(700px 400px at 20% 5%,rgba(232,163,92,.09),transparent 70%),radial-gradient(500px 400px at 90% 40%,rgba(232,163,92,.05),transparent 70%);z-index:-1}
+.glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(700px 400px at 20% 5%,rgba(155,123,255,.09),transparent 70%),radial-gradient(500px 400px at 90% 40%,rgba(155,123,255,.05),transparent 70%);z-index:-1}
 a{color:inherit;text-decoration:none}
 .mono{font-family:'Space Grotesk',sans-serif;letter-spacing:.08em;font-weight:600}
 .muted{color:var(--muted)} .small{font-size:.8rem}
@@ -50,7 +50,7 @@ a{color:inherit;text-decoration:none}
 .btn:hover{transform:translateY(-2px)}
 .btn-sm{padding:10px 16px;font-size:.9rem}
 .btn-solid{background:var(--accent);color:var(--accent-ink)}
-.btn-solid:hover{background:#f1b674}
+.btn-solid:hover{background:#b39cff}
 .btn-ghost{border:1px solid var(--line);background:var(--panel)}
 .btn-ghost:hover{border-color:var(--accent)}
 
@@ -139,7 +139,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 .hero-side{display:flex;flex-direction:column;gap:18px}
 .mp{padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:0 30px 60px -30px #000}
 .mp[hidden]{display:none}
-.mp-art{height:250px;display:flex;justify-content:center;align-items:center;border-radius:12px;background:radial-gradient(circle at 50% 60%,rgba(232,163,92,.14),transparent 70%)}
+.mp-art{height:250px;display:flex;justify-content:center;align-items:center;border-radius:12px;background:radial-gradient(circle at 50% 60%,rgba(155,123,255,.14),transparent 70%)}
 .mp-cov{height:100%;aspect-ratio:1;position:relative;overflow:hidden;border-radius:16px;box-shadow:0 22px 44px -14px #000,0 0 0 1px rgba(255,255,255,.08)}
 .mp-cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .mp-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
@@ -218,7 +218,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 .eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}.eq i:nth-child(4){animation-delay:-.15s}
 @keyframes eq{50%{height:100%}}
 .mp.playing .mp-play{animation:ring 1.8s ease-out infinite}
-@keyframes ring{from{box-shadow:0 0 0 0 rgba(232,163,92,.55)}to{box-shadow:0 0 0 16px rgba(232,163,92,0)}}
+@keyframes ring{from{box-shadow:0 0 0 0 rgba(155,123,255,.55)}to{box-shadow:0 0 0 16px rgba(155,123,255,0)}}
 
 /* click feedback */
 .btn,#tabs a,.mp-play,.mp-ic,.p-link,.faq summary{position:relative;overflow:hidden}
@@ -226,7 +226,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 .btn{transition:transform .15s,background .15s,border-color .15s,scale .12s}
 .btn:active,.mp-play:active,.mp-ic:active{scale:.94}
 .rip{position:absolute;border-radius:50%;pointer-events:none;background:rgba(255,255,255,.28);transform:translate(-50%,-50%) scale(0);animation:ripple .65s ease-out forwards}
-.btn-solid .rip{background:rgba(26,18,6,.25)}
+.btn-solid .rip{background:rgba(18,10,38,.25)}
 .mp-play .rip{background:rgba(0,0,0,.18)}
 @keyframes ripple{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
 .mp-ic.on svg{animation:pop .45s cubic-bezier(.3,1.8,.5,1)}
@@ -254,7 +254,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
     <a href="#home" data-tab="home">Home</a>
     <a href="#development" data-tab="development">Development</a>
     <a href="#coffeenet" data-tab="coffeenet">Coffee.Net</a>
-    <a href="#larpcentral" data-tab="larpcentral">Larp Central</a>
+    <a href="#larphub" data-tab="larphub">Larp Hub</a>
     <a href="#about" data-tab="about">About</a>
     <a href="#links" data-tab="links">Links</a>
     <a href="#faq" data-tab="faq">FAQ</a>
@@ -329,14 +329,14 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
   </div>
 
   <div class="marquee" aria-hidden="true"><div class="track" id="track">
-    <span>Rec Room</span><i></i><span>Coffee.Net</span><i></i><span>Larp Central</span><i></i><span>C#</span><i></i><span>C++</span><i></i><span>Python</span><i></i><span>JavaScript</span><i></i><span>Moderation</span><i></i><span>Paper trading</span><i></i><span>History</span><i></i>
+    <span>Rec Room</span><i></i><span>Coffee.Net</span><i></i><span>Larp Hub</span><i></i><span>C#</span><i></i><span>C++</span><i></i><span>Python</span><i></i><span>JavaScript</span><i></i><span>Moderation</span><i></i><span>Paper trading</span><i></i><span>History</span><i></i>
   </div></div>
 
   <div class="section-head"><h2>My stuff</h2><span class="mono muted small">PROJECTS</span></div>
   <div class="grid3">
     <a class="card tile" href="#coffeenet"><span class="mono tag">01 / PROJECT</span><h3>Coffee.Net <i>↗</i></h3><p>The Rec Room project I put the most time into. It has its own website and its own Discord server.</p></a>
     <a class="card tile" href="#development"><span class="mono tag">02 / DEVELOPMENT</span><h3>Development <i>↗</i></h3><p>I make Rec Room projects and I’m usually working on more than one at a time. This is where it all breaks down.</p></a>
-    <a class="card tile" href="#larpcentral"><span class="mono tag">03 / COMMUNITY</span><h3>Larp Central <i>↗</i></h3><p>Larp Central is a community I founded. It’s all about larping videos and related content, and it’s something I started myself.</p></a>
+    <a class="card tile" href="#larphub"><span class="mono tag">03 / COMMUNITY</span><h3>Larp Hub <i>↗</i></h3><p>Larp Hub is a community I founded. It’s all about larping videos and related content, and it’s something I started myself.</p></a>
   </div>
 
 </section>
@@ -372,13 +372,13 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
   </div>
 </section>
 
-<!-- LARP CENTRAL -->
-<section class="view" id="view-larpcentral" hidden>
+<!-- LARP HUB -->
+<section class="view" id="view-larphub" hidden>
   <p class="eyebrow mono">COMMUNITY</p>
-  <h1 class="h-md"><em>Larp Central</em></h1>
-  <p class="lead">Larp Central is a community I founded. It’s all about larping videos and related content, and it’s something I started myself.</p>
+  <h1 class="h-md"><em>Larp Hub</em></h1>
+  <p class="lead">Larp Hub is a community I founded. It used to be called Larp Central, and we changed the name to Larp Hub. It’s all about larping videos and related content, and it’s something I started myself.</p>
   <div class="grid2 mt">
-    <div class="card tile"><span class="mono tag">FOUNDER</span><h3>Started by me</h3><p>I’m the founder. I came up with Larp Central and I’m the one who set it up and runs it.</p></div>
+    <div class="card tile"><span class="mono tag">FOUNDER</span><h3>Started by me</h3><p>I’m the founder. I came up with Larp Hub and I’m the one who set it up and runs it.</p></div>
     <div class="card tile"><span class="mono tag">WHAT’S THERE</span><h3>Larping videos</h3><p>The community is centered on larping videos and related content, so if that’s your thing, it’s the place to be.</p></div>
   </div>
 </section>
@@ -389,7 +389,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
   <h1 class="h-md">Hi, I’m <em>Punch.</em></h1>
   <div class="about">
     <div class="prose">
-      <p>I’m 16 and I make Rec Room projects, like <b>Coffee.Net</b>. I work on multiple things at once, so there’s usually something going on. Coffee.Net is the main one, and I also founded a community called Larp Central.</p>
+      <p>I’m 16 and I make Rec Room projects, like <b>Coffee.Net</b>. I work on multiple things at once, so there’s usually something going on. Coffee.Net is the main one, and I also founded a community called Larp Hub.</p>
       <p>I started out making Roblox scripts. Since then I’ve made hundreds of servers.</p>
       <p>I love to code across C#, C++, Python, JavaScript and more. I used to be a DMA cheat developer, so I know how to make cheats. I’m a tech nerd.</p>
       <p>I’m great at moderation, and I love what I do. Outside of tech I like history, especially how France and the US were founded. I’m also planning to start trading, and right now I’m paper trading.</p>
@@ -419,7 +419,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
   <div class="grid3 mt">
     <a class="card tile" href="https://discord.gg/coffeenet" target="_blank" rel="noopener"><span class="mono tag">DISCORD</span><h3>Coffee.Net server <i>↗</i></h3><p>Join the Coffee.Net Discord server at discord.gg/coffeenet.</p></a>
     <a class="card tile" href="https://coffeenet.site" target="_blank" rel="noopener"><span class="mono tag">WEBSITE</span><h3>coffeenet.site <i>↗</i></h3><p>The official Coffee.Net website.</p></a>
-    <a class="card tile" href="#larpcentral"><span class="mono tag">COMMUNITY</span><h3>Larp Central <i>↗</i></h3><p>The community I founded for larping videos and related content.</p></a>
+    <a class="card tile" href="#larphub"><span class="mono tag">COMMUNITY</span><h3>Larp Hub <i>↗</i></h3><p>The community I founded for larping videos and related content.</p></a>
   </div>
 </section>
 
@@ -431,7 +431,8 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
     <details open><summary>How old are you?</summary><p>I’m 16.</p></details>
     <details><summary>What do you make?</summary><p>I make Rec Room projects, like Coffee.Net. I usually work on multiple things at once.</p></details>
     <details><summary>What is Coffee.Net?</summary><p>Coffee.Net is a Rec Room project that I work on. It has a website at coffeenet.site and a Discord server at discord.gg/coffeenet.</p></details>
-    <details><summary>What is Larp Central?</summary><p>A community I founded. It’s all about larping videos and related content.</p></details>
+    <details><summary>What is Larp Hub?</summary><p>A community I founded. It used to be called Larp Central, and we changed the name to Larp Hub. It’s all about larping videos and related content.</p></details>
+    <details><summary>Did Larp Central change its name?</summary><p>Yes. Larp Central is now Larp Hub.</p></details>
     <details><summary>Can I DM you?</summary><p>Yes. My DMs are always open, so message me on Discord anytime.</p></details>
     <details><summary>How long have you been on Discord?</summary><p>4 years. I did get terminated once, because Discord gave me random limitations due to how bad the platform has become.</p></details>
     <details><summary>What languages do you code in?</summary><p>C#, C++, Python, JavaScript and more.</p></details>
@@ -461,7 +462,7 @@ a.tile:hover{border-color:var(--accent);transform:translateY(-3px)}
 const DISCORD_ID = "1495161901330464801";
 
 /* ---------- tabs (hash routing) ---------- */
-const views = ["home", "development", "coffeenet", "larpcentral", "about", "links", "faq"];
+const views = ["home", "development", "coffeenet", "larphub", "about", "links", "faq"];
 function show(id) {
   if (!views.includes(id)) id = "home";
   views.forEach(v => document.getElementById("view-" + v).hidden = v !== id);
@@ -472,9 +473,10 @@ function show(id) {
 }
 // clean URLs: /about instead of /#about (404.html sends direct links back here)
 const pathOf = id => id === "home" ? "/" : "/" + id;
-const idOfPath = () => { const p = location.pathname.replace(/^\/+|\/+$/g, ""); return views.includes(p) ? p : "home"; };
+const alias = s => s === "larpcentral" ? "larphub" : s;
+const idOfPath = () => { const p = alias(location.pathname.replace(/^\/+|\/+$/g, "")); return views.includes(p) ? p : "home"; };
 (function () {
-  const q = new URLSearchParams(location.search).get("p"), hh = location.hash.slice(1);
+  const q = alias(new URLSearchParams(location.search).get("p") || ""), hh = alias(location.hash.slice(1));
   const want = views.includes(q) ? q : views.includes(hh) ? hh : null;
   if (want) { try { history.replaceState(null, "", pathOf(want)); } catch (_) {} }
 })();
