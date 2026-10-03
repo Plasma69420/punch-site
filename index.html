@@ -3,467 +3,140 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Punch — Founder of Larp Hub</title>
-<meta name="description" content="I'm Punch, the founder and owner of Larp Hub: a premium content library, tools and community for building your digital presence.">
-<meta name="theme-color" content="#0a0a0c">
-<meta name="author" content="Punch">
+<title>Punch</title>
+<meta name="description" content="i'm punch. i run larp hub and i write code. dms are open.">
+<meta name="theme-color" content="#0e0e0e">
 <link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Punch">
-<meta property="og:title" content="Punch — Founder of Larp Hub">
-<meta property="og:description" content="Founder and owner of Larp Hub. Content library, prompts, tools and a private community.">
+<meta property="og:title" content="Punch">
+<meta property="og:description" content="i run larp hub and i write code. dms are open.">
 <meta property="og:url" content="https://heyimpunch.xyz/">
 <meta property="og:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=512">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0a0a0c; --panel:#121216; --panel-2:#17171c; --line:#24242b; --text:#f4f3f1; --muted:#9a9aa4;
-  --accent:#9b7bff; --accent-2:#6ee7d8; --ink:#120a26;
-  --green:#3ba55d; --yellow:#faa61a; --red:#ed4245; --grey:#747f8d;
-  --r:20px;
-}
+:root{--bg:#0e0e0e;--text:#e9e6df;--dim:#8a867d;--line:#262522;--hi:#d8ff5a}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font:400 17px/1.6 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-h1,h2,h3,.logo,.num{font-family:'Space Grotesk','Inter',sans-serif}
-.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
-.muted{color:var(--muted)}
-.grad{background:linear-gradient(100deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+body{background:var(--bg);color:var(--text);font:400 16px/1.7 'JetBrains Mono',ui-monospace,monospace;-webkit-font-smoothing:antialiased}
+::selection{background:var(--hi);color:#000}
+a{color:inherit}
+.col{width:min(680px,100% - 40px);margin:0 auto;padding:72px 0 56px}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
 
-/* background */
-.bg{position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:
-   radial-gradient(800px 520px at 12% -5%,rgba(155,123,255,.16),transparent 70%),
-   radial-gradient(700px 500px at 100% 30%,rgba(110,231,216,.07),transparent 70%)}
-.bg::after{content:"";position:absolute;inset:0;opacity:.35;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:64px 64px;
-  -webkit-mask-image:radial-gradient(ellipse 70% 50% at 50% 0,#000,transparent 75%);mask-image:radial-gradient(ellipse 70% 50% at 50% 0,#000,transparent 75%)}
+h1{font-size:clamp(4rem,15vw,7.5rem);line-height:.9;letter-spacing:-.03em}
+h1 i{color:var(--hi)}
+.tag{margin-top:22px;color:var(--dim)}
 
-/* nav */
-.nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.7);border-bottom:1px solid transparent;transition:border-color .2s}
-.nav.stuck{border-color:var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
-.logo{font-weight:700;font-size:1.45rem;letter-spacing:-.04em}
-.logo i{font-style:normal;color:var(--accent)}
-.links{display:flex;gap:28px;font-size:.95rem;color:var(--muted)}
-.links a{transition:color .15s}
-.links a:hover{color:var(--text)}
+.status{display:flex;align-items:center;gap:10px;margin-top:34px;font-size:.88rem;color:var(--dim);min-height:1.7em}
+.dot{width:9px;height:9px;border-radius:50%;background:#555;flex:none}
+.dot.online{background:#3ba55d}.dot.idle{background:#faa61a}.dot.dnd{background:#ed4245}
+.status b{color:var(--text);font-weight:400}
 
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid transparent;transition:transform .15s,background .15s,border-color .15s,box-shadow .15s;white-space:nowrap}
-.btn:hover{transform:translateY(-2px)}
-.btn-solid{background:var(--accent);color:var(--ink);box-shadow:0 10px 30px -10px rgba(155,123,255,.6)}
-.btn-solid:hover{background:#b39cff}
-.btn-ghost{background:var(--panel);border-color:var(--line)}
-.btn-ghost:hover{border-color:var(--accent)}
-.btn-sm{padding:9px 16px;font-size:.88rem;border-radius:10px}
+section{margin-top:76px}
+h2{font-size:2rem;line-height:1.1;margin-bottom:18px;letter-spacing:-.01em}
+p+p{margin-top:14px}
+.dim{color:var(--dim)}
+.link{text-decoration:underline;text-decoration-color:var(--dim);text-underline-offset:4px;transition:text-decoration-color .15s,color .15s}
+.link:hover{color:var(--hi);text-decoration-color:var(--hi)}
 
-/* hero */
-.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center;padding:96px 0 72px}
-.pill{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border:1px solid var(--line);background:var(--panel);border-radius:999px;font-size:.85rem;color:var(--muted);margin-bottom:26px}
-.pill b{color:var(--text);font-weight:500}
-.pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(59,165,93,.6);animation:pulse 2s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
-h1{font-size:clamp(2.8rem,6.4vw,5rem);line-height:1;letter-spacing:-.045em;font-weight:700}
-.lead{font-size:1.2rem;color:#b5b5bd;max-width:54ch;margin:26px 0 34px}
-.lead b{color:var(--text);font-weight:500}
-.actions{display:flex;gap:12px;flex-wrap:wrap}
+.list{list-style:none;margin-top:6px;border-top:1px solid var(--line)}
+.list li{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid var(--line)}
+.list span:first-child{color:var(--dim);flex:none}
+.list span:last-child{text-align:right}
 
-/* presence card */
-.card{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:var(--r)}
-.presence{padding:24px;box-shadow:0 40px 80px -40px #000}
-.card-top{display:flex;justify-content:space-between;font:600 .68rem 'Space Grotesk',sans-serif;letter-spacing:.14em;color:var(--muted);margin-bottom:20px}
-#conn.live{color:var(--green)}
-.p-head{display:flex;gap:16px;align-items:center}
-.avatar{position:relative;width:76px;height:76px;flex:none}
-.avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#262a33}
-.dot{position:absolute;right:-1px;bottom:-1px;width:20px;height:20px;border-radius:50%;border:4px solid var(--panel);background:var(--grey)}
-.dot.online{background:var(--green)} .dot.idle{background:var(--yellow)} .dot.dnd{background:var(--red)}
-.p-name{font:700 1.35rem 'Space Grotesk',sans-serif;letter-spacing:-.02em;line-height:1.2}
-.p-role{font-size:.9rem;color:var(--muted)}
-.p-status{margin-top:18px;font-weight:600;display:flex;flex-direction:column;gap:2px}
-.p-status span+span{font-weight:400;font-size:.9rem;color:var(--muted)}
-.p-activity{margin-top:16px;padding:12px;border-radius:14px;background:#0c0c0f;border:1px solid var(--line);display:flex;gap:12px;align-items:center;font-size:.88rem}
-.p-activity[hidden]{display:none}
-.p-activity img{width:48px;height:48px;border-radius:8px;object-fit:cover}
-.p-activity div{min-width:0}
-.p-activity div *{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.p-activity b{font-size:.92rem}
-.p-activity span{color:var(--muted)}
-.p-link{display:flex;justify-content:space-between;margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-weight:600;font-size:.92rem;transition:color .15s}
-.p-link:hover{color:var(--accent)}
+.big{display:block;margin-top:26px;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1}
+.big:hover{color:var(--hi)}
 
-/* sections */
-section{padding:84px 0}
-.eyebrow{font:600 .75rem 'Space Grotesk',sans-serif;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;margin-bottom:14px}
-h2{font-size:clamp(2rem,4vw,3rem);line-height:1.08;letter-spacing:-.035em;font-weight:700;max-width:20ch}
-.sub{color:#b0b0b8;max-width:58ch;margin-top:16px;font-size:1.08rem}
+footer{margin-top:90px;padding-top:22px;border-top:1px solid var(--line);font-size:.78rem;color:var(--dim)}
+footer p{max-width:60ch}
 
-/* stats strip */
-.strip{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow:hidden}
-.strip>div{padding:28px 24px;border-right:1px solid var(--line)}
-.strip>div:last-child{border:0}
-.num{font-size:2.3rem;font-weight:700;letter-spacing:-.04em;line-height:1}
-.strip span{display:block;color:var(--muted);font-size:.9rem;margin-top:8px}
-
-/* feature grid */
-.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:44px}
-.tile{padding:28px;grid-column:span 2;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
-.tile:hover{border-color:#3a3a46;transform:translateY(-3px)}
-.tile.w3{grid-column:span 3}
-.tile.w4{grid-column:span 4}
-.ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(155,123,255,.12);color:var(--accent);margin-bottom:18px}
-.ic svg{width:21px;height:21px}
-.tile h3{font-size:1.3rem;letter-spacing:-.025em;margin-bottom:8px}
-.tile p{color:#a9a9b2;font-size:.98rem}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.tag{padding:6px 13px;border:1px solid var(--line);background:#0c0c0f;border-radius:999px;font-size:.85rem;color:#c9c9d0}
-
-/* about */
-.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.about p{color:#b8b8c0;margin-bottom:18px}
-.about p b{color:var(--text);font-weight:500}
-.facts{padding:6px 24px}
-.facts div{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:17px 0;border-bottom:1px solid var(--line)}
-.facts div:last-child{border:0}
-.facts span{color:var(--muted);font-size:.9rem}
-.facts b{font-weight:500;text-align:right}
-
-/* plans */
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
-.plan{padding:30px}
-.plan.pop{border-color:var(--accent);box-shadow:0 30px 70px -40px rgba(155,123,255,.6)}
-.plan .name{font:600 .8rem 'Space Grotesk',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
-.plan.pop .name span+span{color:var(--accent)}
-.plan .len{font:700 2rem 'Space Grotesk',sans-serif;letter-spacing:-.03em;margin:14px 0 4px}
-.plan p{color:var(--muted);font-size:.95rem}
-.plan ul{list-style:none;margin:22px 0 0;display:grid;gap:10px;font-size:.95rem;color:#c3c3ca}
-.plan li{display:flex;gap:10px}
-.plan li::before{content:"";flex:none;width:16px;height:16px;margin-top:4px;border-radius:50%;background:rgba(155,123,255,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%239b7bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 8.5l2.3 2.3 4.7-5'/%3E%3C/svg%3E") center/16px no-repeat}
-.note{margin-top:24px;color:var(--muted);font-size:.92rem}
-
-/* faq */
-.faq{margin-top:40px;max-width:820px;display:grid;gap:12px}
-.faq details{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 24px;transition:border-color .2s}
-.faq details:hover,.faq details[open]{border-color:#3a3a46}
-.faq summary{cursor:pointer;font:600 1.05rem 'Space Grotesk',sans-serif;list-style:none;display:flex;justify-content:space-between;gap:12px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";color:var(--accent);font-size:1.4rem;line-height:1;transition:transform .2s}
-.faq details[open] summary::after{transform:rotate(45deg)}
-.faq p{color:#b0b0b8;margin-top:12px}
-
-/* cta */
-.cta{text-align:center;padding:64px 28px;position:relative;overflow:hidden;background:radial-gradient(500px 240px at 50% 0,rgba(155,123,255,.22),transparent 70%),var(--panel)}
-.cta h2{margin-inline:auto}
-.cta .sub{margin-inline:auto}
-.cta .actions{justify-content:center;margin-top:30px}
-
-footer{border-top:1px solid var(--line);padding:36px 0 48px;margin-top:40px}
-.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-start}
-.disc{max-width:62ch;color:var(--muted);font-size:.82rem;margin-top:10px}
-.foot nav{display:flex;gap:22px;font-size:.9rem;color:var(--muted)}
-.foot nav a:hover{color:var(--text)}
-
-/* reveal */
-.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*70ms)}
-.rv.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
-
-@media(max-width:900px){
-  .links{display:none}
-  .hero{grid-template-columns:1fr;gap:40px;padding:56px 0 48px}
-  .about{grid-template-columns:1fr;gap:32px}
-  .strip{grid-template-columns:repeat(2,1fr)}
-  .strip>div:nth-child(2){border-right:0}
-  .strip>div:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .grid{grid-template-columns:1fr 1fr}
-  .tile,.tile.w3,.tile.w4{grid-column:span 1}
-  .plans{grid-template-columns:1fr}
-  section{padding:60px 0}
-}
-@media(max-width:560px){
-  body{font-size:16px}
-  .grid{grid-template-columns:1fr}
-  .btn-sm.hide-s{display:none}
-}
+@media(max-width:520px){.col{padding-top:48px}.list li{flex-direction:column;gap:0}.list span:last-child{text-align:left}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="bg" aria-hidden="true"></div>
+<div class="col">
 
-<header class="nav" id="nav">
-  <div class="wrap">
-    <a class="logo" href="#top">punch<i>.</i></a>
-    <nav class="links" aria-label="Main">
-      <a href="#larphub">Larp Hub</a>
-      <a href="#inside">What's inside</a>
-      <a href="#plans">Plans</a>
-      <a href="#about">About</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a class="btn btn-solid btn-sm" href="https://larphub.tech" target="_blank" rel="noopener">Visit Larp Hub ↗</a>
-  </div>
-</header>
+  <header>
+    <h1 class="serif">punch<i>.</i></h1>
+    <p class="tag">i run larp hub and i write code.</p>
+    <div class="status" aria-live="polite"><span class="dot" id="dot"></span><span id="status">checking discord…</span></div>
+  </header>
 
-<main id="top">
-<div class="wrap">
-
-  <!-- HERO -->
-  <div class="hero">
-    <div>
-      <div class="pill rv"><span class="pulse"></span><b>Founder &amp; owner</b> of Larp Hub</div>
-      <h1 class="rv" style="--i:1">I'm Punch.<br>I built <span class="grad">Larp Hub.</span></h1>
-      <p class="lead rv" style="--i:2">Larp Hub is a library of premium photos, videos, prompts and tools, with a private community behind it, for anyone who wants to <b>build their digital presence</b>. I started it, I run it, and I'm the one who keeps it growing.</p>
-      <div class="actions rv" style="--i:3">
-        <a class="btn btn-solid" href="https://larphub.tech" target="_blank" rel="noopener">Go to larphub.tech ↗</a>
-        <a class="btn btn-ghost" href="#larphub">What is Larp Hub?</a>
-      </div>
-    </div>
-
-    <aside class="card presence rv" style="--i:2" aria-live="polite">
-      <div class="card-top"><span>LIVE DISCORD STATUS</span><span id="conn">CONNECTING</span></div>
-      <div class="p-head">
-        <div class="avatar">
-          <img id="p-avatar" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Crect width='4' height='4' fill='%23262a33'/%3E%3C/svg%3E">
-          <span class="dot" id="p-dot"></span>
-        </div>
-        <div>
-          <div class="p-name" id="p-name">Punch</div>
-          <div class="p-role">Founder, Larp Hub</div>
-        </div>
-      </div>
-      <div class="p-status"><span id="p-state">Offline</span><span id="p-custom"></span></div>
-      <div class="p-activity" id="p-activity" hidden></div>
-      <a class="p-link" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">Message me on Discord <span>↗</span></a>
-    </aside>
-  </div>
-
-  <!-- STATS -->
-  <div class="strip rv">
-    <div><div class="num">1.5K+</div><span>Files in the library</span></div>
-    <div><div class="num">4K</div><span>Quality, RAW photos + video</span></div>
-    <div><div class="num">Weekly</div><span>New additions</span></div>
-    <div><div class="num">24/7</div><span>Private community</span></div>
-  </div>
-
-  <!-- WHAT IS LARP HUB -->
-  <section id="larphub">
-    <p class="eyebrow rv">The project</p>
-    <h2 class="rv" style="--i:1">A larper's dream library.</h2>
-    <p class="sub rv" style="--i:2">Larp Hub is a suite of premium interfaces and curated content for entertainment, parody, mockups and content creation. Whatever look you're going for, it gives you the content and resources to pull it off.</p>
-    <div class="tags rv" style="--i:3">
-      <span class="tag">Vehicles</span><span class="tag">Travel</span><span class="tag">Wealth</span><span class="tag">Watches</span><span class="tag">Nightlife</span><span class="tag">Lifestyle</span><span class="tag">Edited</span>
-    </div>
+  <section>
+    <h2 class="serif">me</h2>
+    <p>i'm punch. i build stuff on the internet and i like making things work properly.</p>
+    <p>i code in c#, c++, python and javascript, i moderate communities, and i'm a tech nerd in general. i'm also into history, mostly how france and the us got started.</p>
+    <p>my dms are always open, so if you've got a question or an idea, just message me.</p>
   </section>
 
-  <!-- INSIDE -->
-  <section id="inside" style="padding-top:0">
-    <p class="eyebrow rv">What's inside</p>
-    <h2 class="rv" style="--i:1">Everything in one place.</h2>
-    <div class="grid">
-      <div class="card tile w4 rv">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-        <h3>Content Library</h3>
-        <p>Thousands of high-quality photos and videos across cars, travel, wealth, watches, nightlife and more. Ready to post, edit, send or use however you need, with new files added every week.</p>
-      </div>
-      <div class="card tile rv" style="--i:1">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 17l.7 1.8L21.5 19.5l-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z"/></svg></div>
-        <h3>Prompt Library</h3>
-        <p>Need a specific shot? Grab a ready-made prompt for cars, travel, parties, lifestyle scenes and more.</p>
-      </div>
-      <div class="card tile rv">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
-        <h3>Growth Library</h3>
-        <p>Playbooks, breakdowns and methods for when you want to grow something.</p>
-      </div>
-      <div class="card tile rv" style="--i:1">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
-        <h3>Simulations</h3>
-        <p>Interactive dashboards for creating believable balances, transactions, activity and other scenarios.</p>
-      </div>
-      <div class="card tile rv" style="--i:2">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
-        <h3>TikTok Tools</h3>
-        <p>Check username availability fast, generate clean alternatives, and download videos and photo posts in the best quality available.</p>
-      </div>
-      <div class="card tile w3 rv">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
-        <h3>Private Community</h3>
-        <p>Private Discord access to share ideas, results, methods and whatever you're working on with other larpers.</p>
-      </div>
-      <div class="card tile w3 rv" style="--i:1">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>Priority Support</h3>
-        <p>Plans include priority support, all updates, and full dashboard access, so you're never left guessing.</p>
-      </div>
-    </div>
+  <section>
+    <h2 class="serif">larp hub</h2>
+    <p>i started larp hub (it used to be larp central) and i run it. it's a library of photos and videos, prompts, tools, and a private discord for people who larp.</p>
+    <p class="dim">it's for entertainment, parody, mockups and content creation. it doesn't touch real money and it's not for fraud.</p>
+    <a class="big serif" href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech &rarr;</a>
   </section>
 
-  <!-- PLANS -->
-  <section id="plans" style="padding-top:0">
-    <p class="eyebrow rv">Plans</p>
-    <h2 class="rv" style="--i:1">Choose what fits.</h2>
-    <p class="sub rv" style="--i:2">Get a plan for wider access, or grab a library or bundle on its own. Current pricing is always on the site.</p>
-    <div class="plans">
-      <div class="card plan rv">
-        <div class="name"><span>Starter</span></div>
-        <div class="len">7 days</div>
-        <p>A quick way in.</p>
-        <ul><li>Full dashboard access</li><li>All updates included</li><li>Content library (500 files)</li><li>Prompt + Growth libraries</li><li>Priority support</li></ul>
-      </div>
-      <div class="card plan pop rv" style="--i:1">
-        <div class="name"><span>Pro</span><span>Most popular</span></div>
-        <div class="len">30 days</div>
-        <p>The best balance.</p>
-        <ul><li>Full dashboard access</li><li>All updates included</li><li>Content library (1,000 files)</li><li>Prompt + Growth libraries</li><li>Priority support</li></ul>
-      </div>
-      <div class="card plan rv" style="--i:2">
-        <div class="name"><span>Premium</span></div>
-        <div class="len">Lifetime</div>
-        <p>Everything, forever.</p>
-        <ul><li>Full dashboard access</li><li>All updates included</li><li>Full content library</li><li>Prompt + Growth libraries</li><li>Priority support</li></ul>
-      </div>
-    </div>
-    <p class="note rv">See live pricing and sign up at <a href="https://larphub.tech" target="_blank" rel="noopener" style="color:var(--accent)">larphub.tech</a>.</p>
+  <section>
+    <h2 class="serif">quick facts</h2>
+    <ul class="list">
+      <li><span>founder of</span><span>larp hub</span></li>
+      <li><span>codes in</span><span>c#, c++, python, js</span></li>
+      <li><span>also</span><span>moderation</span></li>
+      <li><span>into</span><span>history</span></li>
+      <li><span>dms</span><span>open</span></li>
+    </ul>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" style="padding-top:0">
-    <div class="about">
-      <div>
-        <p class="eyebrow rv">About</p>
-        <h2 class="rv" style="--i:1">The person behind it.</h2>
-        <div style="margin-top:22px">
-          <p class="rv" style="--i:2">I'm <b>Punch</b>, founder and owner of Larp Hub. It started life as <b>Larp Central</b> and grew into Larp Hub, which is the name it has today.</p>
-          <p class="rv" style="--i:3">I build and run the whole thing myself: the site, the dashboard, the Discord bot, the library and the community. If something's broken or you've got an idea, you're talking directly to the person who can fix it.</p>
-          <p class="rv" style="--i:4">My DMs are always open. Questions, feedback, partnerships or support, send a message on Discord.</p>
-        </div>
-      </div>
-      <div class="card facts rv" style="--i:2">
-        <div><span>Role</span><b>Founder &amp; owner</b></div>
-        <div><span>Project</span><b>Larp Hub</b></div>
-        <div><span>Formerly</span><b>Larp Central</b></div>
-        <div><span>Website</span><b><a href="https://larphub.tech" target="_blank" rel="noopener" style="color:var(--accent)">larphub.tech</a></b></div>
-        <div><span>Contact</span><b>Discord DMs, always open</b></div>
-      </div>
-    </div>
+  <section>
+    <h2 class="serif">find me</h2>
+    <p><a class="link" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">discord</a> is the fastest way. or check out <a class="link" href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech</a>.</p>
   </section>
 
-  <!-- FAQ -->
-  <section id="faq" style="padding-top:0">
-    <p class="eyebrow rv">FAQ</p>
-    <h2 class="rv" style="--i:1">Quick answers.</h2>
-    <div class="faq">
-      <details open class="rv"><summary>What is Larp Hub?</summary><p>A suite of premium interfaces and curated content: a photo and video library, prompts, growth playbooks, simulations, TikTok tools and a private community. It's built for entertainment, parody, mockups and content creation.</p></details>
-      <details class="rv"><summary>Who runs it?</summary><p>I do. I'm Punch, the founder and owner of Larp Hub.</p></details>
-      <details class="rv"><summary>Was it called something else before?</summary><p>Yes. It used to be Larp Central. It's now Larp Hub.</p></details>
-      <details class="rv"><summary>Can Larp Hub be used for fraud?</summary><p>No. Larp Hub does not facilitate real financial activity and must not be used for fraud or deception.</p></details>
-      <details class="rv"><summary>How do I get access?</summary><p>Head to <a href="https://larphub.tech" target="_blank" rel="noopener" style="color:var(--accent)">larphub.tech</a>, pick a plan or a library, and sign in.</p></details>
-      <details class="rv"><summary>How do I reach you?</summary><p>Message me on Discord. My DMs are always open.</p></details>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <div class="card cta rv">
-    <h2>Ready to build your presence?</h2>
-    <p class="sub">Browse the library, pick a plan, and join the community.</p>
-    <div class="actions">
-      <a class="btn btn-solid" href="https://larphub.tech" target="_blank" rel="noopener">Open Larp Hub ↗</a>
-      <a class="btn btn-ghost" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">Message me</a>
-    </div>
-  </div>
-
+  <footer>
+    <p>&copy; 2026 punch. larp hub is for entertainment, parody, mockups and content creation only.</p>
+  </footer>
 </div>
-</main>
-
-<footer>
-  <div class="wrap foot">
-    <div>
-      <a class="logo" href="#top">punch<i>.</i></a>
-      <p class="disc">© 2026 Punch. Larp Hub is intended for entertainment, parody, mockups and content creation. It does not facilitate real financial activity and must not be used for fraud or deception.</p>
-    </div>
-    <nav aria-label="Footer">
-      <a href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech</a>
-      <a href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">Discord</a>
-    </nav>
-  </div>
-</footer>
 
 <script>
-const DISCORD_ID = "1495161901330464801";
+const ID = "1495161901330464801";
 const $ = id => document.getElementById(id);
+const LABEL = { online: "online", idle: "idle", dnd: "busy", offline: "offline" };
 
-/* nav border on scroll */
-const nav = $("nav");
-const onScroll = () => nav.classList.toggle("stuck", scrollY > 8);
-addEventListener("scroll", onScroll, { passive: true }); onScroll();
-
-/* scroll reveal */
-const rv = document.querySelectorAll(".rv");
-if ("IntersectionObserver" in window) {
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
-  rv.forEach(el => io.observe(el));
-} else rv.forEach(el => el.classList.add("in"));
-
-/* live Discord presence via Lanyard */
-const LABELS = { online: "Online", idle: "Idle", dnd: "Do not disturb", offline: "Offline" };
-function img(src) { const i = document.createElement("img"); i.src = src; i.alt = ""; return i; }
-function text(kind, title, sub) {
-  const d = document.createElement("div");
-  const k = document.createElement("span"); k.textContent = kind;
-  const b = document.createElement("b"); b.textContent = title;
-  const s = document.createElement("span"); s.textContent = sub;
-  d.append(k, b, s);
-  return d;
-}
 function render(d) {
-  const u = d.discord_user || {};
-  $("p-name").textContent = u.global_name || u.display_name || u.username || "Punch";
-  if (u.avatar) $("p-avatar").src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=256`;
   const s = d.discord_status || "offline";
-  $("p-dot").className = "dot " + s;
-  $("p-state").textContent = LABELS[s] || s;
+  $("dot").className = "dot " + s;
   const acts = d.activities || [];
   const custom = acts.find(a => a.type === 4);
-  $("p-custom").textContent = custom ? [custom.emoji && custom.emoji.name, custom.state].filter(Boolean).join(" ") : "";
-  const box = $("p-activity");
-  box.replaceChildren();
   const game = acts.find(a => a.type === 0);
-  if (d.listening_to_spotify && d.spotify) {
-    box.hidden = false;
-    box.append(img(d.spotify.album_art_url), text("Listening to Spotify", d.spotify.song, d.spotify.artist));
-  } else if (game) {
-    box.hidden = false;
-    const asset = game.assets && game.assets.large_image;
-    const src = asset && (asset.startsWith("mp:external/") ? "https://media.discordapp.net/external/" + asset.slice(12) : `https://cdn.discordapp.com/app-assets/${game.application_id}/${asset}.png`);
-    if (src) box.append(img(src));
-    box.append(text("Playing", game.name, game.details || game.state || ""));
-  } else box.hidden = true;
+  let t = LABEL[s] || s;
+  const bits = [];
+  if (d.listening_to_spotify && d.spotify) bits.push("listening to " + d.spotify.song + " by " + d.spotify.artist);
+  else if (game) bits.push("playing " + game.name);
+  else if (custom && custom.state) bits.push(custom.state);
+  const el = $("status");
+  el.replaceChildren();
+  const b = document.createElement("b"); b.textContent = t;
+  el.append(b);
+  if (bits.length) el.append(" · " + bits[0]);
 }
-const setConn = (t, live) => { const c = $("conn"); c.textContent = t; c.classList.toggle("live", !!live); };
-(function start() {
-  let ws, hb, retry = 1000;
-  fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => {});
-  function connect() {
-    ws = new WebSocket("wss://api.lanyard.rest/socket");
-    ws.onmessage = e => {
-      const m = JSON.parse(e.data);
-      if (m.op === 1) {
-        ws.send(JSON.stringify({ op: 2, d: { subscribe_to_id: DISCORD_ID } }));
-        clearInterval(hb);
-        hb = setInterval(() => ws.readyState === 1 && ws.send(JSON.stringify({ op: 3 })), m.d.heartbeat_interval);
-      } else if (m.op === 0) {
-        retry = 1000; setConn("LIVE", true);
-        render(m.d[DISCORD_ID] || m.d);
-      }
-    };
-    ws.onclose = () => { clearInterval(hb); setConn("RECONNECTING"); setTimeout(connect, retry = Math.min(retry * 2, 30000)); };
-  }
-  connect();
+
+fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => { $("status").textContent = "discord status unavailable"; });
+
+(function connect(retry = 1000) {
+  let hb;
+  const ws = new WebSocket("wss://api.lanyard.rest/socket");
+  ws.onmessage = e => {
+    const m = JSON.parse(e.data);
+    if (m.op === 1) {
+      ws.send(JSON.stringify({ op: 2, d: { subscribe_to_id: ID } }));
+      hb = setInterval(() => ws.readyState === 1 && ws.send(JSON.stringify({ op: 3 })), m.d.heartbeat_interval);
+    } else if (m.op === 0) render(m.d[ID] || m.d);
+  };
+  ws.onclose = () => { clearInterval(hb); setTimeout(() => connect(Math.min(retry * 2, 30000)), retry); };
 })();
 </script>
 </body>
