@@ -26,8 +26,8 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* background */
-.bg{position:fixed;inset:-30px;z-index:-2;background:#050505 url("img/bg.jpg") center/cover no-repeat;filter:blur(7px) brightness(.62);animation:drift 40s ease-in-out infinite alternate}
-@keyframes drift{from{transform:scale(1.04)}to{transform:scale(1.14) translate(-1.5%,1%)}}
+.bg{position:fixed;inset:-24px;z-index:-2;background:#050505 url("img/bg.jpg") center/cover no-repeat;filter:blur(4px) brightness(.7)}
+.bg video{width:100%;height:100%;object-fit:cover;display:block}
 .shade{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at center,rgba(0,0,0,.15),rgba(0,0,0,.7))}
 
 /* enter */
@@ -101,7 +101,7 @@ input[type=range]::-moz-range-thumb{width:11px;height:11px;border:0;border-radiu
 </style>
 </head>
 <body class="locked">
-<div class="bg" aria-hidden="true"></div>
+<div class="bg" aria-hidden="true"><video id="bgv" src="media/bg.mp4" poster="img/bg.jpg" autoplay muted loop playsinline preload="auto"></video></div>
 <div class="shade" aria-hidden="true"></div>
 
 <div id="gate" role="button" tabindex="0" aria-label="Click to enter"><span>click to enter</span></div>
@@ -159,7 +159,7 @@ const ID = "1495161901330464801";
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* typed bio */
-const lines = ["dma hardware developer", "fortnite cheat dev", "professional c++ coder", "founder of larphub"], typed = $("typed");
+const lines = ["dma hardware developer", "fortnite cheat dev", "professional c++ coder", "reverse engineering"], typed = $("typed");
 if (reduce) typed.textContent = lines[0];
 else {
   let li = 0, ci = 0, del = false;
@@ -228,10 +228,21 @@ fill(vol, au.volume);
 const sync = () => { pp.innerHTML = au.paused ? ICON.play : ICON.pause; pp.setAttribute("aria-label", au.paused ? "Play" : "Pause"); };
 au.addEventListener("play", sync); au.addEventListener("pause", sync);
 pp.onclick = () => au.paused ? au.play().catch(() => {}) : au.pause();
-au.addEventListener("loadedmetadata", () => { seek.max = au.duration; $("dur").textContent = fmt(au.duration); });
+/* duration can load before this script runs, so read it on every event and at start */
+function setDur() {
+  if (!isFinite(au.duration) || au.duration <= 0) return;
+  if (+seek.max !== au.duration) seek.max = au.duration;
+  $("dur").textContent = fmt(au.duration);
+}
+["loadedmetadata", "durationchange", "loadeddata", "canplay"].forEach(ev => au.addEventListener(ev, setDur));
+setDur();
 let drag = false;
 seek.addEventListener("pointerdown", () => drag = true); addEventListener("pointerup", () => drag = false);
-au.addEventListener("timeupdate", () => { if (drag) return; seek.value = au.currentTime; $("cur").textContent = fmt(au.currentTime); fill(seek, au.currentTime / (au.duration || 1)); });
+au.addEventListener("timeupdate", () => {
+  setDur();
+  if (drag) return;
+  seek.value = au.currentTime; $("cur").textContent = fmt(au.currentTime); fill(seek, au.currentTime / (au.duration || 1));
+});
 seek.oninput = () => { au.currentTime = seek.value; $("cur").textContent = fmt(+seek.value); fill(seek, seek.value / (au.duration || 1)); };
 vol.oninput = () => { au.volume = vol.value; fill(vol, vol.value); try { localStorage.setItem("punch-vol", vol.value); } catch (_) {} };
 au.addEventListener("error", () => document.querySelector(".player").hidden = true);
