@@ -94,6 +94,10 @@ input[type=range]::-moz-range-thumb{width:11px;height:11px;border:0;border-radiu
 
 .foot{margin-top:18px;text-align:center;font-size:.72rem;color:rgba(255,255,255,.5)}
 .foot b{font-weight:500;color:rgba(255,255,255,.8)}
+.foot{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
+.views{display:inline-flex;align-items:center;gap:6px}
+.views svg{width:15px;height:15px}
+.views b{font-variant-numeric:tabular-nums}
 .legal{margin-top:16px;text-align:center;font-size:.68rem;color:rgba(255,255,255,.35);padding:0 8px}
 
 @media(max-width:420px){.av{width:82px;height:82px}.name{font-size:1.8rem}.links a{padding:10px 14px}#vol{display:none}}
@@ -145,7 +149,11 @@ input[type=range]::-moz-range-thumb{width:11px;height:11px;border:0;border-radiu
         <input id="vol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Volume">
       </div>
 
-      <p class="foot"><b>dms open</b></p>
+      <p class="foot">
+        <span class="views" id="views" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b id="vn">0</b> views</span>
+        <span class="sep" id="sep" hidden>&middot;</span>
+        <b>dms open</b>
+      </p>
     </main>
     <p class="legal">larphub is for entertainment, parody, mockups and content creation only. no real money, not for fraud.</p>
   </div>
@@ -247,6 +255,20 @@ seek.oninput = () => { au.currentTime = seek.value; $("cur").textContent = fmt(+
 vol.oninput = () => { au.volume = vol.value; fill(vol, vol.value); try { localStorage.setItem("punch-vol", vol.value); } catch (_) {} };
 au.addEventListener("error", () => document.querySelector(".player").hidden = true);
 sync();
+
+/* view counter: counts once per browser session, and only on the real domain */
+(async () => {
+  try {
+    let first = false;
+    try { first = location.hostname === "heyimpunch.xyz" && !sessionStorage.getItem("hp-view"); } catch (_) {}
+    const r = await fetch("https://abacus.jasoncameron.dev/" + (first ? "hit" : "get") + "/heyimpunch-xyz/visits");
+    const j = await r.json();
+    if (typeof j.value !== "number") throw 0;
+    try { if (first) sessionStorage.setItem("hp-view", "1"); } catch (_) {}
+    $("vn").textContent = j.value.toLocaleString();
+    $("views").hidden = false; $("sep").hidden = false;
+  } catch (_) { /* counter down: keep it hidden */ }
+})();
 
 /* enter */
 const gate = $("gate");
