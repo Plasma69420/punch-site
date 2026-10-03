@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Punch</title>
 <meta name="description" content="i'm punch. i run larp hub and i write code. dms are open.">
-<meta name="theme-color" content="#0e0e0e">
+<meta name="theme-color" content="#0b0b0b">
 <link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Punch">
@@ -17,83 +17,132 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0e0e0e;--text:#e9e6df;--dim:#8a867d;--line:#262522;--hi:#d8ff5a}
+:root{--bg:#0b0b0b;--text:#ebe8e1;--dim:#85817a;--line:#242321;--hi:#d8ff5a;--mx:50%;--my:30%}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font:400 16px/1.7 'JetBrains Mono',ui-monospace,monospace;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font:400 16px/1.7 'JetBrains Mono',ui-monospace,monospace;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 ::selection{background:var(--hi);color:#000}
 a{color:inherit}
-.col{width:min(680px,100% - 40px);margin:0 auto;padding:72px 0 56px}
 .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
 
-h1{font-size:clamp(4rem,15vw,7.5rem);line-height:.9;letter-spacing:-.03em}
-h1 i{color:var(--hi)}
-.tag{margin-top:22px;color:var(--dim)}
+/* cursor spotlight + grain */
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(520px circle at var(--mx) var(--my),rgba(216,255,90,.075),transparent 70%)}
+body::after{content:"";position:fixed;inset:-50%;z-index:100;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-5%,-2%)}80%{transform:translate(4%,4%)}100%{transform:translate(0,0)}}
 
-.status{display:flex;align-items:center;gap:10px;margin-top:34px;font-size:.88rem;color:var(--dim);min-height:1.7em}
-.dot{width:9px;height:9px;border-radius:50%;background:#555;flex:none}
-.dot.online{background:#3ba55d}.dot.idle{background:#faa61a}.dot.dnd{background:#ed4245}
+.col{width:min(720px,100% - 40px);margin:0 auto;padding:44px 0 56px}
+
+/* top bar */
+.bar{display:flex;justify-content:space-between;gap:16px;font-size:.78rem;color:var(--dim);letter-spacing:.04em}
+.bar b{color:var(--text);font-weight:400}
+
+/* hero */
+.hero{padding:clamp(56px,14vh,120px) 0 8px}
+h1{font-size:clamp(5rem,23vw,11.5rem);line-height:.82;letter-spacing:-.04em;display:flex;flex-wrap:wrap;margin-left:-.04em;cursor:default}
+h1 span{display:inline-block;transition:transform .35s cubic-bezier(.3,1.6,.5,1),color .2s,font-style .2s}
+h1 span:hover{transform:translateY(-.1em) rotate(-4deg);color:var(--hi);font-style:italic}
+h1 .stop{color:var(--hi)}
+.line{margin-top:30px;font-size:1.05rem;min-height:1.7em}
+.line .cur{display:inline-block;width:.6ch;height:1.05em;background:var(--hi);vertical-align:-.17em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.status{display:flex;align-items:center;gap:10px;margin-top:20px;font-size:.85rem;color:var(--dim)}
 .status b{color:var(--text);font-weight:400}
+.dot{width:9px;height:9px;border-radius:50%;background:#555;flex:none;position:relative}
+.dot.online{background:#3ba55d}.dot.idle{background:#faa61a}.dot.dnd{background:#ed4245}
+.dot.online::after,.dot.idle::after,.dot.dnd::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:ping 2s ease-out infinite}
+@keyframes ping{to{transform:scale(3);opacity:0}}
 
-section{margin-top:76px}
-h2{font-size:2rem;line-height:1.1;margin-bottom:18px;letter-spacing:-.01em}
+/* sections */
+section{margin-top:84px}
+h2{font-size:2.1rem;line-height:1.1;margin-bottom:18px;display:flex;align-items:baseline;gap:14px}
+h2 small{font:400 .72rem 'JetBrains Mono',monospace;color:var(--dim);letter-spacing:.1em}
 p+p{margin-top:14px}
 .dim{color:var(--dim)}
-.link{text-decoration:underline;text-decoration-color:var(--dim);text-underline-offset:4px;transition:text-decoration-color .15s,color .15s}
+.link{text-decoration:underline;text-decoration-color:var(--dim);text-underline-offset:4px;transition:color .15s,text-decoration-color .15s}
 .link:hover{color:var(--hi);text-decoration-color:var(--hi)}
 
-.list{list-style:none;margin-top:6px;border-top:1px solid var(--line)}
-.list li{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid var(--line)}
-.list span:first-child{color:var(--dim);flex:none}
-.list span:last-child{text-align:right}
+/* big larp hub link */
+.big{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:28px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:clamp(2rem,7vw,3.2rem);line-height:1;text-decoration:none;transition:color .2s,padding .3s}
+.big em{font-style:normal;transition:transform .3s}
+.big:hover{color:var(--hi);padding-left:10px}
+.big:hover em{transform:translateX(-10px) rotate(-45deg)}
 
-.big{display:block;margin-top:26px;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1}
-.big:hover{color:var(--hi)}
+/* marquee */
+.mq{margin:84px -20px 0;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.mq div{display:flex;width:max-content;animation:run 30s linear infinite}
+.mq:hover div{animation-play-state:paused}
+.mq span{font-size:clamp(1.6rem,5vw,2.4rem);padding-right:34px;white-space:nowrap;color:#4a4843;transition:color .2s}
+.mq span:hover{color:var(--hi)}
+@keyframes run{to{transform:translateX(-50%)}}
 
-footer{margin-top:90px;padding-top:22px;border-top:1px solid var(--line);font-size:.78rem;color:var(--dim)}
-footer p{max-width:60ch}
+/* terminal */
+.term{margin-top:6px;border:1px solid var(--line);border-radius:10px;background:#0f0f0e;overflow:hidden}
+.term-top{display:flex;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:.72rem;color:var(--dim);align-items:center}
+.term-top i{width:9px;height:9px;border-radius:50%;background:#2b2a27}
+.term-top span{margin-left:8px}
+.out{padding:16px 16px 4px;font-size:.88rem;max-height:340px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#2b2a27 transparent}
+.out div{white-space:pre-wrap;word-break:break-word;margin-bottom:6px}
+.out .cmd{color:var(--dim)}
+.out .cmd::before{content:"> ";color:var(--hi)}
+.out a{color:var(--hi);text-underline-offset:3px}
+.prompt{display:flex;align-items:center;gap:8px;padding:6px 16px 14px;font-size:.88rem}
+.prompt::before{content:">";color:var(--hi)}
+.prompt input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--text);font:inherit;caret-color:var(--hi)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
+.chips button{background:none;border:1px solid var(--line);color:var(--dim);font:inherit;font-size:.78rem;padding:4px 11px;border-radius:999px;cursor:pointer;transition:color .15s,border-color .15s}
+.chips button:hover{color:var(--hi);border-color:var(--hi)}
 
-@media(max-width:520px){.col{padding-top:48px}.list li{flex-direction:column;gap:0}.list span:last-child{text-align:left}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+footer{margin-top:90px;padding-top:22px;border-top:1px solid var(--line);font-size:.76rem;color:var(--dim)}
+footer p{max-width:62ch}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:520px){.col{padding-top:28px}.bar .hide{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <div class="col">
 
-  <header>
-    <h1 class="serif">punch<i>.</i></h1>
-    <p class="tag">i run larp hub and i write code.</p>
+  <div class="bar"><span>heyimpunch.xyz</span><span class="hide" id="clock"></span></div>
+
+  <header class="hero">
+    <h1 class="serif" aria-label="punch."><span>p</span><span>u</span><span>n</span><span>c</span><span>h</span><span class="stop">.</span></h1>
+    <p class="line"><span id="typed"></span><span class="cur"></span></p>
     <div class="status" aria-live="polite"><span class="dot" id="dot"></span><span id="status">checking discord…</span></div>
   </header>
 
-  <section>
-    <h2 class="serif">me</h2>
+  <section class="rv">
+    <h2 class="serif">me <small>01</small></h2>
     <p>i'm punch. i build stuff on the internet and i like making things work properly.</p>
     <p>i code in c#, c++, python and javascript, i moderate communities, and i'm a tech nerd in general. i'm also into history, mostly how france and the us got started.</p>
     <p>my dms are always open, so if you've got a question or an idea, just message me.</p>
   </section>
 
-  <section>
-    <h2 class="serif">larp hub</h2>
+  <section class="rv">
+    <h2 class="serif">larp hub <small>02</small></h2>
     <p>i started larp hub (it used to be larp central) and i run it. it's a library of photos and videos, prompts, tools, and a private discord for people who larp.</p>
     <p class="dim">it's for entertainment, parody, mockups and content creation. it doesn't touch real money and it's not for fraud.</p>
-    <a class="big serif" href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech &rarr;</a>
+    <a class="big serif" href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech <em>&rarr;</em></a>
   </section>
 
-  <section>
-    <h2 class="serif">quick facts</h2>
-    <ul class="list">
-      <li><span>founder of</span><span>larp hub</span></li>
-      <li><span>codes in</span><span>c#, c++, python, js</span></li>
-      <li><span>also</span><span>moderation</span></li>
-      <li><span>into</span><span>history</span></li>
-      <li><span>dms</span><span>open</span></li>
-    </ul>
-  </section>
+  <div class="mq rv" aria-hidden="true"><div id="mq">
+    <span class="serif">larp hub</span><span class="serif">c#</span><span class="serif">c++</span><span class="serif">python</span><span class="serif">javascript</span><span class="serif">moderation</span><span class="serif">history</span><span class="serif">dms open</span>
+  </div></div>
 
-  <section>
-    <h2 class="serif">find me</h2>
-    <p><a class="link" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">discord</a> is the fastest way. or check out <a class="link" href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech</a>.</p>
+  <section class="rv">
+    <h2 class="serif">ask me <small>03</small></h2>
+    <p class="dim" style="margin-bottom:16px">there's a terminal. type <b style="color:var(--text);font-weight:400">help</b>.</p>
+    <div class="term">
+      <div class="term-top"><i></i><i></i><i></i><span>punch@heyimpunch.xyz</span></div>
+      <div class="out" id="out" aria-live="polite"></div>
+      <form class="prompt" id="form" autocomplete="off"><input id="cmd" aria-label="command" spellcheck="false" autocapitalize="off" placeholder="type a command"></form>
+      <div class="chips" id="chips"></div>
+    </div>
   </section>
 
   <footer>
@@ -102,30 +151,63 @@ footer p{max-width:60ch}
 </div>
 
 <script>
-const ID = "1495161901330464801";
 const $ = id => document.getElementById(id);
-const LABEL = { online: "online", idle: "idle", dnd: "busy", offline: "offline" };
+const ID = "1495161901330464801";
+const DISCORD = "https://discord.com/users/" + ID;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* cursor spotlight */
+addEventListener("pointermove", e => {
+  document.documentElement.style.setProperty("--mx", e.clientX + "px");
+  document.documentElement.style.setProperty("--my", e.clientY + "px");
+}, { passive: true });
+
+/* clock */
+const clock = () => { $("clock").textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }).toLowerCase() + " · local"; };
+clock(); setInterval(clock, 15000);
+
+/* typed intro */
+const lines = ["i run larp hub.", "i write code.", "i moderate stuff.", "my dms are open."];
+const typed = $("typed");
+if (reduce) typed.textContent = lines[0];
+else {
+  let li = 0, ci = 0, del = false;
+  (function tick() {
+    const w = lines[li];
+    typed.textContent = w.slice(0, ci);
+    if (!del && ci === w.length) { del = true; return setTimeout(tick, 1600); }
+    if (del && ci === 0) { del = false; li = (li + 1) % lines.length; }
+    ci += del ? -1 : 1;
+    setTimeout(tick, del ? 28 : 65);
+  })();
+}
+
+/* scroll reveal */
+const rv = document.querySelectorAll(".rv");
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
+  rv.forEach(el => io.observe(el));
+} else rv.forEach(el => el.classList.add("in"));
+
+/* marquee loop */
+$("mq").innerHTML += $("mq").innerHTML;
+
+/* live discord status */
+const LABEL = { online: "online", idle: "idle", dnd: "busy", offline: "offline" };
 function render(d) {
   const s = d.discord_status || "offline";
   $("dot").className = "dot " + s;
   const acts = d.activities || [];
-  const custom = acts.find(a => a.type === 4);
-  const game = acts.find(a => a.type === 0);
-  let t = LABEL[s] || s;
-  const bits = [];
-  if (d.listening_to_spotify && d.spotify) bits.push("listening to " + d.spotify.song + " by " + d.spotify.artist);
-  else if (game) bits.push("playing " + game.name);
-  else if (custom && custom.state) bits.push(custom.state);
-  const el = $("status");
-  el.replaceChildren();
-  const b = document.createElement("b"); b.textContent = t;
-  el.append(b);
-  if (bits.length) el.append(" · " + bits[0]);
+  const custom = acts.find(a => a.type === 4), game = acts.find(a => a.type === 0);
+  let extra = "";
+  if (d.listening_to_spotify && d.spotify) extra = "listening to " + d.spotify.song + " by " + d.spotify.artist;
+  else if (game) extra = "playing " + game.name;
+  else if (custom && custom.state) extra = custom.state;
+  const el = $("status"); el.replaceChildren();
+  const b = document.createElement("b"); b.textContent = LABEL[s] || s; el.append(b);
+  if (extra) el.append(" · " + extra);
 }
-
 fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => { $("status").textContent = "discord status unavailable"; });
-
 (function connect(retry = 1000) {
   let hb;
   const ws = new WebSocket("wss://api.lanyard.rest/socket");
@@ -138,6 +220,38 @@ fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j
   };
   ws.onclose = () => { clearInterval(hb); setTimeout(() => connect(Math.min(retry * 2, 30000)), retry); };
 })();
+
+/* terminal */
+const out = $("out"), input = $("cmd");
+function print(t, cls) { const d = document.createElement("div"); if (cls) d.className = cls; d.textContent = t; out.append(d); out.scrollTop = out.scrollHeight; return d; }
+function printLink(pre, label, href) {
+  const d = document.createElement("div"); d.append(pre);
+  const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = label;
+  d.append(a); out.append(d); out.scrollTop = out.scrollHeight;
+}
+const COMMANDS = {
+  help: () => print("commands: whoami, larphub, stack, history, discord, clear"),
+  whoami: () => print("punch. founder of larp hub. i write code and moderate. dms open."),
+  larphub: () => { print("a library of photos, videos and prompts, plus tools and a private discord. formerly larp central."); printLink("go: ", "larphub.tech", "https://larphub.tech"); },
+  stack: () => print("c#, c++, python, javascript"),
+  history: () => print("france and the us. mostly how they got started."),
+  discord: () => printLink("message me: ", "discord", DISCORD),
+  clear: () => out.replaceChildren(),
+  sudo: () => print("nice try."),
+  ls: () => print("larphub/  code/  history/  dms/"),
+};
+function run(raw) {
+  const c = raw.trim().toLowerCase();
+  if (!c) return;
+  print(raw.trim(), "cmd");
+  const base = c.split(/\s+/)[0];
+  (COMMANDS[base] || (() => print("command not found: " + base + ". try help")))();
+}
+$("form").addEventListener("submit", e => { e.preventDefault(); run(input.value); input.value = ""; });
+["help", "whoami", "larphub", "stack", "discord", "clear"].forEach(n => {
+  const b = document.createElement("button"); b.type = "button"; b.textContent = n; b.onclick = () => run(n); $("chips").append(b);
+});
+print("hey. type help to see what i can do.");
 </script>
 </body>
 </html>
