@@ -25,8 +25,15 @@ a:hover{background:#ccc;color:#0c0c0c}
 #gate{position:fixed;inset:0;z-index:10;background:#0c0c0c;padding:16px;cursor:pointer}
 #gate.gone{display:none}
 
-#screen{min-height:100%;padding:16px 16px 70px;max-width:900px;cursor:text}
+#screen{min-height:100%;padding:36px 28px 90px;max-width:820px;margin:0 auto;cursor:text}
 .ln{white-space:pre-wrap;word-break:break-word;min-height:1.4em}
+.kv{display:flex;gap:0;margin-left:2ch}
+.kv .k{flex:0 0 14ch;color:#888}
+.kv .v{flex:1;min-width:0;word-break:break-word}
+.rule{border-bottom:1px solid #444;margin:6px 0 12px}
+.dim{color:#888}
+.gap{height:1.4em}
+.cmdline{margin-top:18px}
 #form{display:flex}
 #form .p{white-space:pre}
 #cmd{flex:1;min-width:0;background:none;border:0;outline:0;color:inherit;font:inherit;caret-color:#ccc;border-radius:0}
@@ -59,61 +66,70 @@ const ID = "1495161901330464801", DISCORD = "https://discord.com/users/" + ID;
 const log = $("log"), form = $("form"), input = $("cmd"), au = $("au");
 const end = () => window.scrollTo(0, document.body.scrollHeight);
 
-function line(t = "") { const d = document.createElement("div"); d.className = "ln"; d.textContent = t; log.append(d); end(); }
-function linkLine(pre, label, href) {
-  const d = document.createElement("div"); d.className = "ln"; d.append(pre);
-  const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = label;
-  d.append(a); log.append(d); end();
+function line(t = "", cls = "") { const d = document.createElement("div"); d.className = "ln " + cls; d.textContent = t; log.append(d); end(); }
+function gap() { const d = document.createElement("div"); d.className = "gap"; log.append(d); }
+function rule() { const d = document.createElement("div"); d.className = "rule"; log.append(d); }
+/* label / value row. value can be text or {href, label} */
+function kv(k, v) {
+  const d = document.createElement("div"); d.className = "kv";
+  const a = document.createElement("span"); a.className = "k"; a.textContent = k;
+  const b = document.createElement("span"); b.className = "v";
+  if (v && v.href) { const l = document.createElement("a"); l.href = v.href; l.target = "_blank"; l.rel = "noopener"; l.textContent = v.label || v.href; b.append(l); }
+  else b.textContent = v;
+  d.append(a, b); log.append(d); end();
 }
 
 const COMMANDS = {
   help() {
-    line("about      who i am");
-    line("skills     what i do");
-    line("larphub    my side brand");
-    line("status     discord status");
-    line("discord    contact me");
-    line("song       play/pause");
-    line("clear      clear screen");
+    line("commands", "dim"); rule();
+    kv("about", "who i am");
+    kv("skills", "what i work with");
+    kv("larphub", "my side brand");
+    kv("status", "discord status");
+    kv("discord", "contact me");
+    kv("song", "play / pause");
+    kv("clear", "clear the screen");
   },
   about() {
-    line("punch");
-    line("");
-    line("dma hardware developer.");
-    line("i make fortnite cheats.");
-    line("professional c++ coder.");
-    line("i do reverse engineering.");
-    line("");
-    line("side brand: larphub");
-    line("dms open.");
+    line("about", "dim"); rule();
+    kv("name", "punch");
+    kv("role", "dma hardware developer");
+    kv("", "fortnite cheat developer");
+    kv("", "professional c++ coder");
+    kv("", "reverse engineering");
+    kv("side brand", "larphub");
+    kv("contact", "discord, dms open");
   },
   skills() {
-    line("c++ (pro)");
-    line("dma hardware");
-    line("game cheats (fortnite)");
-    line("reverse engineering");
-    line("c#, python, javascript");
+    line("skills", "dim"); rule();
+    kv("c++", "professional");
+    kv("dma hardware", "developer");
+    kv("game cheats", "fortnite");
+    kv("reverse eng.", "yes");
+    kv("also", "c#, python, javascript");
   },
   larphub() {
-    line("larphub, my side brand. used to be larp central.");
-    line("photo/video library, prompts, tools and a private discord.");
-    line("entertainment, parody and mockups only. no real money, not for fraud.");
-    linkLine("", "https://larphub.tech", "https://larphub.tech");
+    line("larphub (side brand)", "dim"); rule();
+    kv("what", "photo and video library, prompts, tools, private discord");
+    kv("formerly", "larp central");
+    kv("site", { href: "https://larphub.tech", label: "larphub.tech" });
+    kv("note", "entertainment, parody and mockups only. no real money, not for fraud.");
   },
-  status() { line(statusText()); },
-  discord() { linkLine("", DISCORD, DISCORD); },
+  status() { line("status", "dim"); rule(); kv("discord", statusText()); },
+  discord() { line("contact", "dim"); rule(); kv("discord", { href: DISCORD, label: "message me" }); kv("dms", "open"); },
   song() { if (au.paused) au.play().catch(() => line("click the page first.")); else au.pause(); },
   clear() { log.replaceChildren(); },
-  dir() { line("about  skills  larphub  discord"); },
+  dir() { line("files", "dim"); rule(); kv("about", "who i am"); kv("skills", "what i work with"); kv("larphub", "my side brand"); kv("discord", "contact me"); },
 };
 COMMANDS.ls = COMMANDS.dir; COMMANDS.cls = COMMANDS.clear; COMMANDS.contact = COMMANDS.discord; COMMANDS.whoami = COMMANDS.about;
 const NAMES = Object.keys(COMMANDS);
 const hist = []; let hi = 0;
 
-function echo(c) { line("C:\\punch> " + c); }
+function echo(c) { line("C:\\punch> " + c, "cmdline"); }
 function run(raw) {
   const t = raw.trim(); if (!t) return;
   const base = t.split(/\s+/)[0].toLowerCase();
+  gap();
   COMMANDS[base] ? COMMANDS[base]() : line("'" + base + "' is not recognized. type help.");
   end();
 }
@@ -178,10 +194,8 @@ function start() {
   gate.classList.add("gone"); document.body.classList.remove("locked");
   au.play().catch(() => {}); sync();
   line("punch [version 1.0]");
-  line("");
-  echo("about"); COMMANDS.about();
-  line("");
-  line("type help for commands.");
+  line("type help for commands.", "dim");
+  echo("about"); run("about");
   form.hidden = false; $("quick").hidden = false;
   input.focus({ preventScroll: true });
 }
