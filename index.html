@@ -3,172 +3,235 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Punch</title>
-<meta name="description" content="i'm punch. i run larp hub and i write code. dms are open.">
-<meta name="theme-color" content="#0b0b0b">
+<title>PUNCH</title>
+<meta name="description" content="punch. i run larp hub and i write code. dms open.">
+<meta name="theme-color" content="#070707">
 <link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Punch">
-<meta property="og:description" content="i run larp hub and i write code. dms are open.">
+<meta property="og:title" content="PUNCH">
+<meta property="og:description" content="i run larp hub and i write code. dms open.">
 <meta property="og:url" content="https://heyimpunch.xyz/">
 <meta property="og:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=512">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0b0b;--text:#ebe8e1;--dim:#85817a;--line:#242321;--hi:#d8ff5a;--mx:50%;--my:30%}
+:root{--bg:#070707;--text:#e9e5dc;--dim:#7b776f;--line:#232120;--red:#ff2a2a;--blue:#2a6bff;--bass:0;--mx:50vw;--my:30vh}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{background:var(--bg);color:var(--text);font:400 16px/1.7 'JetBrains Mono',ui-monospace,monospace;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-::selection{background:var(--hi);color:#000}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--text);font:400 15px/1.75 'IBM Plex Mono',ui-monospace,monospace;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body.locked{overflow:hidden}
+::selection{background:var(--red);color:#000}
 a{color:inherit}
-.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.hd{font-family:'Anton','Impact',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.005em}
 
-/* cursor spotlight + grain */
-body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(520px circle at var(--mx) var(--my),rgba(216,255,90,.075),transparent 70%)}
-body::after{content:"";position:fixed;inset:-50%;z-index:100;pointer-events:none;opacity:.07;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 1s steps(6) infinite}
+/* atmosphere: grain, vignette, red spotlight */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(480px circle at var(--mx) var(--my),rgba(255,42,42,.09),transparent 70%),radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.65))}
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden;opacity:.09}
+.grain::after{content:"";position:absolute;inset:-50%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain .9s steps(6) infinite}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-5%,-2%)}80%{transform:translate(4%,4%)}100%{transform:translate(0,0)}}
+#viz{position:fixed;left:0;right:0;bottom:0;width:100%;height:160px;z-index:1;pointer-events:none;opacity:.55}
+main,.top{position:relative;z-index:2}
 
-.col{width:min(720px,100% - 40px);margin:0 auto;padding:44px 0 56px}
+/* enter screen */
+#gate{position:fixed;inset:0;z-index:200;background:#000;display:grid;place-items:center;cursor:pointer;transition:opacity .7s ease,visibility .7s}
+#gate.gone{opacity:0;visibility:hidden}
+#gate div{text-align:center}
+#gate b{display:block;font-size:clamp(2.4rem,9vw,5.5rem);line-height:1;color:var(--text);animation:flick 3.2s infinite}
+#gate span{display:block;margin-top:18px;font-size:.8rem;letter-spacing:.3em;color:var(--dim);text-transform:uppercase}
+@keyframes flick{0%,92%,100%{opacity:1}93%{opacity:.25}94%{opacity:1}96%{opacity:.5}97%{opacity:1}}
 
 /* top bar */
-.bar{display:flex;justify-content:space-between;gap:16px;font-size:.78rem;color:var(--dim);letter-spacing:.04em}
-.bar b{color:var(--text);font-weight:400}
+.top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(16px,3vw,36px);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);mix-blend-mode:difference}
+.top b{color:#fff;font-weight:500}
+.ctl{display:flex;align-items:center;gap:14px}
+.ctl button{background:none;border:1px solid #fff;color:#fff;font:inherit;letter-spacing:.14em;padding:5px 11px;cursor:pointer;text-transform:uppercase;transition:background .15s,color .15s}
+.ctl button:hover{background:#fff;color:#000}
+.ctl input{width:84px;accent-color:#fff}
+
+.wrap{width:min(1100px,100% - 40px);margin:0 auto}
 
 /* hero */
-.hero{padding:clamp(56px,14vh,120px) 0 8px}
-h1{font-size:clamp(5rem,23vw,11.5rem);line-height:.82;letter-spacing:-.04em;display:flex;flex-wrap:wrap;margin-left:-.04em;cursor:default}
-h1 span{display:inline-block;transition:transform .35s cubic-bezier(.3,1.6,.5,1),color .2s,font-style .2s}
-h1 span:hover{transform:translateY(-.1em) rotate(-4deg);color:var(--hi);font-style:italic}
-h1 .stop{color:var(--hi)}
-.line{margin-top:30px;font-size:1.05rem;min-height:1.7em}
-.line .cur{display:inline-block;width:.6ch;height:1.05em;background:var(--hi);vertical-align:-.17em;margin-left:2px;animation:blink 1s steps(1) infinite}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:90px 0 60px}
+h1{font-size:clamp(7.5rem,31vw,23rem);line-height:.82;position:relative;display:inline-block;align-self:flex-start;margin-left:-.03em;
+  transform:scale(calc(1 + var(--bass)*.02));transform-origin:left center;
+  text-shadow:calc(var(--bass)*-6px) 0 var(--red),calc(var(--bass)*6px) 0 var(--blue);cursor:default;user-select:none}
+h1::before,h1::after{content:attr(data-t);position:absolute;inset:0;pointer-events:none;opacity:0}
+h1::before{color:var(--red);clip-path:inset(0 0 55% 0)}
+h1::after{color:var(--blue);clip-path:inset(55% 0 0 0)}
+h1:hover::before,h1:hover::after{opacity:1;animation:glitch .35s steps(2) infinite}
+h1:hover::after{animation-direction:reverse}
+@keyframes glitch{0%{transform:translate(-6px,2px)}25%{transform:translate(5px,-3px)}50%{transform:translate(-3px,-2px)}75%{transform:translate(6px,3px)}100%{transform:translate(-4px,0)}}
+.sub{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:26px;font-size:.82rem;letter-spacing:.16em;text-transform:uppercase}
+.sub span{color:var(--text)}
+.sub span:nth-child(even){color:var(--red)}
+.line{margin-top:22px;font-size:1.05rem;min-height:1.75em}
+.line .cur{display:inline-block;width:.6ch;height:1.05em;background:var(--red);vertical-align:-.17em;margin-left:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.status{display:flex;align-items:center;gap:10px;margin-top:20px;font-size:.85rem;color:var(--dim)}
+.status{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:.82rem;color:var(--dim)}
 .status b{color:var(--text);font-weight:400}
-.dot{width:9px;height:9px;border-radius:50%;background:#555;flex:none;position:relative}
-.dot.online{background:#3ba55d}.dot.idle{background:#faa61a}.dot.dnd{background:#ed4245}
-.dot.online::after,.dot.idle::after,.dot.dnd::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:ping 2s ease-out infinite}
-@keyframes ping{to{transform:scale(3);opacity:0}}
+.dot{width:9px;height:9px;background:#555;flex:none;position:relative}
+.dot.online{background:#3ba55d}.dot.idle{background:#faa61a}.dot.dnd{background:var(--red)}
+.dot.online::after,.dot.idle::after,.dot.dnd::after{content:"";position:absolute;inset:0;background:inherit;animation:ping 1.8s ease-out infinite}
+@keyframes ping{to{transform:scale(3.2);opacity:0}}
 
-/* sections */
-section{margin-top:84px}
-h2{font-size:2.1rem;line-height:1.1;margin-bottom:18px;display:flex;align-items:baseline;gap:14px}
-h2 small{font:400 .72rem 'JetBrains Mono',monospace;color:var(--dim);letter-spacing:.1em}
-p+p{margin-top:14px}
-.dim{color:var(--dim)}
-.link{text-decoration:underline;text-decoration-color:var(--dim);text-underline-offset:4px;transition:color .15s,text-decoration-color .15s}
-.link:hover{color:var(--hi);text-decoration-color:var(--hi)}
-
-/* big larp hub link */
-.big{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:28px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:clamp(2rem,7vw,3.2rem);line-height:1;text-decoration:none;transition:color .2s,padding .3s}
-.big em{font-style:normal;transition:transform .3s}
-.big:hover{color:var(--hi);padding-left:10px}
-.big:hover em{transform:translateX(-10px) rotate(-45deg)}
-
-/* marquee */
-.mq{margin:84px -20px 0;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-.mq div{display:flex;width:max-content;animation:run 30s linear infinite}
-.mq:hover div{animation-play-state:paused}
-.mq span{font-size:clamp(1.6rem,5vw,2.4rem);padding-right:34px;white-space:nowrap;color:#4a4843;transition:color .2s}
-.mq span:hover{color:var(--hi)}
+/* tape */
+.tape{position:relative;z-index:3;background:var(--red);color:#000;transform:rotate(-1.6deg);margin:0 -4vw;padding:10px 0;overflow:hidden;border-block:2px solid #000;box-shadow:0 0 0 1px var(--red)}
+.tape.alt{background:var(--text);transform:rotate(1.2deg);margin-top:-6px}
+.tape div{display:flex;width:max-content;animation:run 26s linear infinite}
+.tape.alt div{animation-direction:reverse;animation-duration:34s}
+.tape span{font-size:1.5rem;padding-right:28px;white-space:nowrap}
 @keyframes run{to{transform:translateX(-50%)}}
 
+/* sections */
+section{padding:110px 0 0}
+.lbl{display:flex;align-items:baseline;gap:16px;border-bottom:2px solid var(--text);padding-bottom:8px;margin-bottom:28px}
+.lbl h2{font-size:clamp(2.6rem,7vw,4.6rem);line-height:1}
+.lbl small{font-size:.75rem;color:var(--red);letter-spacing:.2em}
+.cols{display:grid;grid-template-columns:1.1fr .9fr;gap:48px}
+p+p{margin-top:16px}
+.dim{color:var(--dim)}
+.link{text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:4px}
+.link:hover{background:var(--red);color:#000}
+.facts{border:2px solid var(--text);align-self:start}
+.facts div{display:flex;justify-content:space-between;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:.85rem}
+.facts div:last-child{border:0}
+.facts span{color:var(--dim)}
+.facts b{font-weight:500;text-align:right}
+
+.hub{display:block;margin-top:30px;border:2px solid var(--text);padding:clamp(20px,4vw,38px);text-decoration:none;position:relative;overflow:hidden;transition:color .25s,border-color .25s}
+.hub::before{content:"";position:absolute;inset:0;background:var(--red);transform:translateY(101%);transition:transform .35s cubic-bezier(.7,0,.2,1);z-index:-1}
+.hub:hover{color:#000;border-color:var(--red)}
+.hub:hover::before{transform:none}
+.hub b{display:flex;justify-content:space-between;align-items:center;font-size:clamp(2.6rem,9vw,6rem);line-height:1}
+.hub b em{font-style:normal;transition:transform .3s}
+.hub:hover b em{transform:rotate(-45deg)}
+.hub small{display:block;margin-top:10px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+
 /* terminal */
-.term{margin-top:6px;border:1px solid var(--line);border-radius:10px;background:#0f0f0e;overflow:hidden}
-.term-top{display:flex;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:.72rem;color:var(--dim);align-items:center}
-.term-top i{width:9px;height:9px;border-radius:50%;background:#2b2a27}
-.term-top span{margin-left:8px}
-.out{padding:16px 16px 4px;font-size:.88rem;max-height:340px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#2b2a27 transparent}
+.term{border:2px solid var(--text);background:#0a0a0a}
+.term-top{display:flex;justify-content:space-between;padding:8px 14px;border-bottom:2px solid var(--text);background:var(--text);color:#000;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+.out{padding:16px 16px 4px;font-size:.88rem;max-height:340px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#333 transparent}
 .out div{white-space:pre-wrap;word-break:break-word;margin-bottom:6px}
 .out .cmd{color:var(--dim)}
-.out .cmd::before{content:"> ";color:var(--hi)}
-.out a{color:var(--hi);text-underline-offset:3px}
+.out .cmd::before{content:"> ";color:var(--red)}
+.out a{color:var(--red);text-underline-offset:3px}
 .prompt{display:flex;align-items:center;gap:8px;padding:6px 16px 14px;font-size:.88rem}
-.prompt::before{content:">";color:var(--hi)}
-.prompt input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--text);font:inherit;caret-color:var(--hi)}
+.prompt::before{content:">";color:var(--red)}
+.prompt input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--text);font:inherit;caret-color:var(--red)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
-.chips button{background:none;border:1px solid var(--line);color:var(--dim);font:inherit;font-size:.78rem;padding:4px 11px;border-radius:999px;cursor:pointer;transition:color .15s,border-color .15s}
-.chips button:hover{color:var(--hi);border-color:var(--hi)}
+.chips button{background:none;border:1px solid var(--dim);color:var(--dim);font:inherit;font-size:.76rem;padding:3px 10px;cursor:pointer;text-transform:uppercase;letter-spacing:.08em;transition:all .15s}
+.chips button:hover{background:var(--red);border-color:var(--red);color:#000}
 
-footer{margin-top:90px;padding-top:22px;border-top:1px solid var(--line);font-size:.76rem;color:var(--dim)}
-footer p{max-width:62ch}
+footer{margin-top:130px;padding:26px 0 190px;border-top:2px solid var(--text);font-size:.74rem;color:var(--dim);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer p{max-width:60ch}
 
-/* reveal */
-.rv{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
-.rv.in{opacity:1;transform:none}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.show{opacity:1;transform:none}
 
-@media(max-width:520px){.col{padding-top:28px}.bar .hide{display:none}}
+@media(max-width:760px){.cols{grid-template-columns:1fr;gap:30px}.top .hide{display:none}.ctl input{width:64px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
-<body>
-<div class="col">
+<body class="locked">
+<div class="grain" aria-hidden="true"></div>
+<canvas id="viz" aria-hidden="true"></canvas>
 
-  <div class="bar"><span>heyimpunch.xyz</span><span class="hide" id="clock"></span></div>
-
-  <header class="hero">
-    <h1 class="serif" aria-label="punch."><span>p</span><span>u</span><span>n</span><span>c</span><span>h</span><span class="stop">.</span></h1>
-    <p class="line"><span id="typed"></span><span class="cur"></span></p>
-    <div class="status" aria-live="polite"><span class="dot" id="dot"></span><span id="status">checking discord…</span></div>
-  </header>
-
-  <section class="rv">
-    <h2 class="serif">me <small>01</small></h2>
-    <p>i'm punch. i build stuff on the internet and i like making things work properly.</p>
-    <p>i code in c#, c++, python and javascript, i moderate communities, and i'm a tech nerd in general. i'm also into history, mostly how france and the us got started.</p>
-    <p>my dms are always open, so if you've got a question or an idea, just message me.</p>
-  </section>
-
-  <section class="rv">
-    <h2 class="serif">larp hub <small>02</small></h2>
-    <p>i started larp hub (it used to be larp central) and i run it. it's a library of photos and videos, prompts, tools, and a private discord for people who larp.</p>
-    <p class="dim">it's for entertainment, parody, mockups and content creation. it doesn't touch real money and it's not for fraud.</p>
-    <a class="big serif" href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech <em>&rarr;</em></a>
-  </section>
-
-  <div class="mq rv" aria-hidden="true"><div id="mq">
-    <span class="serif">larp hub</span><span class="serif">c#</span><span class="serif">c++</span><span class="serif">python</span><span class="serif">javascript</span><span class="serif">moderation</span><span class="serif">history</span><span class="serif">dms open</span>
-  </div></div>
-
-  <section class="rv">
-    <h2 class="serif">ask me <small>03</small></h2>
-    <p class="dim" style="margin-bottom:16px">there's a terminal. type <b style="color:var(--text);font-weight:400">help</b>.</p>
-    <div class="term">
-      <div class="term-top"><i></i><i></i><i></i><span>punch@heyimpunch.xyz</span></div>
-      <div class="out" id="out" aria-live="polite"></div>
-      <form class="prompt" id="form" autocomplete="off"><input id="cmd" aria-label="command" spellcheck="false" autocapitalize="off" placeholder="type a command"></form>
-      <div class="chips" id="chips"></div>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2026 punch. larp hub is for entertainment, parody, mockups and content creation only.</p>
-  </footer>
+<div id="gate" role="button" tabindex="0" aria-label="Click to enter">
+  <div><b class="hd">click to enter</b><span>sound on</span></div>
 </div>
+
+<div class="top">
+  <b>PUNCH</b>
+  <span class="hide" id="clock"></span>
+  <div class="ctl"><button id="pp" type="button">pause</button><input id="vol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Volume"></div>
+</div>
+
+<main>
+  <div class="wrap">
+    <header class="hero">
+      <h1 class="hd" data-t="punch">punch</h1>
+      <p class="sub"><span>founder of larp hub</span><span>//</span><span>coder</span><span>//</span><span>mod</span><span>//</span><span>dms open</span></p>
+      <p class="line"><span id="typed"></span><span class="cur"></span></p>
+      <div class="status" aria-live="polite"><span class="dot" id="dot"></span><span id="status">checking discord…</span></div>
+    </header>
+  </div>
+
+  <div class="tape" aria-hidden="true"><div class="tp"><span class="hd">larp hub</span><span class="hd">//</span><span class="hd">punch</span><span class="hd">//</span><span class="hd">dms open</span><span class="hd">//</span></div></div>
+
+  <div class="wrap">
+    <section class="rv">
+      <div class="lbl"><h2 class="hd">me</h2><small>01</small></div>
+      <div class="cols">
+        <div>
+          <p>i'm punch. i build stuff on the internet and i like making things work properly.</p>
+          <p>i code in c#, c++, python and javascript, i moderate communities, and i'm a tech nerd in general. i'm also into history, mostly how france and the us got started.</p>
+          <p>my dms are always open. got a question or an idea, just message me.</p>
+        </div>
+        <div class="facts">
+          <div><span>founder of</span><b>larp hub</b></div>
+          <div><span>codes in</span><b>c#, c++, python, js</b></div>
+          <div><span>also</span><b>moderation</b></div>
+          <div><span>into</span><b>history</b></div>
+          <div><span>dms</span><b>open</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rv">
+      <div class="lbl"><h2 class="hd">larp hub</h2><small>02</small></div>
+      <p>i started larp hub (it used to be larp central) and i run it. it's a library of photos and videos, prompts, tools, and a private discord for people who larp.</p>
+      <p class="dim">it's for entertainment, parody, mockups and content creation. it doesn't touch real money and it's not for fraud.</p>
+      <a class="hub" href="https://larphub.tech" target="_blank" rel="noopener"><b class="hd">larphub.tech <em>&rarr;</em></b><small>the whole thing lives here</small></a>
+    </section>
+  </div>
+
+  <div class="tape alt" style="margin-top:110px" aria-hidden="true"><div class="tp"><span class="hd">c#</span><span class="hd">//</span><span class="hd">c++</span><span class="hd">//</span><span class="hd">python</span><span class="hd">//</span><span class="hd">javascript</span><span class="hd">//</span><span class="hd">moderation</span><span class="hd">//</span></div></div>
+
+  <div class="wrap">
+    <section class="rv" style="padding-top:90px">
+      <div class="lbl"><h2 class="hd">ask me</h2><small>03</small></div>
+      <p class="dim" style="margin-bottom:16px">there's a terminal. type <b style="color:var(--text);font-weight:400">help</b>.</p>
+      <div class="term">
+        <div class="term-top"><span>punch@heyimpunch.xyz</span><span>live</span></div>
+        <div class="out" id="out" aria-live="polite"></div>
+        <form class="prompt" id="form" autocomplete="off"><input id="cmd" aria-label="command" spellcheck="false" autocapitalize="off" placeholder="type a command"></form>
+        <div class="chips" id="chips"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 punch. larp hub is for entertainment, parody, mockups and content creation only.</p>
+      <p><a class="link" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">discord</a> &nbsp; <a class="link" href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech</a></p>
+    </footer>
+  </div>
+</main>
+
+<audio id="au" src="music/song.mp3" preload="auto" loop></audio>
 
 <script>
 const $ = id => document.getElementById(id);
 const ID = "1495161901330464801";
 const DISCORD = "https://discord.com/users/" + ID;
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const root = document.documentElement;
 
-/* cursor spotlight */
-addEventListener("pointermove", e => {
-  document.documentElement.style.setProperty("--mx", e.clientX + "px");
-  document.documentElement.style.setProperty("--my", e.clientY + "px");
-}, { passive: true });
+/* spotlight follows cursor */
+addEventListener("pointermove", e => { root.style.setProperty("--mx", e.clientX + "px"); root.style.setProperty("--my", e.clientY + "px"); }, { passive: true });
 
 /* clock */
-const clock = () => { $("clock").textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }).toLowerCase() + " · local"; };
+const clock = () => { $("clock").textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }).toLowerCase() + " local"; };
 clock(); setInterval(clock, 15000);
 
-/* typed intro */
-const lines = ["i run larp hub.", "i write code.", "i moderate stuff.", "my dms are open."];
-const typed = $("typed");
+/* tapes: duplicate for seamless loop */
+document.querySelectorAll(".tp").forEach(t => { t.innerHTML += t.innerHTML; t.innerHTML += t.innerHTML; });
+
+/* typed line */
+const lines = ["i run larp hub.", "i write code.", "i moderate stuff.", "my dms are open."], typed = $("typed");
 if (reduce) typed.textContent = lines[0];
 else {
   let li = 0, ci = 0, del = false;
@@ -182,17 +245,77 @@ else {
   })();
 }
 
-/* scroll reveal */
+/* reveal */
 const rv = document.querySelectorAll(".rv");
 if ("IntersectionObserver" in window) {
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold: .12 });
   rv.forEach(el => io.observe(el));
-} else rv.forEach(el => el.classList.add("in"));
+} else rv.forEach(el => el.classList.add("show"));
 
-/* marquee loop */
-$("mq").innerHTML += $("mq").innerHTML;
+/* ===== audio + visualizer ===== */
+const au = $("au"), gate = $("gate"), pp = $("pp"), vol = $("vol"), cv = $("viz"), ctx2 = cv.getContext("2d");
+let actx, analyser, data, hasAnalyser = false, fake = 0;
+au.volume = 0.6;
+try { const sv = localStorage.getItem("punch-vol"); if (sv !== null) { au.volume = +sv; vol.value = sv; } } catch (_) {}
 
-/* live discord status */
+function sizeCv() { const d = devicePixelRatio || 1; cv.width = cv.clientWidth * d; cv.height = cv.clientHeight * d; }
+sizeCv(); addEventListener("resize", sizeCv);
+
+function setupAnalyser() {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    actx = new AC();
+    const src = actx.createMediaElementSource(au);
+    analyser = actx.createAnalyser(); analyser.fftSize = 256; analyser.smoothingTimeConstant = .8;
+    src.connect(analyser); analyser.connect(actx.destination);
+    data = new Uint8Array(analyser.frequencyBinCount);
+    hasAnalyser = true;
+  } catch (_) { hasAnalyser = false; }
+}
+
+function frame(t) {
+  const w = cv.width, h = cv.height;
+  ctx2.clearRect(0, 0, w, h);
+  const bars = 64, bw = w / bars;
+  let bass = 0;
+  if (hasAnalyser && !au.paused) {
+    analyser.getByteFrequencyData(data);
+    for (let i = 0; i < 6; i++) bass += data[i];
+    bass = Math.min(1, (bass / 6 / 255) * 1.15);
+  } else if (!au.paused) { bass = (Math.sin(t / 180) + 1) / 4; } // fallback if analyser unavailable
+  root.style.setProperty("--bass", reduce ? 0 : bass.toFixed(3));
+  for (let i = 0; i < bars; i++) {
+    let v;
+    if (hasAnalyser && !au.paused) v = data[Math.floor(i * 0.9) + 1] / 255;
+    else if (!au.paused) v = (Math.sin(t / 220 + i * .5) + 1) / 3;
+    else v = 0.03;
+    const bh = Math.max(3, v * h);
+    ctx2.fillStyle = i % 8 === 0 ? "#e9e5dc" : "#ff2a2a";
+    ctx2.fillRect(i * bw + 1, h - bh, bw - 2, bh);
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+function syncBtn() { pp.textContent = au.paused ? "play" : "pause"; }
+au.addEventListener("play", syncBtn); au.addEventListener("pause", syncBtn);
+pp.onclick = () => { if (actx && actx.state === "suspended") actx.resume(); au.paused ? au.play().catch(() => {}) : au.pause(); };
+vol.oninput = () => { au.volume = vol.value; try { localStorage.setItem("punch-vol", vol.value); } catch (_) {} };
+
+function enter() {
+  if (gate.classList.contains("gone")) return;
+  gate.classList.add("gone"); document.body.classList.remove("locked");
+  if (!actx) setupAnalyser();
+  if (actx && actx.state === "suspended") actx.resume();
+  au.play().catch(() => {});
+  syncBtn();
+}
+gate.addEventListener("click", enter);
+gate.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") enter(); });
+au.addEventListener("error", () => { pp.style.display = "none"; vol.style.display = "none"; });
+syncBtn();
+
+/* ===== live discord status ===== */
 const LABEL = { online: "online", idle: "idle", dnd: "busy", offline: "offline" };
 function render(d) {
   const s = d.discord_status || "offline";
@@ -221,20 +344,21 @@ fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j
   ws.onclose = () => { clearInterval(hb); setTimeout(() => connect(Math.min(retry * 2, 30000)), retry); };
 })();
 
-/* terminal */
+/* ===== terminal ===== */
 const out = $("out"), input = $("cmd");
-function print(t, cls) { const d = document.createElement("div"); if (cls) d.className = cls; d.textContent = t; out.append(d); out.scrollTop = out.scrollHeight; return d; }
+function print(t, cls) { const d = document.createElement("div"); if (cls) d.className = cls; d.textContent = t; out.append(d); out.scrollTop = out.scrollHeight; }
 function printLink(pre, label, href) {
   const d = document.createElement("div"); d.append(pre);
   const a = document.createElement("a"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = label;
   d.append(a); out.append(d); out.scrollTop = out.scrollHeight;
 }
 const COMMANDS = {
-  help: () => print("commands: whoami, larphub, stack, history, discord, clear"),
+  help: () => print("commands: whoami, larphub, stack, history, song, discord, clear"),
   whoami: () => print("punch. founder of larp hub. i write code and moderate. dms open."),
   larphub: () => { print("a library of photos, videos and prompts, plus tools and a private discord. formerly larp central."); printLink("go: ", "larphub.tech", "https://larphub.tech"); },
   stack: () => print("c#, c++, python, javascript"),
   history: () => print("france and the us. mostly how they got started."),
+  song: () => { au.paused ? au.play().then(() => print("playing.")).catch(() => print("click the page first, then try again.")) : (au.pause(), print("paused.")); },
   discord: () => printLink("message me: ", "discord", DISCORD),
   clear: () => out.replaceChildren(),
   sudo: () => print("nice try."),
@@ -248,7 +372,7 @@ function run(raw) {
   (COMMANDS[base] || (() => print("command not found: " + base + ". try help")))();
 }
 $("form").addEventListener("submit", e => { e.preventDefault(); run(input.value); input.value = ""; });
-["help", "whoami", "larphub", "stack", "discord", "clear"].forEach(n => {
+["help", "whoami", "larphub", "stack", "song", "discord", "clear"].forEach(n => {
   const b = document.createElement("button"); b.type = "button"; b.textContent = n; b.onclick = () => run(n); $("chips").append(b);
 });
 print("hey. type help to see what i can do.");
