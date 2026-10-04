@@ -19,95 +19,107 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{background:#000;color:#f2f0ea;font:400 15px/1.6 'IBM Plex Mono',ui-monospace,Consolas,monospace;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:#000;color:#eceae4;font:400 14px/1.65 'IBM Plex Mono',ui-monospace,Consolas,monospace;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body.locked{overflow:hidden}
-::selection{background:#f2f0ea;color:#000}
+::selection{background:#eceae4;color:#000}
 a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
-/* video, full bleed and visible */
-.bg{position:fixed;inset:0;z-index:-2;background:#000 url("img/bg.jpg") center/cover no-repeat}
-.bg video{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.52) contrast(1.05)}
-.fade{position:fixed;inset:0;z-index:-1;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 55%),linear-gradient(to right,rgba(0,0,0,.55),transparent 65%)}
-.mid,.top,.row{text-shadow:0 1px 12px rgba(0,0,0,.7)}
+.bg{position:fixed;inset:-10px;z-index:-2;background:#000 url("img/bg.jpg") center/cover no-repeat;filter:blur(2px) brightness(.6)}
+.bg video{width:100%;height:100%;object-fit:cover;display:block}
+.shade{position:fixed;inset:0;z-index:-1;background:rgba(0,0,0,.25)}
 
-#gate{position:fixed;inset:0;z-index:50;background:#000;display:grid;place-items:center;cursor:pointer;transition:opacity .5s,visibility .5s;font-size:1rem}
+#gate{position:fixed;inset:0;z-index:50;background:#000;display:grid;place-items:center;cursor:pointer;transition:opacity .5s,visibility .5s}
 #gate.gone{opacity:0;visibility:hidden}
 
-.wrap{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,3vw,34px)}
+.page{min-height:100svh;display:grid;place-items:center;padding:24px 14px}
+.card{width:min(430px,100%);background:rgba(0,0,0,.58);border:1px solid rgba(255,255,255,.22);border-radius:4px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:24px}
 
-/* top row */
-.top{display:flex;justify-content:space-between;gap:20px;font-size:.85rem}
-.top span{opacity:.85}
+/* top: avatar + name */
+.head{display:flex;gap:16px;align-items:center}
+.av{position:relative;flex:none;width:72px;height:72px}
+.av img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#1a1a1a;display:block}
+.name{font-family:'Archivo Black','Arial Black',Impact,sans-serif;font-weight:400;font-size:2.4rem;line-height:1;letter-spacing:-.02em;text-transform:uppercase}
+.sub{margin-top:6px;opacity:.7}
 
-/* middle text */
-.mid{max-width:36ch;margin-top:clamp(40px,10vh,110px)}
-.mid p{font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.5}
-.links{margin-top:22px;display:flex;flex-wrap:wrap;gap:6px 26px;font-size:.95rem}
-.links a{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
-.links a:hover{background:#f2f0ea;color:#000;text-decoration:none}
-.note{margin-top:14px;font-size:.74rem;opacity:.75;max-width:44ch}
-
-/* bottom */
-.bottom{margin-top:30px}
-.row{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;font-size:.85rem;margin-bottom:6px}
-.stat{display:flex;align-items:center;gap:10px;min-width:0}
-.stat img{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#222;flex:none}
+/* status line */
+.stat{display:flex;align-items:center;gap:9px;margin-top:20px;padding-top:16px;border-top:1px dashed rgba(255,255,255,.22);font-size:.82rem}
 .stat i{width:9px;height:9px;border-radius:50%;background:#777;flex:none}
 .stat i.online{background:#3ba55d}.stat i.idle{background:#faa61a}.stat i.dnd{background:#e0433f}
-.stat span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ctl{display:flex;align-items:center;gap:14px}
-.ctl button{text-decoration:underline;text-underline-offset:4px}
-.ctl button:hover{background:#f2f0ea;color:#000;text-decoration:none}
-.ctl .t{font-variant-numeric:tabular-nums;opacity:.8}
+.stat span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* text */
+.txt{margin-top:18px;font-size:1rem;line-height:1.55}
+.txt p+p{margin-top:2px}
+.note{margin-top:14px;font-size:.72rem;opacity:.6}
+
+/* links */
+.links{display:flex;gap:10px;margin-top:20px}
+.links a{flex:1;text-align:center;padding:11px 12px;border:1px solid #eceae4;border-radius:3px;text-decoration:none;font-weight:500;transition:background .12s,color .12s}
+.links a.fill{background:#eceae4;color:#000}
+.links a:hover{background:#fff;color:#000}
+.links a.fill:hover{background:transparent;color:#eceae4}
+
+/* player */
+.player{display:flex;align-items:center;gap:12px;margin-top:20px;font-size:.78rem}
+.player button{text-decoration:underline;text-underline-offset:4px;min-width:5ch;text-align:left}
+.player button:hover{background:#eceae4;color:#000;text-decoration:none}
+.player .t{font-variant-numeric:tabular-nums;opacity:.8;white-space:nowrap}
 input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;height:18px;--p:0%}
-input[type=range]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(to right,#f2f0ea var(--p),rgba(242,240,234,.3) var(--p))}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;background:#f2f0ea;margin-top:-3.5px;border-radius:0}
-input[type=range]::-moz-range-track{height:2px;background:rgba(242,240,234,.3)}
-input[type=range]::-moz-range-progress{height:2px;background:#f2f0ea}
-input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:0;background:#f2f0ea}
-#seek{width:min(180px,28vw)}
-#vol{width:60px}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(to right,#eceae4 var(--p),rgba(236,234,228,.28) var(--p))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:8px;height:8px;background:#eceae4;margin-top:-3px;border-radius:0}
+input[type=range]::-moz-range-track{height:2px;background:rgba(236,234,228,.28)}
+input[type=range]::-moz-range-progress{height:2px;background:#eceae4}
+input[type=range]::-moz-range-thumb{width:8px;height:8px;border:0;border-radius:0;background:#eceae4}
+#seek{flex:1;min-width:0}
+#vol{width:52px;flex:none}
 
-h1{font-family:'Archivo Black','Arial Black',Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(5rem,min(24vw,38vh),38rem);line-height:.74;letter-spacing:-.045em;margin-left:-.04em;margin-bottom:-.04em;white-space:nowrap;user-select:none}
+.foot{margin-top:18px;font-size:.74rem;opacity:.65;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-@media(max-width:600px){#vol{display:none}.row{align-items:flex-start}.mid{margin-top:34px}}
+@media(max-width:420px){.card{padding:20px}.name{font-size:2rem}.av{width:62px;height:62px}#vol{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body class="locked">
 <div class="bg" aria-hidden="true"><video id="bgv" src="media/bg.mp4" poster="img/bg.jpg" autoplay muted loop playsinline preload="auto"></video></div>
-<div class="fade" aria-hidden="true"></div>
+<div class="shade" aria-hidden="true"></div>
 
 <div id="gate" role="button" tabindex="0" aria-label="Click to enter">click to enter</div>
 
-<div class="wrap">
-  <div class="top">
-    <span>heyimpunch.xyz</span>
-    <span id="views" hidden><b id="vn">0</b> views</span>
-  </div>
+<div class="page">
+  <main class="card">
 
-  <main class="mid">
-    <p>dma hardware developer.<br>i make fortnite cheats.<br>professional c++ coder.<br>founder of larphub.</p>
-    <div class="links">
-      <a href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech</a>
-      <a href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">discord</a>
-    </div>
-    <p class="note">larphub is for entertainment, parody, mockups and content creation only. no real money, not for fraud. dms open.</p>
-  </main>
-
-  <div class="bottom">
-    <div class="row">
-      <div class="stat" aria-live="polite"><img id="av" alt="" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=64"><i id="dot"></i><span id="pstat">connecting...</span></div>
-      <div class="ctl" id="player">
-        <button id="pp" type="button">play</button>
-        <span class="t"><span id="cur">0:00</span> / <span id="dur">0:00</span></span>
-        <input id="seek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek">
-        <input id="vol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Volume">
+    <div class="head">
+      <div class="av"><img id="av" alt="punch" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=256"></div>
+      <div>
+        <h1 class="name">punch</h1>
+        <p class="sub">founder of larphub</p>
       </div>
     </div>
-    <h1>punch</h1>
-  </div>
+
+    <div class="stat" aria-live="polite"><i id="dot"></i><span id="pstat">connecting...</span></div>
+
+    <div class="txt">
+      <p>dma hardware developer.</p>
+      <p>i make fortnite cheats.</p>
+      <p>professional c++ coder.</p>
+    </div>
+
+    <div class="links">
+      <a class="fill" href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech</a>
+      <a href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">discord</a>
+    </div>
+
+    <div class="player" id="player">
+      <button id="pp" type="button">play</button>
+      <span class="t"><span id="cur">0:00</span> / <span id="dur">0:00</span></span>
+      <input id="seek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek">
+      <input id="vol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Volume">
+    </div>
+
+    <div class="foot"><span id="views" hidden><b id="vn">0</b> views</span><span>dms open</span></div>
+    <p class="note">larphub is for entertainment, parody, mockups and content creation only. no real money, not for fraud.</p>
+  </main>
 </div>
 
 <audio id="au" src="music/song.mp3" preload="auto" loop></audio>
@@ -120,7 +132,7 @@ const ID = "1495161901330464801";
 const LABEL = { online: "online", idle: "idle", dnd: "do not disturb", offline: "offline" };
 function render(d) {
   const u = d.discord_user || {};
-  if (u.avatar) $("av").src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=64`;
+  if (u.avatar) $("av").src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=256`;
   const s = d.discord_status || "offline";
   $("dot").className = s;
   const acts = d.activities || [], game = acts.find(a => a.type === 0), custom = acts.find(a => a.type === 4);
