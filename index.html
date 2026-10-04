@@ -3,163 +3,110 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Punch — Founder &amp; Developer</title>
-<meta name="description" content="Punch. Founder of Larp Hub. DMA hardware developer and professional C++ engineer.">
-<meta name="theme-color" content="#0a0a0a">
+<title>punch</title>
+<meta name="description" content="punch. dma hardware developer, fortnite cheats, professional c++ coder. founder of larphub.">
+<meta name="theme-color" content="#000000">
 <link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Punch — Founder &amp; Developer">
-<meta property="og:description" content="Founder of Larp Hub. DMA hardware developer and professional C++ engineer.">
+<meta property="og:title" content="punch">
+<meta property="og:description" content="dma hardware developer, fortnite cheats, professional c++ coder. founder of larphub.">
 <meta property="og:url" content="https://heyimpunch.xyz/">
 <meta property="og:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=512">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#c9a45f;--gold-2:#e2c88f;--ink:#f3f0ea;--mute:rgba(243,240,234,.62);--line:rgba(255,255,255,.14);--glass:rgba(10,10,10,.62)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{background:#050505;color:var(--ink);font:400 15px/1.55 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:#000;color:#f2f0ea;font:400 15px/1.6 'IBM Plex Mono',ui-monospace,Consolas,monospace;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body.locked{overflow:hidden}
-a{color:inherit;text-decoration:none}
+::selection{background:#f2f0ea;color:#000}
+a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
-/* background video */
-.bg{position:fixed;inset:-24px;z-index:-2;background:#050505 url("img/bg.jpg") center/cover no-repeat;filter:blur(5px) brightness(.55) saturate(.8)}
-.bg video{width:100%;height:100%;object-fit:cover;display:block}
-.shade{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at center,rgba(0,0,0,.2),rgba(0,0,0,.75))}
+/* video, full bleed and visible */
+.bg{position:fixed;inset:0;z-index:-2;background:#000 url("img/bg.jpg") center/cover no-repeat}
+.bg video{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.52) contrast(1.05)}
+.fade{position:fixed;inset:0;z-index:-1;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 55%),linear-gradient(to right,rgba(0,0,0,.55),transparent 65%)}
+.mid,.top,.row{text-shadow:0 1px 12px rgba(0,0,0,.7)}
 
-/* enter */
-#gate{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(0,0,0,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);cursor:pointer;transition:opacity .6s,visibility .6s}
+#gate{position:fixed;inset:0;z-index:50;background:#000;display:grid;place-items:center;cursor:pointer;transition:opacity .5s,visibility .5s;font-size:1rem}
 #gate.gone{opacity:0;visibility:hidden}
-#gate div{text-align:center}
-#gate b{display:block;font-size:.72rem;letter-spacing:.4em;color:var(--gold);font-weight:500;text-transform:uppercase}
-#gate span{display:block;margin-top:14px;font-size:1.5rem;font-weight:500;letter-spacing:.02em}
 
-.page{min-height:100svh;display:grid;place-items:center;padding:28px 14px}
-.stack{width:min(480px,100%)}
-.card{background:var(--glass);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(18px) saturate(1.1);-webkit-backdrop-filter:blur(18px) saturate(1.1);padding:28px;box-shadow:0 40px 90px -30px #000,inset 0 1px 0 rgba(255,255,255,.06);opacity:0;transform:translateY(14px);animation:rise .8s .15s cubic-bezier(.2,.8,.2,1) forwards;position:relative}
-.card::before{content:"";position:absolute;left:28px;right:28px;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-@keyframes rise{to{opacity:1;transform:none}}
+.wrap{min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,3vw,34px)}
 
-/* header */
-.head{display:flex;gap:20px;align-items:center}
-.av{position:relative;flex:none;width:88px;height:88px}
-.av img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#1a1a1a;border:2px solid var(--gold);padding:3px;background-clip:content-box}
-.av .dot{position:absolute;right:1px;bottom:3px;width:20px;height:20px;border-radius:50%;background:#6b6b6b;border:3px solid #0b0b0b}
-.dot.online{background:#3ba55d}.dot.idle{background:#faa61a}.dot.dnd{background:#e0433f}
-.who{min-width:0}
-.eyebrow{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500}
-.name{font-size:2.3rem;font-weight:700;letter-spacing:-.025em;line-height:1.05;margin-top:4px}
-.title{margin-top:6px;color:var(--mute);font-size:.92rem}
+/* top row */
+.top{display:flex;justify-content:space-between;gap:20px;font-size:.85rem}
+.top span{opacity:.85}
 
-.rule{height:1px;background:var(--line);margin:24px 0 8px}
+/* middle text */
+.mid{max-width:36ch;margin-top:clamp(40px,10vh,110px)}
+.mid p{font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.5}
+.links{margin-top:22px;display:flex;flex-wrap:wrap;gap:6px 26px;font-size:.95rem}
+.links a{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.links a:hover{background:#f2f0ea;color:#000;text-decoration:none}
+.note{margin-top:14px;font-size:.74rem;opacity:.75;max-width:44ch}
 
-/* info rows */
-.info div{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.9rem}
-.info div:last-child{border-bottom:0}
-.info span{flex:0 0 92px;color:var(--mute);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding-top:2px}
-.info b{font-weight:500;flex:1;min-width:0}
-
-/* presence */
-.pres{display:flex;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)}
-.pres img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#1a1a1a;flex:none}
-.pres div{min-width:0}
-.pres b{display:block;font-weight:600;font-size:.9rem;line-height:1.25}
-.pres span{display:block;font-size:.78rem;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* buttons */
-.btns{display:grid;grid-template-columns:1.25fr 1fr;gap:10px;margin-top:18px}
-.btn{display:flex;align-items:center;justify-content:center;gap:9px;padding:13px 16px;border-radius:12px;font-weight:600;font-size:.9rem;border:1px solid var(--line);background:rgba(255,255,255,.05);transition:transform .2s,background .2s,border-color .2s}
-.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
-.btn.main{background:linear-gradient(180deg,var(--gold-2),var(--gold));color:#14100a;border-color:transparent}
-.btn.main:hover{background:linear-gradient(180deg,#f0d9a6,var(--gold-2))}
-.btn svg{width:17px;height:17px;flex:none}
-
-/* player */
-.player{display:flex;align-items:center;gap:12px;margin-top:16px;padding:9px 14px 9px 10px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)}
-.pbtn{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#000;display:grid;place-items:center;transition:transform .15s}
-.pbtn:hover{transform:scale(1.07)}
-.pbtn svg{width:15px;height:15px}
-.bar{flex:1;display:flex;align-items:center;gap:9px;font-size:.7rem;color:var(--mute);font-variant-numeric:tabular-nums;min-width:0}
+/* bottom */
+.bottom{margin-top:30px}
+.row{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;font-size:.85rem;margin-bottom:6px}
+.stat{display:flex;align-items:center;gap:10px;min-width:0}
+.stat img{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#222;flex:none}
+.stat i{width:9px;height:9px;border-radius:50%;background:#777;flex:none}
+.stat i.online{background:#3ba55d}.stat i.idle{background:#faa61a}.stat i.dnd{background:#e0433f}
+.stat span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ctl{display:flex;align-items:center;gap:14px}
+.ctl button{text-decoration:underline;text-underline-offset:4px}
+.ctl button:hover{background:#f2f0ea;color:#000;text-decoration:none}
+.ctl .t{font-variant-numeric:tabular-nums;opacity:.8}
 input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;height:18px;--p:0%}
-input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:linear-gradient(to right,var(--gold) var(--p),rgba(255,255,255,.2) var(--p))}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:var(--ink);margin-top:-3.5px}
-input[type=range]::-moz-range-track{height:3px;border-radius:3px;background:rgba(255,255,255,.2)}
-input[type=range]::-moz-range-progress{height:3px;border-radius:3px;background:var(--gold)}
-input[type=range]::-moz-range-thumb{width:10px;height:10px;border:0;border-radius:50%;background:var(--ink)}
-#seek{flex:1;min-width:0}
-#vol{width:54px;flex:none}
-.vic{width:15px;height:15px;flex:none;color:var(--mute)}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(to right,#f2f0ea var(--p),rgba(242,240,234,.3) var(--p))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;background:#f2f0ea;margin-top:-3.5px;border-radius:0}
+input[type=range]::-moz-range-track{height:2px;background:rgba(242,240,234,.3)}
+input[type=range]::-moz-range-progress{height:2px;background:#f2f0ea}
+input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:0;background:#f2f0ea}
+#seek{width:min(180px,28vw)}
+#vol{width:60px}
 
-.foot{margin-top:20px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;font-size:.76rem;color:var(--mute)}
-.foot b{font-weight:500;color:var(--ink)}
-.views{display:inline-flex;align-items:center;gap:6px}
-.views svg{width:14px;height:14px}
-.views b{font-variant-numeric:tabular-nums}
-.legal{margin-top:16px;text-align:center;font-size:.68rem;color:rgba(255,255,255,.38);padding:0 10px}
+h1{font-family:'Archivo Black','Arial Black',Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(5rem,min(24vw,38vh),38rem);line-height:.74;letter-spacing:-.045em;margin-left:-.04em;margin-bottom:-.04em;white-space:nowrap;user-select:none}
 
-@media(max-width:440px){.card{padding:22px}.av{width:74px;height:74px}.name{font-size:1.9rem}.info span{flex-basis:78px}#vol{display:none}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card{opacity:1;transform:none}}
+@media(max-width:600px){#vol{display:none}.row{align-items:flex-start}.mid{margin-top:34px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body class="locked">
 <div class="bg" aria-hidden="true"><video id="bgv" src="media/bg.mp4" poster="img/bg.jpg" autoplay muted loop playsinline preload="auto"></video></div>
-<div class="shade" aria-hidden="true"></div>
+<div class="fade" aria-hidden="true"></div>
 
-<div id="gate" role="button" tabindex="0" aria-label="Click to enter"><div><b>Punch</b><span>Click to enter</span></div></div>
+<div id="gate" role="button" tabindex="0" aria-label="Click to enter">click to enter</div>
 
-<div class="page">
-  <div class="stack">
-    <main class="card" id="card">
+<div class="wrap">
+  <div class="top">
+    <span>heyimpunch.xyz</span>
+    <span id="views" hidden><b id="vn">0</b> views</span>
+  </div>
 
-      <div class="head">
-        <div class="av">
-          <img id="av" alt="Punch" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=256">
-          <span class="dot" id="dot"></span>
-        </div>
-        <div class="who">
-          <p class="eyebrow">Founder &amp; Developer</p>
-          <h1 class="name">Punch</h1>
-          <p class="title">DMA hardware developer. Professional C++ engineer.</p>
-        </div>
-      </div>
+  <main class="mid">
+    <p>dma hardware developer.<br>i make fortnite cheats.<br>professional c++ coder.<br>founder of larphub.</p>
+    <div class="links">
+      <a href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech</a>
+      <a href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">discord</a>
+    </div>
+    <p class="note">larphub is for entertainment, parody, mockups and content creation only. no real money, not for fraud. dms open.</p>
+  </main>
 
-      <div class="rule"></div>
-
-      <div class="info">
-        <div><span>Founder</span><b>Larp Hub</b></div>
-        <div><span>Focus</span><b>DMA hardware, Fortnite cheat development, reverse engineering</b></div>
-        <div><span>Languages</span><b>C++ (professional), C#, Python, JavaScript</b></div>
-      </div>
-
-      <div class="pres" aria-live="polite">
-        <img id="pav" alt="" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=128">
-        <div><b id="pname">Punch</b><span id="pstat">connecting...</span></div>
-      </div>
-
-      <div class="btns">
-        <a class="btn main" href="https://larphub.tech" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>Larp Hub</a>
-        <a class="btn" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-5.5A8 8 0 1 1 21 12z"/></svg>Contact</a>
-      </div>
-
-      <div class="player">
-        <button class="pbtn" id="pp" type="button" aria-label="Play"></button>
-        <div class="bar"><span id="cur">0:00</span><input id="seek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek"><span id="dur">0:00</span></div>
-        <svg class="vic" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3z"/><path d="M16 8.5a5 5 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <div class="bottom">
+    <div class="row">
+      <div class="stat" aria-live="polite"><img id="av" alt="" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=64"><i id="dot"></i><span id="pstat">connecting...</span></div>
+      <div class="ctl" id="player">
+        <button id="pp" type="button">play</button>
+        <span class="t"><span id="cur">0:00</span> / <span id="dur">0:00</span></span>
+        <input id="seek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek">
         <input id="vol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Volume">
       </div>
-
-      <p class="foot">
-        <span class="views" id="views" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b id="vn">0</b> views</span>
-        <span id="sep" hidden>&middot;</span>
-        <span>Open to DMs</span>
-      </p>
-    </main>
-    <p class="legal">Larp Hub is for entertainment, parody, mockups and content creation only. No real money. Not for fraud.</p>
+    </div>
+    <h1>punch</h1>
   </div>
 </div>
 
@@ -169,25 +116,21 @@ input[type=range]::-moz-range-thumb{width:10px;height:10px;border:0;border-radiu
 const $ = id => document.getElementById(id);
 const ID = "1495161901330464801";
 
-/* discord presence (live) */
-const LABEL = { online: "Online", idle: "Idle", dnd: "Do not disturb", offline: "Offline" };
+/* discord presence */
+const LABEL = { online: "online", idle: "idle", dnd: "do not disturb", offline: "offline" };
 function render(d) {
   const u = d.discord_user || {};
-  if (u.avatar) {
-    const url = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=256`;
-    $("av").src = url; $("pav").src = url;
-  }
-  $("pname").textContent = u.global_name || u.display_name || u.username || "Punch";
+  if (u.avatar) $("av").src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=64`;
   const s = d.discord_status || "offline";
-  $("dot").className = "dot " + s;
+  $("dot").className = s;
   const acts = d.activities || [], game = acts.find(a => a.type === 0), custom = acts.find(a => a.type === 4);
   let t = LABEL[s] || s;
-  if (d.listening_to_spotify && d.spotify) t = "Listening to " + d.spotify.song + " by " + d.spotify.artist;
-  else if (game) t = "Playing " + game.name;
-  else if (custom && custom.state) t = custom.state;
+  if (d.listening_to_spotify && d.spotify) t += " · listening to " + d.spotify.song + " by " + d.spotify.artist;
+  else if (game) t += " · playing " + game.name;
+  else if (custom && custom.state) t += " · " + custom.state;
   $("pstat").textContent = t;
 }
-fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => { $("pstat").textContent = "Status unavailable"; });
+fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => { $("pstat").textContent = "status unavailable"; });
 (function connect(retry = 1000) {
   let hb;
   const ws = new WebSocket("wss://api.lanyard.rest/socket");
@@ -201,16 +144,12 @@ fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j
 
 /* player */
 const au = $("au"), pp = $("pp"), seek = $("seek"), vol = $("vol");
-const ICON = {
-  play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
-  pause: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>'
-};
 const fmt = s => isFinite(s) ? Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0") : "0:00";
 const fill = (el, f) => el.style.setProperty("--p", (f * 100) + "%");
 au.volume = 0.6;
 try { const sv = localStorage.getItem("punch-vol"); if (sv !== null) { au.volume = +sv; vol.value = sv; } } catch (_) {}
 fill(vol, au.volume);
-const sync = () => { pp.innerHTML = au.paused ? ICON.play : ICON.pause; pp.setAttribute("aria-label", au.paused ? "Play" : "Pause"); };
+const sync = () => { pp.textContent = au.paused ? "play" : "pause"; };
 au.addEventListener("play", sync); au.addEventListener("pause", sync);
 pp.onclick = () => au.paused ? au.play().catch(() => {}) : au.pause();
 function setDur() {
@@ -229,7 +168,7 @@ au.addEventListener("timeupdate", () => {
 });
 seek.oninput = () => { au.currentTime = seek.value; $("cur").textContent = fmt(+seek.value); fill(seek, seek.value / (au.duration || 1)); };
 vol.oninput = () => { au.volume = vol.value; fill(vol, vol.value); try { localStorage.setItem("punch-vol", vol.value); } catch (_) {} };
-au.addEventListener("error", () => document.querySelector(".player").hidden = true);
+au.addEventListener("error", () => $("player").hidden = true);
 sync();
 
 /* view counter: once per browser session, only on the real domain */
@@ -242,7 +181,7 @@ sync();
     if (typeof j.value !== "number") throw 0;
     try { if (first) sessionStorage.setItem("hp-view", "1"); } catch (_) {}
     $("vn").textContent = j.value.toLocaleString();
-    $("views").hidden = false; $("sep").hidden = false;
+    $("views").hidden = false;
   } catch (_) { /* counter down: keep it hidden */ }
 })();
 
@@ -252,7 +191,9 @@ function enter() {
   if (gate.classList.contains("gone")) return;
   gate.classList.add("gone"); document.body.classList.remove("locked");
   au.play().catch(() => {}); sync();
+  $("bgv").play().catch(() => {});
 }
+$("bgv").play().catch(() => {});
 gate.addEventListener("click", enter);
 gate.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") enter(); });
 </script>
