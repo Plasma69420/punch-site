@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Punch</title>
-<meta name="description" content="punch. dma hardware dev, fortnite cheats, c++. founder of larphub.">
+<meta name="description" content="punch. dma hardware dev, fortnite cheats, c++. owner of larphub and plasma tools.">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Punch">
-<meta property="og:description" content="dma hardware dev, fortnite cheats, c++. founder of larphub.">
+<meta property="og:description" content="dma hardware dev, fortnite cheats, c++. owner of larphub and plasma tools.">
 <meta property="og:url" content="https://heyimpunch.xyz/">
 <meta property="og:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=512">
 <meta name="twitter:card" content="summary">
@@ -37,7 +37,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @keyframes pulse{50%{opacity:.35}}
 
 /* layout */
-.page{min-height:100svh;display:grid;place-items:center;padding:28px 14px}
+.page{min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;padding:28px 14px}
 .stack{width:min(440px,100%);perspective:1000px}
 .card{background:rgba(6,6,6,.5);border:1px solid rgba(255,255,255,.16);border-radius:22px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:22px;box-shadow:0 30px 80px -30px #000;transform-style:preserve-3d;transition:transform .15s ease-out;opacity:0;transform:translateY(10px);animation:rise 2s .6s ease forwards}
 @keyframes rise{to{opacity:1;transform:none}}
@@ -64,11 +64,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .pres span{display:block;font-size:.8rem;font-style:italic;color:rgba(255,255,255,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pres div{min-width:0}
 
-/* links: icons only, like guns.lol */
-.links{display:flex;justify-content:center;gap:14px;margin-top:22px}
-.links a{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);transition:background .2s,transform .2s,border-color .2s,color .2s}
-.links a:hover{background:rgba(232,38,42,.2);border-color:var(--red);transform:translateY(-3px)}
-.links svg{width:22px;height:22px}
+/* brands */
+.lbl{margin-top:22px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.brands{display:grid;gap:10px;margin-top:10px}
+.brands a{display:flex;align-items:center;gap:14px;padding:13px 16px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);transition:background .2s,border-color .2s,transform .2s}
+.brands a:hover{background:rgba(232,38,42,.16);border-color:var(--red);transform:translateY(-2px)}
+.brands svg{width:24px;height:24px;flex:none}
+.brands div{flex:1;min-width:0}
+.brands b{display:block;font-weight:600;line-height:1.2}
+.brands span{display:block;font-size:.78rem;color:rgba(255,255,255,.55)}
+.brands em{font-style:normal;opacity:.6;transition:transform .2s}
+.brands a:hover em{transform:translate(2px,-2px);opacity:1}
 
 /* player */
 .player{display:flex;align-items:center;gap:12px;margin-top:20px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.06)}
@@ -116,20 +122,23 @@ input[type=range]::-moz-range-thumb{width:11px;height:11px;border:0;border-radiu
         <div class="who">
           <h1 class="name">Punch</h1>
           <p class="bio"><span id="typed"></span><i></i></p>
-          <p class="sub">founder of larphub</p>
+          <p class="sub">owner of larphub &amp; plasma tools</p>
         </div>
       </div>
 
-      <div class="pres" aria-live="polite">
+      <a class="pres" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener" aria-live="polite" title="message me on discord">
         <img id="pav" alt="" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=128">
         <div><b id="pname">Punch</b><span id="pstat">connecting...</span></div>
-      </div>
+      </a>
 
-      <div class="links">
-        <a href="https://larphub.tech" target="_blank" rel="noopener" aria-label="larphub.tech" title="larphub.tech">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg></a>
-        <a href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener" aria-label="discord" title="discord">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-5.5A8 8 0 1 1 21 12z"/></svg></a>
+      <p class="lbl">brands</p>
+      <div class="brands">
+        <a href="https://larphub.tech" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>
+          <div><b>larphub</b><span>larphub.tech</span></div><em>&#8599;</em></a>
+        <a href="https://plasmatools.tech" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>
+          <div><b>plasma tools</b><span>plasmatools.tech</span></div><em>&#8599;</em></a>
       </div>
 
       <div class="player">
