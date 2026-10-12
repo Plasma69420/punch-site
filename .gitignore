@@ -1,0 +1,8 @@
+
+# never publish these (private store + bot source, local tooling)
+plasma/
+plasma-bot/
+.claude/
+thumbnails/
+.env
+*.env
