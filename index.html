@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>punch - websites, discord bots, custom tools</title>
-<meta name="description" content="i'm punch. i build websites, discord bots and custom tools. add me on discord to order. owner of larphub and plasma.">
+<meta name="description" content="i'm punch. i build websites, discord bots and custom tools. add me on discord to order. owner of larp hub and plasma.">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
@@ -15,109 +15,135 @@
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0a;--text:#ecebe6;--dim:#85837c;--line:#262523;--red:#e8262a}
+:root{--bg:#0a0a0a;--card:#111;--line:#232323;--text:#f4f4f2;--dim:#8b8b8b;--mid:#b4b4b0;--red:#e8262a;--r:22px}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{background:var(--bg);color:var(--text);font:400 15px/1.65 'IBM Plex Mono',ui-monospace,Consolas,monospace;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-::selection{background:var(--red);color:#fff}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);font:400 16px/1.6 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:#fff;color:#000}
 a{color:inherit;text-decoration:none}
-.hd{font-family:'Archivo Black','Arial Black',Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-.01em}
-.wrap{width:min(1020px,100% - 40px);margin:0 auto}
-.dim{color:var(--dim)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Consolas,monospace}
+.wrap{width:min(1080px,100% - 40px);margin:0 auto}
+h1,h2,h3{letter-spacing:-.03em;line-height:1.08;font-weight:600}
+em{font-style:italic;font-weight:500;color:var(--dim)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:500;font-size:.95rem;border:1px solid #2e2e2e;background:#0f0f0f;transition:transform .15s,background .15s,border-color .15s,color .15s}
+.btn:hover{transform:translateY(-2px);border-color:#555}
+.btn.solid{background:#fff;color:#000;border-color:#fff}
+.btn.solid:hover{background:#e6e6e6}
+.btn.sm{padding:10px 18px;font-size:.88rem}
 
 /* nav */
-.nav{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:16px}
-.logo{font-size:1.3rem}
-.logo i{color:var(--red);font-style:normal}
-.links{display:flex;gap:26px;font-size:.85rem;color:var(--dim)}
-.links a:hover{color:var(--text)}
-.btn{display:inline-block;padding:11px 20px;border:1px solid var(--text);font-size:.85rem;font-weight:500;transition:background .15s,color .15s,border-color .15s}
-.btn:hover{background:var(--text);color:#000}
-.btn.red{background:var(--red);border-color:var(--red);color:#fff}
-.btn.red:hover{background:#ff3b3f;border-color:#ff3b3f}
+.nav{position:sticky;top:0;z-index:30;background:rgba(10,10,10,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:1.05rem}
+.brand img{width:32px;height:32px;border-radius:50%;object-fit:cover;background:#1a1a1a}
+.links{display:flex;gap:30px;font-size:.92rem;color:var(--mid)}
+.links a:hover{color:#fff}
+.burger{display:none;width:38px;height:38px;position:relative}
+.burger span{position:absolute;left:9px;right:9px;height:2px;background:#fff;transition:.2s}
+.burger span:first-child{top:15px}.burger span:last-child{top:21px}
+.burger.open span:first-child{top:18px;transform:rotate(45deg)}
+.burger.open span:last-child{top:18px;transform:rotate(-45deg)}
+.mnav{display:none;border-top:1px solid var(--line);background:var(--bg)}
+.mnav.open{display:block}
+.mnav a{display:block;padding:15px 20px;border-bottom:1px solid var(--line);color:var(--mid)}
 
 /* hero */
-.hero{padding:clamp(70px,14vh,140px) 0 80px}
-.hero h1{font-size:clamp(2.8rem,9vw,6.4rem);line-height:.95}
-.hero h1 em{font-style:normal;color:var(--red)}
-.hero p{max-width:50ch;margin:26px 0 30px;color:#b9b7b0;font-size:1.05rem}
-.row{display:flex;flex-wrap:wrap;gap:12px}
+.hero{text-align:center;padding:clamp(80px,16vh,160px) 0 clamp(70px,12vh,120px);background:radial-gradient(ellipse 60% 50% at 50% 0,rgba(255,255,255,.05),transparent 70%)}
+.hero h1{font-size:clamp(2.6rem,7.4vw,5.2rem);max-width:15ch;margin:0 auto}
+.hero p{margin:26px auto 34px;color:var(--mid);font-size:clamp(1rem,1.6vw,1.18rem);max-width:46ch}
+.hero .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 
-section{padding:70px 0;border-top:1px solid var(--line)}
-.lbl{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:34px}
-.lbl h2{font-size:clamp(1.8rem,4.6vw,3rem);line-height:1}
-.lbl span{font-size:.75rem;color:var(--dim);letter-spacing:.12em;text-transform:uppercase}
+section{padding:84px 0;border-top:1px solid var(--line)}
+.tag{display:inline-flex;align-items:center;gap:10px;font:500 .72rem 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:22px}
+.tag::before{content:"";width:7px;height:7px;background:#fff}
+.head h2{font-size:clamp(1.9rem,4.4vw,3rem)}
+.head p{margin-top:14px;color:var(--mid);max-width:50ch}
+.head{margin-bottom:44px}
 
-/* services: rows, not cards */
-.svc{display:grid;grid-template-columns:90px 1fr auto;gap:20px;align-items:start;padding:26px 0;border-bottom:1px solid var(--line)}
-.svc:first-of-type{border-top:1px solid var(--line)}
-.svc .n{color:var(--red);font-size:.85rem;padding-top:6px}
-.svc h3{font-size:1.5rem}
-.svc p{margin-top:8px;color:#b0aea8;max-width:56ch;font-size:.92rem}
-.svc .meta{text-align:right;font-size:.85rem;white-space:nowrap}
-.svc .meta b{display:block;font-size:1.3rem;font-weight:500}
-.svc .meta span{color:var(--dim)}
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+
+.svc{display:flex;flex-direction:column}
+.svc .top{display:flex;align-items:center;gap:16px}
+.ic{width:46px;height:46px;border-radius:14px;border:1px solid var(--line);background:#0a0a0a;display:grid;place-items:center;flex:none}
+.ic svg{width:21px;height:21px}
+.svc h3{font-size:1.4rem;flex:1}
+.svc .num{font:400 .75rem 'IBM Plex Mono',monospace;color:var(--dim)}
+.svc p{color:var(--dim);margin:20px 0 4px;font-size:.95rem}
+.svc ul{list-style:none;margin:8px 0 22px;flex:1}
+.svc li{padding:12px 0;border-bottom:1px solid var(--line);font-size:.92rem;display:flex;gap:12px;color:#d6d6d3}
+.svc li::before{content:"-";color:var(--dim)}
+.svc li:last-child{border-bottom:0}
+.svc .foot{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;padding-top:18px;border-top:1px solid var(--line)}
+.svc .foot b{font:500 .85rem 'IBM Plex Mono',monospace}
+.svc .foot a{color:var(--dim)}
+.svc .foot a:hover{color:#fff}
+
+.incl{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;padding:22px 28px}
+.incl b{font:500 .72rem 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-right:8px}
+.incl span{font-size:.9rem;color:#d6d6d3}
+.incl span::before{content:"+ ";color:var(--dim)}
 
 /* projects */
-.proj{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.proj a{display:block;border:1px solid var(--line);padding:26px;transition:border-color .15s,background .15s}
-.proj a:hover{border-color:var(--red);background:rgba(232,38,42,.06)}
-.proj small{color:var(--dim);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
-.proj h3{font-size:1.7rem;margin:8px 0 8px}
-.proj p{color:#b0aea8;font-size:.9rem}
-.proj .go{display:block;margin-top:18px;font-size:.85rem}
+.proj{display:block;transition:border-color .2s,transform .2s}
+.proj:hover{border-color:#4a4a4a;transform:translateY(-3px)}
+.proj small{font:400 .72rem 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.proj h3{font-size:1.6rem;margin:10px 0}
+.proj p{color:var(--dim);font-size:.95rem}
+.proj .go{display:block;margin-top:22px;font-size:.9rem;color:#fff}
 
 /* pricing */
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.plan{border:1px solid var(--line);padding:26px;display:flex;flex-direction:column}
-.plan.pop{border-color:var(--red)}
-.plan .top{display:flex;justify-content:space-between;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-.plan.pop .top span:last-child{color:var(--red)}
-.plan .price{font-family:'Archivo Black',sans-serif;font-size:3rem;line-height:1;margin:18px 0 4px}
-.plan .price small{font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--dim);margin-left:6px}
-.plan .ask{font-family:'Archivo Black',sans-serif;font-size:2rem;line-height:1.2;margin:18px 0 4px}
-.plan p{color:#b0aea8;font-size:.88rem}
-.plan ul{list-style:none;margin:20px 0 24px;display:grid;gap:8px;font-size:.86rem;flex:1}
-.plan li::before{content:"+ ";color:var(--red)}
-.plan .btn{text-align:center}
-.note{margin-top:20px;color:var(--dim);font-size:.82rem}
+.plan{display:flex;flex-direction:column;position:relative}
+.plan.pop{border-color:#fff}
+.plan .badge{position:absolute;top:-12px;right:24px;background:#fff;color:#000;font:500 .68rem 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
+.plan h3{font-size:1.15rem}
+.plan .sub{color:var(--dim);font-size:.85rem;margin-top:2px}
+.plan .price{font-size:3.4rem;font-weight:600;letter-spacing:-.04em;line-height:1;margin:26px 0 4px}
+.plan .price small{font-size:1rem;color:var(--dim);font-weight:400;letter-spacing:0;margin-left:6px}
+.plan .ask{font-size:1.9rem;font-weight:600;letter-spacing:-.03em;line-height:1.15;margin:26px 0 4px}
+.plan p{color:var(--dim);font-size:.9rem;margin-top:8px}
+.plan ul{list-style:none;margin:22px 0 26px;flex:1}
+.plan li{padding:11px 0;border-top:1px solid var(--line);font-size:.9rem;color:#d6d6d3}
+.plan li::before{content:"+ ";color:var(--dim)}
+.note{margin-top:22px;color:var(--dim);font-size:.9rem;text-align:center}
 
-/* how */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.steps div{border-top:2px solid var(--text);padding-top:14px}
-.steps b{display:block;color:var(--red);font-size:.8rem;font-weight:500}
-.steps h3{font-size:1.25rem;margin:6px 0}
-.steps p{color:#b0aea8;font-size:.88rem}
+/* steps */
+.step b{font:500 .78rem 'IBM Plex Mono',monospace;color:var(--dim)}
+.step h3{font-size:1.3rem;margin:14px 0 8px}
+.step p{color:var(--dim);font-size:.92rem}
 
 /* contact */
-.contact{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;border:1px solid var(--line);padding:30px}
-.pfp{position:relative;display:block;width:120px;height:120px;border-radius:50%;flex:none}
-.pfp img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#1a1a1a;display:block;border:2px solid var(--text);transition:border-color .2s}
-.pfp:hover img{border-color:var(--red)}
-.pfp i{position:absolute;right:4px;bottom:6px;width:24px;height:24px;border-radius:50%;background:#6b6b6b;border:4px solid var(--bg)}
+.contact{display:flex;align-items:center;gap:36px;padding:42px}
+.pfp{position:relative;display:block;width:132px;height:132px;flex:none}
+.pfp img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#1a1a1a;display:block;border:2px solid #2e2e2e;transition:border-color .2s}
+.pfp:hover img{border-color:#fff}
+.pfp i{position:absolute;right:6px;bottom:8px;width:26px;height:26px;border-radius:50%;background:#6b6b6b;border:5px solid var(--card)}
 .pfp i.online{background:#3ba55d}.pfp i.idle{background:#faa61a}.pfp i.dnd{background:var(--red)}
-.contact h2{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1}
-.contact p{margin:10px 0 18px;color:#b0aea8;max-width:52ch}
-.stat{margin-top:14px;font-size:.8rem;color:var(--dim)}
+.contact h2{font-size:clamp(1.8rem,4vw,2.6rem)}
+.contact p{color:var(--mid);margin:12px 0 22px;max-width:48ch}
+.stat{display:block;margin-top:16px;font:400 .78rem 'IBM Plex Mono',monospace;color:var(--dim)}
 
-footer{border-top:1px solid var(--line);padding:30px 0 50px;font-size:.78rem;color:var(--dim)}
+footer{border-top:1px solid var(--line);padding:34px 0 54px;font-size:.84rem;color:var(--dim)}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-footer p{max-width:62ch}
-footer a:hover{color:var(--text)}
+footer p{max-width:60ch}
+footer a:hover{color:#fff}
 
-.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .rv.show{opacity:1;transform:none}
 
-@media(max-width:760px){
-  .links{display:none}
-  .svc{grid-template-columns:1fr;gap:8px}
-  .svc .meta{text-align:left}
-  .proj,.plans,.steps{grid-template-columns:1fr}
-  .contact{grid-template-columns:1fr;justify-items:start}
-  section{padding:54px 0}
+@media(max-width:860px){
+  .links,.nav .btn{display:none}
+  .burger{display:block}
+  .grid3,.grid2{grid-template-columns:1fr}
+  .contact{flex-direction:column;align-items:flex-start;padding:28px}
+  section{padding:62px 0}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
@@ -126,116 +152,129 @@ footer a:hover{color:var(--text)}
 
 <header class="nav">
   <div class="wrap">
-    <a class="logo hd" href="#top">punch<i>.</i></a>
+    <a class="brand" href="#top"><img id="navav" alt="" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=64"><span>punch</span></a>
     <nav class="links" aria-label="Main">
       <a href="#services">services</a>
       <a href="#projects">projects</a>
       <a href="#pricing">pricing</a>
       <a href="#contact">contact</a>
     </nav>
-    <a class="btn red" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">add me on discord</a>
+    <a class="btn solid sm" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">add me on discord</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
   </div>
+  <nav class="mnav" id="mnav" aria-label="Mobile">
+    <a href="#services">services</a><a href="#projects">projects</a><a href="#pricing">pricing</a><a href="#contact">contact</a>
+  </nav>
 </header>
 
 <main id="top">
-  <div class="wrap">
 
-    <div class="hero">
-      <h1 class="hd">websites.<br>discord bots.<br><em>custom tools.</em></h1>
-      <p>i build them myself, start to finish. no agency, no middleman. to order, add me on discord and tell me what you need.</p>
-      <div class="row">
-        <a class="btn red" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">add me on discord</a>
-        <a class="btn" href="#pricing">see pricing</a>
-      </div>
+  <div class="wrap hero">
+    <h1>websites, <em>discord bots</em> and custom tools.</h1>
+    <p>i build them myself from start to finish. to order, add me on discord and tell me what you need.</p>
+    <div class="row">
+      <a class="btn solid" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">add me on discord</a>
+      <a class="btn" href="#pricing">see pricing</a>
     </div>
+  </div>
 
-    <section id="services" class="rv">
-      <div class="lbl"><h2 class="hd">services</h2><span>what i build</span></div>
-      <div class="svc">
-        <span class="n">01</span>
-        <div><h3 class="hd">discord bots</h3><p>shop bots with order panels, licenses and tickets, plus setup and hosting so it keeps running without you.</p></div>
-        <div class="meta"><b>from $5</b><span>1-3 days</span></div>
+  <section id="services">
+    <div class="wrap rv">
+      <div class="head"><span class="tag">services</span><h2>what i <em>build.</em></h2><p>design, build, deploy and support, all handled by me.</p></div>
+      <div class="grid2">
+        <div class="card svc">
+          <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></svg></div><h3>discord bots</h3><span class="num">01</span></div>
+          <p>shop bots that take orders, hand out licenses and answer tickets while you're offline.</p>
+          <ul><li>order panels</li><li>license keys</li><li>support tickets</li><li>setup and hosting</li></ul>
+          <div class="foot"><b>from $5 &middot; 1-3 days</b><a href="#pricing">pricing &#8599;</a></div>
+        </div>
+        <div class="card svc">
+          <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18"/></svg></div><h3>websites</h3><span class="num">02</span></div>
+          <p>landing pages, profile pages and storefronts that load fast and look right on any screen.</p>
+          <ul><li>landing and profile pages</li><li>store sites</li><li>clean, fast code</li><li>help with deploying</li></ul>
+          <div class="foot"><b>from $20 &middot; 2-5 days</b><a href="#pricing">pricing &#8599;</a></div>
+        </div>
       </div>
-      <div class="svc">
-        <span class="n">02</span>
-        <div><h3 class="hd">websites</h3><p>landing pages, profile pages and storefronts. fast, clean code and help getting it deployed.</p></div>
-        <div class="meta"><b>from $20</b><span>2-5 days</span></div>
-      </div>
-      <div class="svc">
-        <span class="n">03</span>
-        <div><h3 class="hd">custom tools</h3><p>scripts, automation and apis. if it's something different, tell me and i'll tell you if i can build it.</p></div>
-        <div class="meta"><b>on request</b><span>depends on scope</span></div>
-      </div>
-    </section>
+      <div class="card incl"><b>every order</b><span>works on phones</span><span>clean code</span><span>fast delivery</span><span>direct support</span></div>
+    </div>
+  </section>
 
-    <section id="projects" class="rv">
-      <div class="lbl"><h2 class="hd">my projects</h2><span>things i run</span></div>
-      <div class="proj">
-        <a href="https://larphub.tech" target="_blank" rel="noopener">
-          <small>brand</small><h3 class="hd">larp hub</h3>
-          <p>a library of photos and videos, prompts and tools, with a private discord community. for entertainment, parody and mockups only.</p>
+  <section id="projects">
+    <div class="wrap rv">
+      <div class="head"><span class="tag">my projects</span><h2>things i <em>run.</em></h2></div>
+      <div class="grid2">
+        <a class="card proj" href="https://larphub.tech" target="_blank" rel="noopener">
+          <small>brand</small><h3>larp hub</h3>
+          <p>a library of photos, videos, prompts and tools, with a private discord community. for entertainment, parody and mockups only.</p>
           <span class="go">larphub.tech &#8599;</span>
         </a>
-        <a href="https://plasmatools.org" target="_blank" rel="noopener">
-          <small>brand</small><h3 class="hd">plasma</h3>
+        <a class="card proj" href="https://plasmatools.org" target="_blank" rel="noopener">
+          <small>brand</small><h3>plasma</h3>
           <p>my other brand and storefront.</p>
           <span class="go">plasmatools.org &#8599;</span>
         </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="pricing" class="rv">
-      <div class="lbl"><h2 class="hd">pricing</h2><span>all prices in usd</span></div>
-      <div class="plans">
-        <div class="plan">
-          <div class="top"><span>discord bot</span></div>
-          <div class="price">$5<small>starting at</small></div>
+  <section id="pricing">
+    <div class="wrap rv">
+      <div class="head"><span class="tag">pricing</span><h2>simple, <em>upfront</em> pricing.</h2><p>all prices in usd. you see the price before any work starts.</p></div>
+      <div class="grid3">
+        <div class="card plan">
+          <h3>discord bot</h3><span class="sub">starting at</span>
+          <div class="price">$5<small>usd</small></div>
           <p>priced by what it does, from one command to a full shop bot.</p>
           <ul><li>1-3 days delivery</li><li>tickets and automation</li><li>setup and hosting help</li></ul>
           <a class="btn" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">order on discord</a>
         </div>
-        <div class="plan pop">
-          <div class="top"><span>website</span><span>popular</span></div>
-          <div class="price">$20<small>starting at</small></div>
+        <div class="card plan pop">
+          <span class="badge">popular</span>
+          <h3>website</h3><span class="sub">starting at</span>
+          <div class="price">$20<small>usd</small></div>
           <p>a landing page, profile page or storefront.</p>
-          <ul><li>2-5 days delivery</li><li>custom design</li><li>works on phones</li><li>clean, fast code</li></ul>
-          <a class="btn red" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">order on discord</a>
+          <ul><li>2-5 days delivery</li><li>custom design</li><li>responsive layout</li><li>clean, fast code</li></ul>
+          <a class="btn solid" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">order on discord</a>
         </div>
-        <div class="plan">
-          <div class="top"><span>custom</span></div>
+        <div class="card plan">
+          <h3>custom</h3><span class="sub">anything else</span>
           <div class="ask">price on request</div>
-          <p>scripts, automation, apis, anything else.</p>
+          <p>scripts, automation, apis and more.</p>
           <ul><li>depends on scope</li><li>quote before i start</li><li>flexible budget</li></ul>
           <a class="btn" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">ask on discord</a>
         </div>
       </div>
-      <p class="note">you get the price before any work starts.</p>
-    </section>
+    </div>
+  </section>
 
-    <section class="rv">
-      <div class="lbl"><h2 class="hd">how to order</h2><span>three steps</span></div>
-      <div class="steps">
-        <div><b>01</b><h3 class="hd">add me</h3><p>click my discord profile and add me as a friend.</p></div>
-        <div><b>02</b><h3 class="hd">tell me</h3><p>say what you want built. the more detail, the better the quote.</p></div>
-        <div><b>03</b><h3 class="hd">get a price</h3><p>i send a price first. you only pay if you're happy with it.</p></div>
+  <section>
+    <div class="wrap rv">
+      <div class="head"><span class="tag">how to order</span><h2>three <em>steps.</em></h2></div>
+      <div class="grid3">
+        <div class="card step"><b>01</b><h3>add me</h3><p>open my discord profile and send a friend request.</p></div>
+        <div class="card step"><b>02</b><h3>tell me</h3><p>say what you want built. more detail means a better quote.</p></div>
+        <div class="card step"><b>03</b><h3>get a price</h3><p>i send the price first. you only pay if you're happy with it.</p></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="contact" class="rv">
-      <div class="contact">
+  <section id="contact">
+    <div class="wrap rv">
+      <div class="card contact">
         <a class="pfp" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener" aria-label="Open my Discord profile">
           <img id="av" alt="punch on discord" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=256"><i id="dot"></i>
         </a>
         <div>
-          <h2 class="hd">add me to order</h2>
-          <p>click my picture to open my discord profile, then hit add friend. i reply there.</p>
-          <a class="btn red" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">open my discord</a>
-          <p class="stat" id="pstat">connecting...</p>
+          <span class="tag">contact</span>
+          <h2>add me to <em>order.</em></h2>
+          <p>click my picture to open my discord profile, then add me as a friend. i reply there.</p>
+          <a class="btn solid" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">open my discord</a>
+          <span class="stat" id="pstat">connecting...</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </div>
 </main>
 
 <footer>
@@ -249,10 +288,15 @@ footer a:hover{color:var(--text)}
 const $ = id => document.getElementById(id);
 const ID = "1495161901330464801";
 
+/* mobile menu */
+const burger = $("burger"), mnav = $("mnav");
+burger.addEventListener("click", () => { const o = burger.classList.toggle("open"); mnav.classList.toggle("open", o); burger.setAttribute("aria-expanded", o); });
+mnav.addEventListener("click", e => { if (e.target.closest("a")) { burger.classList.remove("open"); mnav.classList.remove("open"); } });
+
 /* reveal on scroll */
 const rv = document.querySelectorAll(".rv");
 if ("IntersectionObserver" in window) {
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold: .1 });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold: .08 });
   rv.forEach(el => io.observe(el));
 } else rv.forEach(el => el.classList.add("show"));
 
@@ -260,7 +304,10 @@ if ("IntersectionObserver" in window) {
 const LABEL = { online: "online now", idle: "idle", dnd: "busy, do not disturb", offline: "offline, i reply when i'm back" };
 function render(d) {
   const u = d.discord_user || {};
-  if (u.avatar) $("av").src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=256`;
+  if (u.avatar) {
+    const url = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=256`;
+    $("av").src = url; $("navav").src = url;
+  }
   const s = d.discord_status || "offline";
   $("dot").className = s;
   $("pstat").textContent = LABEL[s] || s;
