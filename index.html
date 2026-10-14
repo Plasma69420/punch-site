@@ -1,82 +1,92 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>punch - websites, discord bots, custom tools</title>
-<meta name="description" content="i'm punch. i build websites, discord bots and custom tools. add me on discord to order. owner of larp hub and plasma.">
+<meta name="description" content="i'm punch. i build websites, discord bots and custom tools. send a request or add me on discord. owner of larp hub and plasma.">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="punch - websites, discord bots, custom tools">
-<meta property="og:description" content="websites from $20, discord bots from $5, custom tools on request. add me on discord to order.">
+<meta property="og:description" content="websites from $20, discord bots from $5, custom tools on request. send a request or add me on discord.">
 <meta property="og:url" content="https://heyimpunch.xyz/">
 <meta property="og:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=512">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0a;--card:#111;--line:#232323;--text:#f4f4f2;--dim:#8b8b8b;--mid:#b4b4b0;--red:#e8262a;--r:22px}
+:root{--bg:#0a0a0a;--card:#0f0f0f;--line:#222;--text:#f4f4f2;--dim:#8b8b8b;--mid:#b4b4b0;--green:#3ba55d;--r:22px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{background:var(--bg);color:var(--text);font:400 16px/1.6 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.lock{overflow:hidden}
 ::selection{background:#fff;color:#000}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,textarea{font:inherit;color:inherit}
 .mono{font-family:'IBM Plex Mono',ui-monospace,Consolas,monospace}
-.wrap{width:min(1080px,100% - 40px);margin:0 auto}
+.wrap{width:min(1100px,100% - 40px);margin:0 auto}
 h1,h2,h3{letter-spacing:-.03em;line-height:1.08;font-weight:600}
 em{font-style:italic;font-weight:500;color:var(--dim)}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:500;font-size:.95rem;border:1px solid #2e2e2e;background:#0f0f0f;transition:transform .15s,background .15s,border-color .15s,color .15s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 26px;border-radius:999px;font-weight:500;font-size:.95rem;border:1px solid #2c2c2c;background:#0d0d0d;transition:transform .15s,background .15s,border-color .15s}
 .btn:hover{transform:translateY(-2px);border-color:#555}
 .btn.solid{background:#fff;color:#000;border-color:#fff}
-.btn.solid:hover{background:#e6e6e6}
+.btn.solid:hover{background:#e8e8e8}
 .btn.sm{padding:10px 18px;font-size:.88rem}
+.btn .arr{width:24px;height:24px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;margin:-6px -14px -6px 4px}
+.btn .arr svg{width:12px;height:12px}
 
 /* nav */
-.nav{position:sticky;top:0;z-index:30;background:rgba(10,10,10,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.nav{position:sticky;top:0;z-index:30;background:rgba(10,10,10,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
 .brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:1.05rem}
 .brand img{width:32px;height:32px;border-radius:50%;object-fit:cover;background:#1a1a1a}
-.links{display:flex;gap:30px;font-size:.92rem;color:var(--mid)}
-.links a:hover{color:#fff}
-.burger{display:none;width:38px;height:38px;position:relative}
-.burger span{position:absolute;left:9px;right:9px;height:2px;background:#fff;transition:.2s}
-.burger span:first-child{top:15px}.burger span:last-child{top:21px}
-.burger.open span:first-child{top:18px;transform:rotate(45deg)}
-.burger.open span:last-child{top:18px;transform:rotate(-45deg)}
+.links{display:flex;gap:6px}
+.links a{position:relative;padding:8px 14px;font-size:.9rem;color:var(--dim);transition:color .15s}
+.links a:hover,.links a.on{color:#fff}
+.links a.on::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:2px;background:#fff;border-radius:2px}
+.burger{display:none;width:40px;height:40px;position:relative}
+.burger span{position:absolute;left:10px;right:10px;height:2px;background:#fff;transition:.2s}
+.burger span:first-child{top:16px}.burger span:last-child{top:22px}
+.burger.open span:first-child{top:19px;transform:rotate(45deg)}
+.burger.open span:last-child{top:19px;transform:rotate(-45deg)}
 .mnav{display:none;border-top:1px solid var(--line);background:var(--bg)}
 .mnav.open{display:block}
-.mnav a{display:block;padding:15px 20px;border-bottom:1px solid var(--line);color:var(--mid)}
+.mnav a,.mnav button{display:block;width:100%;text-align:left;padding:16px 20px;border-bottom:1px solid var(--line);color:var(--mid)}
 
 /* hero */
-.hero{text-align:center;padding:clamp(80px,16vh,160px) 0 clamp(70px,12vh,120px);background:radial-gradient(ellipse 60% 50% at 50% 0,rgba(255,255,255,.05),transparent 70%)}
-.hero h1{font-size:clamp(2.6rem,7.4vw,5.2rem);max-width:15ch;margin:0 auto}
-.hero p{margin:26px auto 34px;color:var(--mid);font-size:clamp(1rem,1.6vw,1.18rem);max-width:46ch}
+.hero{text-align:center;padding:clamp(90px,17vh,170px) 0 clamp(60px,10vh,100px);background:radial-gradient(ellipse 70% 55% at 50% 0,rgba(255,255,255,.06),transparent 70%)}
+.hero h1{font-size:clamp(2.8rem,8vw,5.6rem);max-width:13ch;margin:0 auto;background:linear-gradient(180deg,#fff 35%,#7d7d7d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+.hero h1 em{color:transparent;font-weight:500}
+.hero p{margin:26px auto 36px;color:var(--mid);font-size:clamp(1rem,1.5vw,1.15rem);max-width:44ch}
 .hero .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.scroll{margin-top:clamp(60px,12vh,110px);font-size:.78rem;color:var(--dim)}
+.scroll i{display:block;width:1px;height:38px;margin:14px auto 0;background:linear-gradient(#555,transparent);position:relative;overflow:hidden}
+.scroll i::after{content:"";position:absolute;left:0;top:0;width:1px;height:12px;background:#fff;animation:drop 1.8s ease-in-out infinite}
+@keyframes drop{from{transform:translateY(-12px)}to{transform:translateY(38px)}}
 
-section{padding:84px 0;border-top:1px solid var(--line)}
-.tag{display:inline-flex;align-items:center;gap:10px;font:500 .72rem 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:22px}
-.tag::before{content:"";width:7px;height:7px;background:#fff}
-.head h2{font-size:clamp(1.9rem,4.4vw,3rem)}
-.head p{margin-top:14px;color:var(--mid);max-width:50ch}
-.head{margin-bottom:44px}
+section{padding:96px 0;border-top:1px solid var(--line)}
+.tag{display:inline-flex;align-items:center;gap:10px;font:500 .7rem 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:22px}
+.tag::before{content:"";width:6px;height:6px;background:#fff}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:46px}
+.head h2{font-size:clamp(2rem,4.6vw,3.2rem)}
+.head p{color:var(--dim);font-size:.9rem;max-width:30ch;text-align:right}
 
-/* cards */
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r)}
 .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 
-.svc{display:flex;flex-direction:column}
+/* services */
+.svc{padding:30px;display:flex;flex-direction:column}
 .svc .top{display:flex;align-items:center;gap:16px}
 .ic{width:46px;height:46px;border-radius:14px;border:1px solid var(--line);background:#0a0a0a;display:grid;place-items:center;flex:none}
-.ic svg{width:21px;height:21px}
+.ic svg{width:20px;height:20px}
 .svc h3{font-size:1.4rem;flex:1}
 .svc .num{font:400 .75rem 'IBM Plex Mono',monospace;color:var(--dim)}
-.svc p{color:var(--dim);margin:20px 0 4px;font-size:.95rem}
+.svc p{color:var(--dim);margin:20px 0 6px;font-size:.95rem}
 .svc ul{list-style:none;margin:8px 0 22px;flex:1}
 .svc li{padding:12px 0;border-bottom:1px solid var(--line);font-size:.92rem;display:flex;gap:12px;color:#d6d6d3}
 .svc li::before{content:"-";color:var(--dim)}
@@ -85,66 +95,125 @@ section{padding:84px 0;border-top:1px solid var(--line)}
 .svc .foot b{font:500 .85rem 'IBM Plex Mono',monospace}
 .svc .foot a{color:var(--dim)}
 .svc .foot a:hover{color:#fff}
-
 .incl{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;padding:22px 28px}
-.incl b{font:500 .72rem 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-right:8px}
+.incl b{font:500 .7rem 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-right:8px}
 .incl span{font-size:.9rem;color:#d6d6d3}
 .incl span::before{content:"+ ";color:var(--dim)}
 
-/* projects */
-.proj{display:block;transition:border-color .2s,transform .2s}
-.proj:hover{border-color:#4a4a4a;transform:translateY(-3px)}
-.proj small{font:400 .72rem 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-.proj h3{font-size:1.6rem;margin:10px 0}
-.proj p{color:var(--dim);font-size:.95rem}
-.proj .go{display:block;margin-top:22px;font-size:.9rem;color:#fff}
+/* work */
+.work{display:grid;grid-template-columns:1fr 1.15fr;gap:36px;align-items:center;padding:34px;margin-bottom:18px}
+.work small{font:400 .72rem 'IBM Plex Mono',monospace;color:var(--dim)}
+.work h3{font-size:1.5rem;margin:12px 0 10px}
+.work p{color:var(--dim);font-size:.95rem}
+.work ul{list-style:none;margin:18px 0 26px;display:grid;gap:8px;font-size:.9rem;color:#d6d6d3}
+.work li::before{content:"- ";color:var(--dim)}
+.work .row{display:flex;gap:10px;flex-wrap:wrap}
+.shot{border-radius:16px;border:1px solid var(--line);overflow:hidden;background:#000;display:block;transition:border-color .2s,transform .3s}
+.shot:hover{border-color:#555;transform:scale(1.01)}
+.shot img{display:block;width:100%;height:auto}
 
 /* pricing */
-.plan{display:flex;flex-direction:column;position:relative}
-.plan.pop{border-color:#fff}
-.plan .badge{position:absolute;top:-12px;right:24px;background:#fff;color:#000;font:500 .68rem 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
-.plan h3{font-size:1.15rem}
-.plan .sub{color:var(--dim);font-size:.85rem;margin-top:2px}
-.plan .price{font-size:3.4rem;font-weight:600;letter-spacing:-.04em;line-height:1;margin:26px 0 4px}
-.plan .price small{font-size:1rem;color:var(--dim);font-weight:400;letter-spacing:0;margin-left:6px}
-.plan .ask{font-size:1.9rem;font-weight:600;letter-spacing:-.03em;line-height:1.15;margin:26px 0 4px}
-.plan p{color:var(--dim);font-size:.9rem;margin-top:8px}
-.plan ul{list-style:none;margin:22px 0 26px;flex:1}
-.plan li{padding:11px 0;border-top:1px solid var(--line);font-size:.9rem;color:#d6d6d3}
-.plan li::before{content:"+ ";color:var(--dim)}
-.note{margin-top:22px;color:var(--dim);font-size:.9rem;text-align:center}
-
-/* steps */
-.step b{font:500 .78rem 'IBM Plex Mono',monospace;color:var(--dim)}
-.step h3{font-size:1.3rem;margin:14px 0 8px}
-.step p{color:var(--dim);font-size:.92rem}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.plan{padding:22px;display:flex;flex-direction:column;position:relative}
+.plan.pop{border-color:#3a3a3a;background:linear-gradient(180deg,#171717,#0f0f0f)}
+.plan .t{display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500}
+.plan .t .ic{width:30px;height:30px;border-radius:9px}
+.plan .t .ic svg{width:15px;height:15px}
+.plan .t .bd{margin-left:auto;font:500 .62rem 'IBM Plex Mono',monospace;background:#1a1a1a;border:1px solid #2b2b2b;border-radius:999px;padding:3px 9px;white-space:nowrap}
+.plan.pop .bd{background:#fff;color:#000;border-color:#fff}
+.plan .lab{font:400 .62rem 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:22px}
+.plan .price{font-size:2.5rem;font-weight:600;letter-spacing:-.04em;line-height:1.1}
+.plan .price small{font-size:.85rem;color:var(--dim);font-weight:400;letter-spacing:0;margin-left:6px}
+.plan .ask{font-size:2.1rem;font-weight:700;letter-spacing:-.04em;line-height:1.1}
+.plan .d{color:var(--dim);font-size:.8rem;margin-top:8px;min-height:4.2em}
+.plan .pill{display:inline-flex;align-items:center;gap:8px;margin:14px 0 18px;padding:7px 12px;border:1px solid #262626;border-radius:999px;font-size:.72rem;color:#cfcfcb;align-self:flex-start}
+.plan .pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}
+.plan ul{list-style:none;border-top:1px solid var(--line);padding-top:16px;margin-bottom:22px;display:grid;gap:11px;flex:1;font-size:.8rem;color:#d6d6d3}
+.plan li{display:flex;gap:10px;align-items:center}
+.plan li::before{content:"";flex:none;width:16px;height:16px;border-radius:50%;background:#1d1d1d url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 8.5l2.3 2.3 4.7-5'/%3E%3C/svg%3E") center/12px no-repeat}
+.plan .btn{width:100%;font-size:.82rem;padding:13px 16px}
+.plan.pop .btn{justify-content:space-between;padding-right:14px}
+.plan.pop .btn .arr{margin:0;background:#000}
 
 /* contact */
-.contact{display:flex;align-items:center;gap:36px;padding:42px}
-.pfp{position:relative;display:block;width:132px;height:132px;flex:none}
-.pfp img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#1a1a1a;display:block;border:2px solid #2e2e2e;transition:border-color .2s}
-.pfp:hover img{border-color:#fff}
-.pfp i{position:absolute;right:6px;bottom:8px;width:26px;height:26px;border-radius:50%;background:#6b6b6b;border:5px solid var(--card)}
-.pfp i.online{background:#3ba55d}.pfp i.idle{background:#faa61a}.pfp i.dnd{background:var(--red)}
-.contact h2{font-size:clamp(1.8rem,4vw,2.6rem)}
-.contact p{color:var(--mid);margin:12px 0 22px;max-width:48ch}
-.stat{display:block;margin-top:16px;font:400 .78rem 'IBM Plex Mono',monospace;color:var(--dim)}
+.contact{text-align:center;padding:100px 0 110px}
+.contact .pfp{display:inline-block;position:relative;width:76px;height:76px;margin-bottom:22px}
+.contact .pfp img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#1a1a1a;border:2px solid #2c2c2c;transition:border-color .2s;display:block}
+.contact .pfp:hover img{border-color:#fff}
+.contact .pfp i{position:absolute;right:0;bottom:2px;width:18px;height:18px;border-radius:50%;background:#6b6b6b;border:3px solid var(--bg)}
+.contact .pfp i.online{background:var(--green)}.contact .pfp i.idle{background:#faa61a}.contact .pfp i.dnd{background:#ed4245}
+.contact h2{font-size:clamp(2.1rem,5vw,3.4rem)}
+.contact p{color:var(--mid);max-width:40ch;margin:16px auto 32px}
+.contact .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.stat{display:block;margin-top:22px;font:400 .76rem 'IBM Plex Mono',monospace;color:var(--dim)}
 
-footer{border-top:1px solid var(--line);padding:34px 0 54px;font-size:.84rem;color:var(--dim)}
-footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-footer p{max-width:60ch}
-footer a:hover{color:#fff}
+/* footer */
+footer{border-top:1px solid var(--line);padding:60px 0 34px}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+.fbrand .brand{margin-bottom:16px}
+.fbrand p{color:var(--dim);font-size:.9rem;max-width:30ch}
+.fcol h4{font:500 .7rem 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
+.fcol a,.fcol button{display:block;color:var(--dim);font-size:.9rem;padding:5px 0;text-align:left;transition:color .15s}
+.fcol a:hover,.fcol button:hover{color:#fff}
+.fbot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:46px;padding-top:24px;font-size:.78rem;color:var(--dim)}
+.fbot .by{display:flex;align-items:center;gap:16px;font:400 .68rem 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase}
+.up{width:40px;height:40px;border-radius:50%;border:1px solid #2c2c2c;display:grid;place-items:center;color:#fff;transition:background .15s,color .15s}
+.up:hover{background:#fff;color:#000}
+.up svg{width:15px;height:15px}
+.legalnote{margin-top:16px;font-size:.72rem;color:#5d5d5d;max-width:80ch}
+
+/* request modal */
+.ov{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:18px}
+.ov.open{display:flex}
+.dlg{width:min(580px,100%);max-height:calc(100svh - 36px);overflow:auto;background:#101010;border:1px solid #2a2a2a;border-radius:24px;padding:30px;animation:pop .25s ease}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.dh span{font:500 .7rem 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.x{width:36px;height:36px;border-radius:50%;border:1px solid #2c2c2c;display:grid;place-items:center;font-size:1.1rem;line-height:1}
+.x:hover{background:#fff;color:#000}
+.prog{height:3px;background:#222;border-radius:3px;margin-bottom:28px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:#fff;transition:width .3s ease}
+.dlg h3{font-size:1.6rem;margin-bottom:6px}
+.dlg .hint{color:var(--dim);font-size:.85rem;margin-bottom:20px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid #2a2a2a;border-radius:14px;text-align:left;font-size:.95rem;transition:border-color .15s,background .15s}
+.opt:hover{border-color:#666}
+.opt.sel{border-color:#fff;background:#1a1a1a}
+.opt::before{content:"";width:16px;height:16px;border-radius:50%;border:1px solid #555;flex:none}
+.opt.sel::before{background:#fff;box-shadow:inset 0 0 0 4px #1a1a1a}
+.fld{width:100%;background:#0b0b0b;border:1px solid #2a2a2a;border-radius:14px;padding:14px 16px;outline:0;font-size:.95rem}
+.fld:focus{border-color:#777}
+textarea.fld{min-height:130px;resize:vertical}
+.err{color:#ff6b6b;font-size:.82rem;margin-top:10px;min-height:1.2em}
+.nav2{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.rev{display:grid;gap:12px;margin-bottom:6px}
+.rev div{border:1px solid #242424;border-radius:14px;padding:12px 14px}
+.rev small{display:block;font:400 .66rem 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.rev p{font-size:.92rem;white-space:pre-wrap;word-break:break-word}
+.done{text-align:center;padding:14px 0 6px}
+.done .ok{width:56px;height:56px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;margin:0 auto 18px}
+.done .ok svg{width:26px;height:26px}
+.done p{color:var(--mid);margin:10px auto 22px;max-width:40ch;font-size:.95rem}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
 .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .rv.show{opacity:1;transform:none}
 
+@media(max-width:980px){
+  .plans{grid-template-columns:repeat(2,1fr)}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .fbrand{grid-column:1/-1}
+}
 @media(max-width:860px){
   .links,.nav .btn{display:none}
   .burger{display:block}
-  .grid3,.grid2{grid-template-columns:1fr}
-  .contact{flex-direction:column;align-items:flex-start;padding:28px}
-  section{padding:62px 0}
+  .grid2,.work{grid-template-columns:1fr}
+  .work{padding:24px}
+  .head{flex-direction:column;align-items:flex-start;gap:14px}
+  .head p{text-align:left;max-width:none}
+  section{padding:68px 0}
 }
+@media(max-width:560px){.plans{grid-template-columns:1fr}.plan .d{min-height:0}.dlg{padding:22px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -153,34 +222,36 @@ footer a:hover{color:#fff}
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top"><img id="navav" alt="" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=64"><span>punch</span></a>
-    <nav class="links" aria-label="Main">
+    <nav class="links" id="links" aria-label="Main">
       <a href="#services">services</a>
-      <a href="#projects">projects</a>
+      <a href="#work">work</a>
       <a href="#pricing">pricing</a>
       <a href="#contact">contact</a>
     </nav>
-    <a class="btn solid sm" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">add me on discord</a>
+    <button class="btn solid sm" data-open>send a request</button>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
   </div>
   <nav class="mnav" id="mnav" aria-label="Mobile">
-    <a href="#services">services</a><a href="#projects">projects</a><a href="#pricing">pricing</a><a href="#contact">contact</a>
+    <a href="#services">services</a><a href="#work">work</a><a href="#pricing">pricing</a><a href="#contact">contact</a>
+    <button data-open>send a request</button>
   </nav>
 </header>
 
 <main id="top">
 
   <div class="wrap hero">
-    <h1>websites, <em>discord bots</em> and custom tools.</h1>
-    <p>i build them myself from start to finish. to order, add me on discord and tell me what you need.</p>
+    <h1>building websites, <em>discord bots</em> and custom tools.</h1>
+    <p>i build sites and automation myself, start to finish, so you save time and bring in more customers.</p>
     <div class="row">
-      <a class="btn solid" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">add me on discord</a>
-      <a class="btn" href="#pricing">see pricing</a>
+      <a class="btn solid" href="#work">see my work</a>
+      <a class="btn" href="#contact">contact</a>
     </div>
+    <div class="scroll">scroll to explore<i></i></div>
   </div>
 
   <section id="services">
     <div class="wrap rv">
-      <div class="head"><span class="tag">services</span><h2>what i <em>build.</em></h2><p>design, build, deploy and support, all handled by me.</p></div>
+      <div class="head"><div><span class="tag">services</span><h2>what i <em>build.</em></h2></div><p>design, build, deploy and support, all handled by me.</p></div>
       <div class="grid2">
         <div class="card svc">
           <div class="top"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></svg></div><h3>discord bots</h3><span class="num">01</span></div>
@@ -195,83 +266,93 @@ footer a:hover{color:#fff}
           <div class="foot"><b>from $20 &middot; 2-5 days</b><a href="#pricing">pricing &#8599;</a></div>
         </div>
       </div>
-      <div class="card incl"><b>every order</b><span>works on phones</span><span>clean code</span><span>fast delivery</span><span>direct support</span></div>
+      <div class="card incl"><b>every request</b><span>works on phones</span><span>clean code</span><span>fast delivery</span><span>direct support</span></div>
     </div>
   </section>
 
-  <section id="projects">
+  <section id="work">
     <div class="wrap rv">
-      <div class="head"><span class="tag">my projects</span><h2>things i <em>run.</em></h2></div>
-      <div class="grid2">
-        <a class="card proj" href="https://larphub.tech" target="_blank" rel="noopener">
-          <small>brand</small><h3>larp hub</h3>
-          <p>a library of photos, videos, prompts and tools, with a private discord community. for entertainment, parody and mockups only.</p>
-          <span class="go">larphub.tech &#8599;</span>
-        </a>
-        <a class="card proj" href="https://plasmatools.org" target="_blank" rel="noopener">
-          <small>brand</small><h3>plasma</h3>
-          <p>my other brand and storefront.</p>
-          <span class="go">plasmatools.org &#8599;</span>
-        </a>
+      <div class="head"><div><span class="tag">work</span><h2>what i <em>built and run.</em></h2></div><p>a look at the brands i've built and launched.</p></div>
+
+      <div class="card work">
+        <div>
+          <small>01 / brand</small>
+          <h3>larphub.tech, build your digital presence.</h3>
+          <p>a library of photos and videos, prompts and tools, with a private discord community behind it.</p>
+          <ul><li>content, prompt and growth libraries</li><li>dashboard and tools</li><li>built and run by me</li></ul>
+          <div class="row"><a class="btn solid sm" href="https://larphub.tech" target="_blank" rel="noopener">visit larphub.tech</a><button class="btn sm" data-open>build something similar</button></div>
+        </div>
+        <a class="shot" href="https://larphub.tech" target="_blank" rel="noopener" aria-label="Open larphub.tech"><img src="img/work-larphub.jpg" alt="larphub.tech homepage" width="1280" height="800"></a>
+      </div>
+
+      <div class="card work">
+        <div>
+          <small>02 / storefront</small>
+          <h3>plasmatools.org, my storefront.</h3>
+          <p>a store i built and run, with product pages, a cart and checkout, and license delivery.</p>
+          <ul><li>product pages and cart</li><li>checkout and license keys</li><li>built and run by me</li></ul>
+          <div class="row"><a class="btn solid sm" href="https://plasmatools.org" target="_blank" rel="noopener">visit plasmatools.org</a><button class="btn sm" data-open>build something similar</button></div>
+        </div>
+        <a class="shot" href="https://plasmatools.org" target="_blank" rel="noopener" aria-label="Open plasmatools.org"><img src="img/work-plasma.jpg" alt="plasmatools.org homepage" width="1280" height="800"></a>
       </div>
     </div>
   </section>
 
   <section id="pricing">
     <div class="wrap rv">
-      <div class="head"><span class="tag">pricing</span><h2>simple, <em>upfront</em> pricing.</h2><p>all prices in usd. you see the price before any work starts.</p></div>
-      <div class="grid3">
+      <div class="head"><div><span class="tag">pricing</span><h2>simple, <em>transparent</em> pricing.</h2></div><p>you see the price before any work starts. no hidden fees. all prices in usd.</p></div>
+      <div class="plans">
         <div class="card plan">
-          <h3>discord bot</h3><span class="sub">starting at</span>
-          <div class="price">$5<small>usd</small></div>
-          <p>priced by what it does, from one command to a full shop bot.</p>
-          <ul><li>1-3 days delivery</li><li>tickets and automation</li><li>setup and hosting help</li></ul>
-          <a class="btn" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">order on discord</a>
+          <div class="t"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4"/></svg></div>discord bot</div>
+          <div class="lab">starting at</div>
+          <div class="price">5<small>USD</small></div>
+          <p class="d">priced by what it does, from one command to a full shop bot.</p>
+          <span class="pill">1-3 days delivery</span>
+          <ul><li>built around your request</li><li>tickets and automation</li><li>setup and hosting help</li></ul>
+          <button class="btn" data-open data-svc="discord bot">send request</button>
         </div>
         <div class="card plan pop">
-          <span class="badge">popular</span>
-          <h3>website</h3><span class="sub">starting at</span>
-          <div class="price">$20<small>usd</small></div>
-          <p>a landing page, profile page or storefront.</p>
-          <ul><li>2-5 days delivery</li><li>custom design</li><li>responsive layout</li><li>clean, fast code</li></ul>
-          <a class="btn solid" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">order on discord</a>
+          <div class="t"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18"/></svg></div>website<span class="bd">most popular</span></div>
+          <div class="lab">starting at</div>
+          <div class="price">20<small>USD</small></div>
+          <p class="d">a modern site, landing page, profile or storefront.</p>
+          <span class="pill">2-5 days delivery</span>
+          <ul><li>fully custom design</li><li>responsive and animated</li><li>clean, fast code</li></ul>
+          <button class="btn solid" data-open data-svc="website">send request <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span></button>
         </div>
         <div class="card plan">
-          <h3>custom</h3><span class="sub">anything else</span>
-          <div class="ask">price on request</div>
-          <p>scripts, automation, apis and more.</p>
-          <ul><li>depends on scope</li><li>quote before i start</li><li>flexible budget</li></ul>
-          <a class="btn" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">ask on discord</a>
+          <div class="t"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg></div>custom</div>
+          <div class="lab">price on</div>
+          <div class="ask">request</div>
+          <p class="d">something different? scripts, automation, apis, anything.</p>
+          <span class="pill">depends on scope</span>
+          <ul><li>built around your idea</li><li>automation and integrations</li><li>flexible scope and budget</li></ul>
+          <button class="btn" data-open data-svc="custom tool">send request</button>
+        </div>
+        <div class="card plan">
+          <div class="t"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6 6 0 0 1 3.5 6"/></svg></div>partnership<span class="bd">long-term</span></div>
+          <div class="lab">price on</div>
+          <div class="ask">request</div>
+          <p class="d">ongoing work on your project: design, development and updates.</p>
+          <span class="pill">ongoing</span>
+          <ul><li>priority support and updates</li><li>monthly improvements</li><li>one person to talk to</li></ul>
+          <button class="btn" data-open data-svc="something else">become a partner</button>
         </div>
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="contact" class="contact">
     <div class="wrap rv">
-      <div class="head"><span class="tag">how to order</span><h2>three <em>steps.</em></h2></div>
-      <div class="grid3">
-        <div class="card step"><b>01</b><h3>add me</h3><p>open my discord profile and send a friend request.</p></div>
-        <div class="card step"><b>02</b><h3>tell me</h3><p>say what you want built. more detail means a better quote.</p></div>
-        <div class="card step"><b>03</b><h3>get a price</h3><p>i send the price first. you only pay if you're happy with it.</p></div>
+      <a class="pfp" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener" aria-label="Open my Discord profile"><img id="av" alt="punch on discord" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=256"><i id="dot"></i></a>
+      <div><span class="tag">contact</span></div>
+      <h2>tell me what you <em>need.</em></h2>
+      <p>a few quick questions, about two minutes. you get a plan and a fair price back fast.</p>
+      <div class="row">
+        <button class="btn solid" data-open>start a request</button>
+        <a class="btn" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">open my discord profile</a>
       </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="wrap rv">
-      <div class="card contact">
-        <a class="pfp" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener" aria-label="Open my Discord profile">
-          <img id="av" alt="punch on discord" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=256"><i id="dot"></i>
-        </a>
-        <div>
-          <span class="tag">contact</span>
-          <h2>add me to <em>order.</em></h2>
-          <p>click my picture to open my discord profile, then add me as a friend. i reply there.</p>
-          <a class="btn solid" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">open my discord</a>
-          <span class="stat" id="pstat">connecting...</span>
-        </div>
-      </div>
+      <span class="stat" id="pstat">connecting...</span>
     </div>
   </section>
 
@@ -279,34 +360,77 @@ footer a:hover{color:#fff}
 
 <footer>
   <div class="wrap">
-    <p>&copy; 2026 punch. larp hub is for entertainment, parody, mockups and content creation only. no real money, not for fraud.</p>
-    <p><span id="views" hidden><b id="vn">0</b> views &nbsp;|&nbsp; </span><a href="profile.html">profile</a></p>
+    <div class="fgrid">
+      <div class="fbrand">
+        <a class="brand" href="#top"><img id="fav" alt="" src="https://cdn.discordapp.com/avatars/1495161901330464801/8389a180a89b59dae233193cd0fb688e.png?size=64"><span>punch</span></a>
+        <p>solo developer building websites, discord bots and tools.</p>
+      </div>
+      <div class="fcol"><h4>explore</h4><a href="#services">services</a><a href="#work">work</a><a href="#pricing">pricing</a></div>
+      <div class="fcol"><h4>contact</h4><button data-open>request form</button><a href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">discord profile</a><button data-open>start a project</button></div>
+      <div class="fcol"><h4>legal</h4><a href="privacy.html">privacy policy</a><a href="refunds.html">refund policy</a><a href="terms.html">terms of service</a></div>
+    </div>
+    <div class="fbot">
+      <span>&copy; 2026 punch. all rights reserved. <span id="views" hidden>&nbsp;|&nbsp; <b id="vn">0</b> views</span></span>
+      <span class="by">designed &amp; built by punch <a class="up" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a></span>
+    </div>
+    <p class="legalnote">larp hub is for entertainment, parody, mockups and content creation only. no real money, not for fraud. <a href="profile.html" style="text-decoration:underline">profile</a></p>
   </div>
 </footer>
+
+<!-- request form -->
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="qt">
+  <div class="dlg" id="dlg">
+    <div class="dh"><span id="step">new request</span><button class="x" id="close" aria-label="Close">&times;</button></div>
+    <div class="prog"><i id="prog"></i></div>
+    <div id="body"></div>
+  </div>
+</div>
 
 <script>
 const $ = id => document.getElementById(id);
 const ID = "1495161901330464801";
+const DISCORD = "https://discord.com/users/" + ID;
 
-/* mobile menu */
+/* =====================================================================
+   REQUEST FORM SETTINGS (edit these)
+   - WEBHOOK_URL: paste a Discord webhook URL here and every submitted
+     request lands in that channel. Leave it empty and the form copies
+     the answers instead and sends people to your Discord profile.
+   - QUESTIONS: add, remove or reword questions. Types: "choice",
+     "text", "long". Set required:true to force an answer.
+   ===================================================================== */
+const WEBHOOK_URL = "";
+const QUESTIONS = [
+  { id: "service", q: "what do you need?", type: "choice", required: true, options: ["discord bot", "website", "custom tool", "something else"] },
+  { id: "details", q: "describe what you want built", hint: "what it does, who it's for, anything important.", type: "long", required: true, placeholder: "tell me about it..." },
+  { id: "links", q: "any examples or links?", hint: "optional. sites, bots or designs you like.", type: "text", placeholder: "paste links here" },
+  { id: "budget", q: "what's your budget in usd?", type: "choice", options: ["under $20", "$20 - $50", "$50 - $100", "$100+", "not sure yet"] },
+  { id: "timeline", q: "when do you need it?", type: "choice", options: ["as soon as possible", "within a week", "in 2+ weeks", "no rush"] },
+  { id: "discord", q: "your discord username", hint: "so i can message you back.", type: "text", required: true, placeholder: "username" },
+];
+
+/* ---------- mobile menu ---------- */
 const burger = $("burger"), mnav = $("mnav");
 burger.addEventListener("click", () => { const o = burger.classList.toggle("open"); mnav.classList.toggle("open", o); burger.setAttribute("aria-expanded", o); });
-mnav.addEventListener("click", e => { if (e.target.closest("a")) { burger.classList.remove("open"); mnav.classList.remove("open"); } });
+mnav.addEventListener("click", e => { if (e.target.closest("a,button")) { burger.classList.remove("open"); mnav.classList.remove("open"); } });
 
-/* reveal on scroll */
+/* ---------- scroll reveal + active nav link ---------- */
 const rv = document.querySelectorAll(".rv");
 if ("IntersectionObserver" in window) {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold: .08 });
   rv.forEach(el => io.observe(el));
+  const links = [...document.querySelectorAll("#links a")];
+  const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id)); }), { rootMargin: "-45% 0px -50% 0px" });
+  ["services", "work", "pricing", "contact"].forEach(id => spy.observe($(id)));
 } else rv.forEach(el => el.classList.add("show"));
 
-/* discord presence */
+/* ---------- discord presence ---------- */
 const LABEL = { online: "online now", idle: "idle", dnd: "busy, do not disturb", offline: "offline, i reply when i'm back" };
 function render(d) {
   const u = d.discord_user || {};
   if (u.avatar) {
     const url = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=256`;
-    $("av").src = url; $("navav").src = url;
+    ["av", "navav", "fav"].forEach(i => $(i).src = url);
   }
   const s = d.discord_status || "offline";
   $("dot").className = s;
@@ -324,7 +448,7 @@ fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j
   ws.onclose = () => { clearInterval(hb); setTimeout(() => connect(Math.min(retry * 2, 30000)), retry); };
 })();
 
-/* view counter: once per session, real domain only */
+/* ---------- view counter ---------- */
 (async () => {
   try {
     let first = false;
@@ -336,6 +460,137 @@ fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j
     $("vn").textContent = j.value.toLocaleString(); $("views").hidden = false;
   } catch (_) {}
 })();
+
+/* ---------- request form ---------- */
+const ov = $("ov"), body = $("body"), prog = $("prog"), stepEl = $("step");
+let idx = 0, answers = {}, lastFocus = null;
+
+function openForm(preService) {
+  lastFocus = document.activeElement;
+  answers = {}; idx = 0;
+  if (preService) answers.service = preService;
+  ov.classList.add("open"); document.body.classList.add("lock");
+  drawStep();
+}
+function closeForm() { ov.classList.remove("open"); document.body.classList.remove("lock"); if (lastFocus) lastFocus.focus(); }
+document.addEventListener("click", e => {
+  const o = e.target.closest("[data-open]");
+  if (o) { e.preventDefault(); openForm(o.dataset.svc); }
+});
+$("close").addEventListener("click", closeForm);
+ov.addEventListener("click", e => { if (e.target === ov) closeForm(); });
+addEventListener("keydown", e => { if (e.key === "Escape" && ov.classList.contains("open")) closeForm(); });
+
+function el(tag, props = {}, ...kids) { const n = document.createElement(tag); Object.assign(n, props); kids.forEach(k => n.append(k)); return n; }
+
+function drawStep() {
+  body.replaceChildren();
+  const total = QUESTIONS.length;
+  if (idx >= total) return drawReview();
+  const q = QUESTIONS[idx];
+  stepEl.textContent = `question ${idx + 1} of ${total}`;
+  prog.style.width = ((idx) / (total + 1) * 100) + "%";
+  body.append(el("h3", { id: "qt", textContent: q.q }));
+  if (q.hint) body.append(el("p", { className: "hint", textContent: q.hint }));
+  else body.append(el("div", { style: "height:14px" }));
+
+  let input;
+  if (q.type === "choice") {
+    input = el("div", { className: "opts" });
+    q.options.forEach(o => {
+      const b = el("button", { type: "button", className: "opt" + (answers[q.id] === o ? " sel" : ""), textContent: o });
+      b.onclick = () => { answers[q.id] = o; [...input.children].forEach(c => c.classList.toggle("sel", c === b)); err.textContent = ""; };
+      input.append(b);
+    });
+  } else {
+    input = el(q.type === "long" ? "textarea" : "input", { className: "fld", placeholder: q.placeholder || "", value: answers[q.id] || "", maxLength: q.type === "long" ? 1500 : 200 });
+    input.oninput = () => { answers[q.id] = input.value; err.textContent = ""; };
+    if (q.type !== "long") input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); next(); } });
+    setTimeout(() => input.focus(), 30);
+  }
+  body.append(input);
+  const err = el("p", { className: "err" }); body.append(err);
+
+  const back = el("button", { type: "button", className: "btn sm", textContent: "back" });
+  back.onclick = () => { if (idx > 0) { idx--; drawStep(); } else closeForm(); };
+  const nx = el("button", { type: "button", className: "btn solid sm", textContent: idx === total - 1 ? "review" : "next" });
+  const next = () => {
+    const v = (answers[q.id] || "").trim();
+    if (q.required && !v) { err.textContent = "this one is required."; return; }
+    idx++; drawStep();
+  };
+  nx.onclick = next;
+  body.append(el("div", { className: "nav2" }, back, nx));
+}
+
+function drawReview() {
+  stepEl.textContent = "review"; prog.style.width = (QUESTIONS.length / (QUESTIONS.length + 1) * 100) + "%";
+  body.append(el("h3", { id: "qt", textContent: "look right?" }), el("p", { className: "hint", textContent: "check your answers, then send." }));
+  const rev = el("div", { className: "rev" });
+  QUESTIONS.forEach((q, i) => {
+    const v = (answers[q.id] || "").trim() || "(skipped)";
+    const box = el("div", {}, el("small", { textContent: q.q }), el("p", { textContent: v }));
+    box.style.cursor = "pointer"; box.title = "edit"; box.onclick = () => { idx = i; drawStep(); };
+    rev.append(box);
+  });
+  body.append(rev);
+  const hp = el("input", { className: "hp", tabIndex: -1, autocomplete: "off", name: "website" }); body.append(hp);
+  const err = el("p", { className: "err" }); body.append(err);
+  const back = el("button", { type: "button", className: "btn sm", textContent: "back" });
+  back.onclick = () => { idx = QUESTIONS.length - 1; drawStep(); };
+  const send = el("button", { type: "button", className: "btn solid sm", textContent: "send request" });
+  send.onclick = () => submit(hp.value, err, send);
+  body.append(el("div", { className: "nav2" }, back, send));
+}
+
+function plainText() {
+  return "new request\n" + QUESTIONS.map(q => `${q.q}\n${(answers[q.id] || "").trim() || "(skipped)"}`).join("\n\n");
+}
+
+async function submit(honey, err, btn) {
+  if (honey) { drawDone(false, true); return; }                      // bots fill the hidden field
+  try {
+    const last = +localStorage.getItem("hp-req") || 0;
+    if (Date.now() - last < 60000) { err.textContent = "slow down, try again in a minute."; return; }
+  } catch (_) {}
+  btn.disabled = true; btn.textContent = "sending...";
+  if (WEBHOOK_URL) {
+    try {
+      const fields = QUESTIONS.map(q => ({ name: q.q.slice(0, 250), value: ((answers[q.id] || "").trim() || "(skipped)").slice(0, 1000) }));
+      const res = await fetch(WEBHOOK_URL, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "site requests", allowed_mentions: { parse: [] }, embeds: [{ title: "new request", color: 0xffffff, fields, timestamp: new Date().toISOString() }] })
+      });
+      if (!res.ok) throw new Error("webhook " + res.status);
+      try { localStorage.setItem("hp-req", String(Date.now())); } catch (_) {}
+      drawDone(true); return;
+    } catch (_) { /* fall through to copy fallback */ }
+  }
+  let copied = false;
+  try { await navigator.clipboard.writeText(plainText()); copied = true; } catch (_) {}
+  try { localStorage.setItem("hp-req", String(Date.now())); } catch (_) {}
+  drawDone(false, false, copied);
+}
+
+function drawDone(sent, spam, copied) {
+  body.replaceChildren(); prog.style.width = "100%"; stepEl.textContent = "done";
+  const tick = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  const wrap = el("div", { className: "done" });
+  const ok = el("div", { className: "ok" }); ok.innerHTML = tick;
+  wrap.append(ok);
+  if (sent || spam) {
+    wrap.append(el("h3", { textContent: "request sent." }), el("p", { textContent: "i'll message you on discord with a plan and a price. you can also add me now so i don't miss you." }));
+  } else {
+    wrap.append(el("h3", { textContent: copied ? "copied." : "almost done." }), el("p", { textContent: copied ? "your answers are copied. open my discord profile, add me and paste them in a message." : "open my discord profile, add me and tell me what you need." }));
+    if (!copied) {
+      const ta = el("textarea", { className: "fld", value: plainText(), readOnly: true }); ta.style.minHeight = "150px"; wrap.append(ta); ta.onclick = () => ta.select();
+    }
+  }
+  const row = el("div", { className: "nav2", style: "justify-content:center" });
+  const a = el("a", { className: "btn solid sm", href: DISCORD, target: "_blank", rel: "noopener", textContent: "open my discord" });
+  const c = el("button", { type: "button", className: "btn sm", textContent: "close" }); c.onclick = closeForm;
+  row.append(a, c); wrap.append(row); body.append(wrap);
+}
 </script>
 </body>
 </html>
