@@ -5,165 +5,139 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<title>punch</title>
+<title>Punch</title>
 <meta name="description" content="punch. founder of larp hub. dms open.">
 <meta name="theme-color" content="#000000">
 <link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="punch">
+<meta property="og:title" content="Punch">
 <meta property="og:description" content="founder of larp hub. dms open.">
 <meta property="og:url" content="https://heyimpunch.xyz/">
 <meta property="og:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=512">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--text:#f3f3f1;--dim:#8f8f8c;--line:rgba(255,255,255,.12);--glass:rgba(10,10,10,.55)}
+:root{--text:#f1f0ec;--dim:rgba(241,240,236,.55);--bar:clamp(46px,9vh,84px)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%}
-body{background:#000;color:var(--text);font:400 15px/1.6 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body.locked{overflow:hidden}
+html,body{height:100%;overflow:hidden;background:#000}
+body{color:var(--text);font:400 14px/1.5 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 ::selection{background:#fff;color:#000}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.mono{font-family:'IBM Plex Mono',ui-monospace,Consolas,monospace}
+.mono{font:400 .72rem 'IBM Plex Mono',ui-monospace,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
 
-/* grayscale video background */
-.bg{position:fixed;inset:-20px;z-index:-2;background:#000 url("img/bg.jpg") center/cover}
-.bg video{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.38) contrast(1.15) blur(2px)}
-.shade{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 35%,rgba(0,0,0,.1),rgba(0,0,0,.85))}
-.grain{position:fixed;inset:0;z-index:40;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* film */
+.film{position:fixed;inset:0;overflow:hidden}
+.film video{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover;filter:grayscale(1) brightness(.5) contrast(1.2);animation:drift 50s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.08) translate(-1.5%,1%)}}
+.film::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 40% 55%,transparent 25%,rgba(0,0,0,.8)),linear-gradient(90deg,rgba(0,0,0,.55),transparent 60%)}
+.grain{position:fixed;inset:-50%;z-index:5;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .8s steps(5) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
 
-/* enter */
-#gate{position:fixed;inset:0;z-index:60;background:#000;display:grid;place-items:center;cursor:pointer;transition:opacity .7s,visibility .7s}
-#gate.gone{opacity:0;visibility:hidden}
+/* letterbox bars: start fully closed, open on enter */
+.bar{position:fixed;left:0;right:0;z-index:10;background:#000;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 clamp(16px,3vw,40px);color:var(--dim);transition:height 1.4s cubic-bezier(.7,0,.2,1)}
+.bar.t{top:0;height:50vh;align-items:flex-end;padding-bottom:calc((var(--bar) - 1.2em)/2)}
+.bar.b{bottom:0;height:50vh;align-items:flex-start;padding-top:calc((var(--bar) - 1.2em)/2)}
+body.open .bar.t,body.open .bar.b{height:var(--bar)}
+.bar .side{flex:1;display:flex;gap:18px;align-items:center;min-width:0;opacity:0;transition:opacity .6s 1.2s}
+body.open .bar .side{opacity:1}
+.bar .side.r{justify-content:flex-end}
+.bar .mid{flex:2;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .6s 1.3s}
+body.open .bar .mid{opacity:1}
+.bar a:hover{color:#fff}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#777;margin-right:8px;vertical-align:1px}
+.dot.online{background:#3ba55d}.dot.idle{background:#faa61a}.dot.dnd{background:#ed4245}
+
+/* enter prompt sits on the seam between the closed bars */
+#gate{position:fixed;inset:0;z-index:20;display:grid;place-items:center;cursor:pointer;transition:opacity .5s}
+body.open #gate{opacity:0;pointer-events:none}
 #gate div{text-align:center}
-#gate img{width:64px;height:64px;border-radius:50%;object-fit:cover;filter:grayscale(1);opacity:.9;margin-bottom:18px}
-#gate span{display:block;font:500 .72rem 'IBM Plex Mono',monospace;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);animation:breathe 2.4s ease-in-out infinite}
-@keyframes breathe{50%{opacity:.35}}
+#gate b{display:block;font-size:2.2rem;font-style:italic;letter-spacing:-.01em}
+#gate span{display:block;margin-top:10px;color:var(--dim);animation:breathe 2.6s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.3}}
 
-.wrap{width:min(560px,100% - 32px);margin:0 auto;padding:clamp(56px,12vh,120px) 0 60px}
-
-/* hero */
-.hero{text-align:center}
-.av{position:relative;width:132px;height:132px;margin:0 auto}
-.av img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#151515;border:1px solid rgba(255,255,255,.25);padding:4px;background-clip:content-box}
-.av i{position:absolute;right:6px;bottom:8px;width:22px;height:22px;border-radius:50%;background:#666;border:4px solid #000}
-.av i.online{background:#3ba55d}.av i.idle{background:#faa61a}.av i.dnd{background:#ed4245}
-h1{margin-top:22px;font-size:clamp(3rem,11vw,4.6rem);font-weight:800;letter-spacing:-.06em;line-height:.95}
-.tag{margin-top:12px;color:var(--dim);font-size:.95rem}
-.tag b{color:var(--text);font-weight:500}
-
-/* cards */
-.card{margin-top:16px;background:var(--glass);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.lab{font:500 .64rem 'IBM Plex Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
-
-/* presence */
-.pres{margin-top:34px;padding:16px 18px;display:flex;gap:14px;align-items:center}
-.pres .art{width:56px;height:56px;border-radius:12px;object-fit:cover;background:#151515;flex:none}
-.pres .art[hidden]{display:none}
-.pres div{min-width:0;flex:1}
-.pres b{display:block;font-weight:600;font-size:.95rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pres span{display:block;font-size:.82rem;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pres a{flex:none;font:500 .72rem 'IBM Plex Mono',monospace;padding:8px 12px;border:1px solid var(--line);border-radius:999px;transition:background .15s,color .15s}
-.pres a:hover{background:#fff;color:#000}
-
-/* larp hub */
-.hub{display:block;overflow:hidden;transition:border-color .2s,transform .25s}
-.hub:hover{border-color:rgba(255,255,255,.35);transform:translateY(-3px)}
-.hub img{display:block;width:100%;height:auto;filter:grayscale(.35);transition:filter .3s}
-.hub:hover img{filter:none}
-.hub .txt{padding:18px 20px 20px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
-.hub h2{font-size:1.4rem;font-weight:800;letter-spacing:-.04em;margin-top:4px}
-.hub p{color:var(--dim);font-size:.85rem;margin-top:4px}
-.hub .go{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:background .15s,color .15s}
-.hub:hover .go{background:#fff;color:#000}
-.hub .go svg{width:16px;height:16px}
+/* scene content */
+.scene{position:fixed;left:clamp(20px,6vw,90px);right:clamp(20px,6vw,90px);bottom:calc(var(--bar) + clamp(24px,7vh,70px));z-index:6;display:flex;justify-content:space-between;align-items:flex-end;gap:30px}
+.who{display:flex;align-items:flex-end;gap:clamp(16px,2.4vw,30px)}
+.who img{width:clamp(72px,9vw,118px);height:clamp(72px,9vw,118px);border-radius:50%;object-fit:cover;filter:grayscale(1) contrast(1.1);border:1px solid rgba(255,255,255,.3);flex:none;background:#111}
+.who .lab{color:var(--dim)}
+h1{font-size:clamp(4.4rem,13vw,10.5rem);line-height:.82;font-style:italic;letter-spacing:-.02em;margin:6px 0 -.08em}
+.sub{margin-top:14px;color:var(--dim);font-size:1rem}
+.sub a{color:var(--text);border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:1px}
+.sub a:hover{border-color:#fff}
 
 /* player */
-.player{padding:14px 16px;display:flex;align-items:center;gap:14px}
-.pbtn{flex:none;width:40px;height:40px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;transition:transform .15s}
-.pbtn:hover{transform:scale(1.06)}
-.pbtn svg{width:16px;height:16px}
-.pmid{flex:1;min-width:0}
-.pmid .top{display:flex;justify-content:space-between;font:400 .7rem 'IBM Plex Mono',monospace;color:var(--dim);margin-bottom:6px}
-.bars{display:flex;gap:2px;align-items:flex-end;height:14px}
-.bars i{width:3px;background:#fff;opacity:.7;height:20%;border-radius:1px}
-.playing .bars i{animation:bar .9s ease-in-out infinite}
-.bars i:nth-child(2n){animation-delay:-.3s}.bars i:nth-child(3n){animation-delay:-.6s}
-@keyframes bar{50%{height:100%}}
+.player{width:min(300px,100%);flex:none}
+.player .lab{color:var(--dim);display:flex;justify-content:space-between;margin-bottom:10px}
+.prow{display:flex;align-items:center;gap:14px}
+.pbtn{flex:none;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;transition:background .2s,color .2s}
+.pbtn:hover{background:#fff;color:#000}
+.pbtn svg{width:15px;height:15px}
 input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;height:16px;width:100%;--p:0%}
-input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:linear-gradient(to right,#fff var(--p),rgba(255,255,255,.2) var(--p))}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;border-radius:50%;background:#fff;margin-top:-3.5px}
-input[type=range]::-moz-range-track{height:3px;border-radius:3px;background:rgba(255,255,255,.2)}
-input[type=range]::-moz-range-progress{height:3px;border-radius:3px;background:#fff}
-input[type=range]::-moz-range-thumb{width:10px;height:10px;border:0;border-radius:50%;background:#fff}
-#vol{width:64px;flex:none}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(to right,#fff var(--p),rgba(255,255,255,.22) var(--p))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;border-radius:50%;background:#fff;margin-top:-3.5px}
+input[type=range]::-moz-range-track{height:2px;background:rgba(255,255,255,.22)}
+input[type=range]::-moz-range-progress{height:2px;background:#fff}
+input[type=range]::-moz-range-thumb{width:9px;height:9px;border:0;border-radius:50%;background:#fff}
+.vol{display:flex;align-items:center;gap:10px;margin-top:12px;color:var(--dim)}
+.vol svg{width:14px;height:14px;flex:none}
 
-/* links */
-.links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-.lnk{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;border-radius:16px;font-weight:600;font-size:.92rem;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background .15s,color .15s,border-color .15s}
-.lnk:hover{background:#fff;color:#000;border-color:#fff}
-.lnk svg{width:18px;height:18px}
+.scene > *{opacity:0;transform:translateY(16px);transition:opacity 1s,transform 1s cubic-bezier(.2,.8,.2,1)}
+body.open .scene > *{opacity:1;transform:none;transition-delay:1.1s}
+body.open .scene > .player{transition-delay:1.35s}
 
-.foot{margin-top:34px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;font:400 .72rem 'IBM Plex Mono',monospace;color:var(--dim)}
-.foot a:hover{color:#fff}
-.legal{margin-top:10px;text-align:center;font-size:.68rem;color:#555}
-
-.rise{opacity:0;transform:translateY(14px)}
-body.in .rise{animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d,0) * 90ms)}
-@keyframes rise{to{opacity:1;transform:none}}
-
-@media(max-width:420px){.av{width:110px;height:110px}#vol{display:none}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rise{opacity:1;transform:none}}
+@media(max-width:760px){
+  .scene{flex-direction:column;align-items:flex-start;bottom:calc(var(--bar) + 22px)}
+  .who{flex-direction:column;align-items:flex-start;gap:14px}
+  .player{width:100%}
+  .bar .mid{display:none}
+  .bar .side.l .hide{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body class="locked">
-<div class="bg" aria-hidden="true"><video id="bgv" src="media/bg.mp4" poster="img/bg.jpg" autoplay muted loop playsinline preload="auto"></video></div>
-<div class="shade" aria-hidden="true"></div>
+<body>
+<div class="film" aria-hidden="true"><video id="bgv" src="media/bg.mp4" poster="img/bg.jpg" autoplay muted loop playsinline preload="auto"></video></div>
 <div class="grain" aria-hidden="true"></div>
 
-<div id="gate" role="button" tabindex="0" aria-label="Click to enter"><div><img data-av alt="" src="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=128"><span>click to enter</span></div></div>
+<div class="bar t">
+  <div class="side l mono"><span>heyimpunch.xyz</span></div>
+  <div class="mid mono" aria-live="polite"><span class="dot" id="dot"></span><span id="act">connecting</span></div>
+  <div class="side r mono"><span id="clock"></span></div>
+</div>
 
-<main class="wrap">
-  <header class="hero">
-    <div class="av rise" style="--d:0"><img data-av alt="punch" src="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=256"><i id="dot"></i></div>
-    <h1 class="rise" style="--d:1">punch</h1>
-    <p class="tag rise" style="--d:2">founder of <b>larp hub</b> &middot; dms open</p>
-  </header>
+<div id="gate" role="button" tabindex="0" aria-label="Enter"><div><b class="serif">Punch</b><span class="mono">click to enter</span></div></div>
 
-  <div class="card pres rise" style="--d:3" aria-live="polite">
-    <img class="art" id="art" alt="" hidden>
-    <div><span class="lab" id="plab">discord</span><b id="ptitle">connecting...</b><span id="psub"></span></div>
-    <a href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">add me</a>
+<main class="scene">
+  <div class="who">
+    <img id="av" alt="punch" src="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=256">
+    <div>
+      <span class="lab mono">founder &middot; developer</span>
+      <h1 class="serif">Punch</h1>
+      <p class="sub">building <a href="https://larphub.tech" target="_blank" rel="noopener">larp hub</a>. dms open.</p>
+    </div>
   </div>
 
-  <a class="card hub rise" style="--d:4" href="https://larphub.tech" target="_blank" rel="noopener">
-    <img src="img/work-larphub.jpg" alt="larphub.tech" width="1280" height="800">
-    <div class="txt">
-      <div><span class="lab">my brand</span><h2>larp hub</h2><p>photos, videos, prompts, tools and a private discord.</p></div>
-      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
-    </div>
-  </a>
-
-  <div class="card player rise" style="--d:5" id="player">
-    <button class="pbtn" id="pp" type="button" aria-label="Play"></button>
-    <div class="pmid">
-      <div class="top"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span><span><span id="cur">0:00</span> / <span id="dur">0:00</span></span></div>
+  <div class="player" id="player">
+    <div class="lab mono"><span>now playing</span><span><span id="cur">0:00</span> / <span id="dur">0:00</span></span></div>
+    <div class="prow">
+      <button class="pbtn" id="pp" type="button" aria-label="Play"></button>
       <input id="seek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek">
     </div>
-    <input id="vol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Volume">
+    <div class="vol"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 4V5L7 9H3z"/></svg><input id="vol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Volume"></div>
   </div>
-
-  <div class="links rise" style="--d:6">
-    <a class="lnk" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L3 21l1.8-5.5A8 8 0 1 1 21 12z"/></svg>discord</a>
-    <a class="lnk" href="https://larphub.tech" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>larphub.tech</a>
-  </div>
-
-  <div class="foot rise" style="--d:7"><span id="views" hidden><b id="vn">0</b> views</span><span id="sep" hidden>/</span><span id="clock"></span><span>/</span><a href="privacy.html">privacy</a><span>/</span><a href="terms.html">terms</a></div>
-  <p class="legal">larp hub is for entertainment, parody, mockups and content creation only. no real money, not for fraud.</p>
 </main>
+
+<div class="bar b">
+  <div class="side l mono"><span id="views" hidden><b id="vn">0</b> views</span></div>
+  <div class="side r mono">
+    <a href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">discord</a>
+    <a href="https://larphub.tech" target="_blank" rel="noopener">larphub</a>
+  </div>
+</div>
 
 <audio id="au" src="music/song.mp3" preload="auto" loop></audio>
 
@@ -172,36 +146,24 @@ const $ = id => document.getElementById(id);
 const ID = "1495161901330464801";
 
 /* clock */
-const clock = () => { $("clock").textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }).toLowerCase(); };
+const clock = () => { $("clock").textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); };
 clock(); setInterval(clock, 15000);
 
 /* discord presence */
 const LABEL = { online: "online", idle: "idle", dnd: "do not disturb", offline: "offline" };
 function render(d) {
   const u = d.discord_user || {};
-  if (u.avatar) {
-    const url = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=256`;
-    document.querySelectorAll("[data-av]").forEach(i => i.src = url);
-  }
+  if (u.avatar) $("av").src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith("a_") ? "gif" : "png"}?size=256`;
   const s = d.discord_status || "offline";
-  $("dot").className = s;
+  $("dot").className = "dot " + s;
   const acts = d.activities || [], game = acts.find(a => a.type === 0), custom = acts.find(a => a.type === 4);
-  const art = $("art");
-  if (d.listening_to_spotify && d.spotify) {
-    $("plab").textContent = "listening to spotify"; $("ptitle").textContent = d.spotify.song; $("psub").textContent = d.spotify.artist;
-    art.src = d.spotify.album_art_url; art.hidden = false;
-  } else if (game) {
-    $("plab").textContent = "playing"; $("ptitle").textContent = game.name; $("psub").textContent = game.details || game.state || LABEL[s] || s;
-    const a = game.assets && game.assets.large_image;
-    const src = a && (a.startsWith("mp:external/") ? "https://media.discordapp.net/external/" + a.slice(12) : `https://cdn.discordapp.com/app-assets/${game.application_id}/${a}.png`);
-    if (src) { art.src = src; art.hidden = false; } else art.hidden = true;
-  } else {
-    $("plab").textContent = "discord"; $("ptitle").textContent = LABEL[s] || s; $("psub").textContent = custom && custom.state ? custom.state : "";
-    art.hidden = true;
-  }
+  let t = LABEL[s] || s;
+  if (d.listening_to_spotify && d.spotify) t = "listening to " + d.spotify.song;
+  else if (game) t = "playing " + game.name;
+  else if (custom && custom.state) t = custom.state;
+  $("act").textContent = t;
 }
-$("art").addEventListener("error", () => { $("art").hidden = true; });
-fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => { $("ptitle").textContent = "status unavailable"; });
+fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => { $("act").textContent = "offline"; });
 (function connect(retry = 1000) {
   let hb;
   const ws = new WebSocket("wss://api.lanyard.rest/socket");
@@ -214,14 +176,14 @@ fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j
 })();
 
 /* player */
-const au = $("au"), pp = $("pp"), seek = $("seek"), vol = $("vol"), player = $("player");
+const au = $("au"), pp = $("pp"), seek = $("seek"), vol = $("vol");
 const ICON = { play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>', pause: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>' };
 const fmt = s => isFinite(s) ? Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0") : "0:00";
 const fill = (el, f) => el.style.setProperty("--p", (f * 100) + "%");
 au.volume = 0.6;
 try { const sv = localStorage.getItem("punch-vol"); if (sv !== null) { au.volume = +sv; vol.value = sv; } } catch (_) {}
 fill(vol, au.volume);
-const sync = () => { pp.innerHTML = au.paused ? ICON.play : ICON.pause; pp.setAttribute("aria-label", au.paused ? "Play" : "Pause"); player.classList.toggle("playing", !au.paused); };
+const sync = () => { pp.innerHTML = au.paused ? ICON.play : ICON.pause; pp.setAttribute("aria-label", au.paused ? "Play" : "Pause"); };
 au.addEventListener("play", sync); au.addEventListener("pause", sync);
 pp.onclick = () => au.paused ? au.play().catch(() => {}) : au.pause();
 function setDur() { if (!isFinite(au.duration) || au.duration <= 0) return; if (+seek.max !== au.duration) seek.max = au.duration; $("dur").textContent = fmt(au.duration); }
@@ -231,7 +193,7 @@ seek.addEventListener("pointerdown", () => drag = true); addEventListener("point
 au.addEventListener("timeupdate", () => { setDur(); if (drag) return; seek.value = au.currentTime; $("cur").textContent = fmt(au.currentTime); fill(seek, au.currentTime / (au.duration || 1)); });
 seek.oninput = () => { au.currentTime = seek.value; $("cur").textContent = fmt(+seek.value); fill(seek, seek.value / (au.duration || 1)); };
 vol.oninput = () => { au.volume = vol.value; fill(vol, vol.value); try { localStorage.setItem("punch-vol", vol.value); } catch (_) {} };
-au.addEventListener("error", () => { player.hidden = true; });
+au.addEventListener("error", () => { $("player").style.display = "none"; });
 sync();
 
 /* views */
@@ -243,15 +205,15 @@ sync();
     const j = await r.json();
     if (typeof j.value !== "number") throw 0;
     try { if (first) sessionStorage.setItem("hp-view", "1"); } catch (_) {}
-    $("vn").textContent = j.value.toLocaleString(); $("views").hidden = false; $("sep").hidden = false;
+    $("vn").textContent = j.value.toLocaleString(); $("views").hidden = false;
   } catch (_) {}
 })();
 
-/* enter */
+/* enter: open the letterbox */
 const gate = $("gate");
 function enter() {
-  if (gate.classList.contains("gone")) return;
-  gate.classList.add("gone"); document.body.classList.remove("locked"); document.body.classList.add("in");
+  if (document.body.classList.contains("open")) return;
+  document.body.classList.add("open");
   au.play().catch(() => {}); $("bgv").play().catch(() => {});
 }
 $("bgv").play().catch(() => {});
