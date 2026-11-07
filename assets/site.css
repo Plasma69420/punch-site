@@ -29,6 +29,7 @@ em{font-style:italic;color:var(--mute)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
 .brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:1.04rem}
 .brand .mark{width:32px;height:32px;font-size:1.25rem}
+.brand .av{width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--soft);border:1px solid var(--line)}
 .links{display:flex;gap:6px}
 .links a{padding:8px 14px;border-radius:999px;font-size:.92rem;color:var(--mute);transition:color .15s,background .15s}
 .links a:hover{color:var(--ink)}

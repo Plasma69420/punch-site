@@ -21,7 +21,10 @@
 .hero h1{font-size:clamp(3rem,7.4vw,6rem);line-height:.98;letter-spacing:-.025em;margin-top:26px}
 .hero .lead{margin-top:24px;color:var(--mute);font-size:1.12rem;max-width:48ch}
 .idcard{padding:28px}
-.idcard .big{width:88px;height:88px;font-size:3.4rem}
+.idcard .pfp{position:relative;width:96px;height:96px}
+.idcard .pfp img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:var(--soft);display:block;border:1px solid var(--line)}
+.idcard .pfp i{position:absolute;right:2px;bottom:4px;width:22px;height:22px;border-radius:50%;background:#9a9890;border:4px solid #fff}
+.idcard .pfp i.online{background:#2f9d55}.idcard .pfp i.idle{background:#e0a020}.idcard .pfp i.dnd{background:#d64541}
 .idcard>b{display:block;margin-top:20px;font-size:1.15rem;font-weight:600}
 .idcard>.dim{font-size:.9rem}
 .idcard ul{list-style:none;margin-top:20px;border-top:1px solid var(--line)}
@@ -44,7 +47,7 @@
 <body>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">P</span>Punch</a>
+    <a class="brand" href="index.html"><img class="av" data-av src="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=128" alt="">Punch</a>
     <nav class="links" aria-label="Main"><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="contact.html">Contact</a></nav>
     <a class="btn dark" href="contact.html">Start a project</a>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
@@ -60,10 +63,10 @@
       <div class="row" style="margin-top:34px"><a class="btn dark" href="contact.html">Start a project</a><a class="btn line" href="work.html">View my work</a></div>
     </div>
     <aside class="card idcard">
-      <span class="mark big" aria-hidden="true">P</span>
+      <div class="pfp"><img data-av src="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=256" alt="Punch on Discord"><i data-dot></i></div>
       <b>Punch</b>
       <span class="dim">Web developer &amp; brand scaler</span>
-      <ul><li><span>Experience</span><b>2 years</b></li><li><span>Focus</span><b>Websites &amp; growth</b></li><li><span>Status</span><b>Building multiple sites</b></li></ul>
+      <ul><li><span>Experience</span><b>2 years</b></li><li><span>Focus</span><b>Websites &amp; growth</b></li><li><span>Discord</span><b data-status>Checking...</b></li><li><span>Working on</span><b>Multiple sites</b></li></ul>
     </aside>
   </div>
 
@@ -112,7 +115,7 @@
   <div class="wrap">
     <div class="fgrid">
       <div class="fbrand">
-        <a class="brand" href="index.html"><span class="mark" aria-hidden="true">P</span>Punch</a>
+        <a class="brand" href="index.html"><img class="av" data-av src="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=128" alt="">Punch</a>
         <p>Web developer and brand scaler. Websites built from scratch.</p>
       </div>
       <div class="fcol"><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div>

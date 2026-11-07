@@ -32,3 +32,31 @@ document.querySelectorAll("[data-year]").forEach(el => el.textContent = new Date
     out.textContent = j.value.toLocaleString(); $("views").hidden = false;
   } catch (_) {}
 })();
+
+/* live Discord profile: avatar + status (shown on the site, not used for contact) */
+(() => {
+  const ID = "1495161901330464801";
+  const LABEL = { online: "Online", idle: "Away", dnd: "Busy", offline: "Offline" };
+  const render = d => {
+    const u = d.discord_user || {};
+    if (u.avatar) {
+      const ext = u.avatar.startsWith("a_") ? "gif" : "png";
+      document.querySelectorAll("[data-av]").forEach(i => i.src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${ext}?size=256`);
+    }
+    const s = d.discord_status || "offline";
+    document.querySelectorAll("[data-dot]").forEach(i => i.className = s);
+    document.querySelectorAll("[data-status]").forEach(i => i.textContent = LABEL[s] || s);
+  };
+  if (!document.querySelector("[data-av],[data-status]")) return;
+  fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => {});
+  (function connect(retry = 1000) {
+    let hb;
+    const ws = new WebSocket("wss://api.lanyard.rest/socket");
+    ws.onmessage = e => {
+      const m = JSON.parse(e.data);
+      if (m.op === 1) { ws.send(JSON.stringify({ op: 2, d: { subscribe_to_id: ID } })); hb = setInterval(() => ws.readyState === 1 && ws.send(JSON.stringify({ op: 3 })), m.d.heartbeat_interval); }
+      else if (m.op === 0) render(m.d[ID] || m.d);
+    };
+    ws.onclose = () => { clearInterval(hb); setTimeout(() => connect(Math.min(retry * 2, 30000)), retry); };
+  })();
+})();
