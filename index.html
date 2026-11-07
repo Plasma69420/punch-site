@@ -3,184 +3,67 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="img/mark.svg">
 <link rel="icon" type="image/png" href="img/favicon.png">
-<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <title>Punch — Web Developer &amp; Brand Scaler</title>
 <meta name="description" content="Punch builds websites from scratch. Small builder and brand scaler with two years of experience on the web.">
 <meta name="theme-color" content="#f6f5f1">
-<link rel="canonical" href="https://heyimpunch.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Punch — Web Developer &amp; Brand Scaler">
-<meta property="og:description" content="Websites built from scratch. Small builder and brand scaler.">
-<meta property="og:url" content="https://heyimpunch.xyz/">
-<meta property="og:image" content="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=512">
+<meta property="og:description" content="Punch builds websites from scratch. Small builder and brand scaler with two years of experience on the web.">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-:root{--paper:#f6f5f1;--card:#fff;--ink:#141413;--mute:#6b6a65;--line:#e3e1da;--soft:#ecebe5}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{background:var(--paper);color:var(--ink);font:400 16px/1.65 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-::selection{background:var(--ink);color:var(--paper)}
-a{color:inherit;text-decoration:none}
-.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
-.mono{font:500 .7rem 'IBM Plex Mono',ui-monospace,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase}
-.wrap{width:min(1080px,100% - 40px);margin:0 auto}
-
-/* nav */
-.nav{position:sticky;top:0;z-index:20;background:rgba(246,245,241,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-.brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:1.02rem}
-.brand img{width:30px;height:30px;border-radius:50%;object-fit:cover;background:var(--soft)}
-.links{display:flex;gap:28px;font-size:.92rem;color:var(--mute)}
-.links a:hover{color:var(--ink)}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;font-weight:500;font-size:.9rem;border:1px solid var(--ink);transition:background .15s,color .15s,transform .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn.dark{background:var(--ink);color:var(--paper)}
-.btn.dark:hover{background:#2a2a28}
-.btn.line:hover{background:var(--ink);color:var(--paper)}
-
-/* hero */
-.hero{padding:clamp(70px,13vh,130px) 0 clamp(60px,10vh,100px);display:grid;grid-template-columns:1.35fr .65fr;gap:56px;align-items:end}
-.avail{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--mute);margin-bottom:28px}
-.avail i{width:8px;height:8px;border-radius:50%;background:#9a9890}
-.avail i.online{background:#2f9d55}.avail i.idle{background:#e0a020}.avail i.dnd{background:#d64541}
-h1{font-size:clamp(3rem,7.4vw,6rem);line-height:.98;letter-spacing:-.025em}
-h1 em{font-style:italic;color:var(--mute)}
-.lead{margin-top:26px;color:var(--mute);font-size:1.12rem;max-width:46ch}
-.hero .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
-.portrait{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px}
-.portrait img{width:100%;aspect-ratio:1;border-radius:14px;object-fit:cover;background:var(--soft);filter:grayscale(.2)}
-.portrait b{display:block;margin-top:16px;font-size:1.05rem;font-weight:600}
-.portrait span{display:block;font-size:.85rem;color:var(--mute)}
-
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.stats div{padding:34px 28px}
-.stats div+div{border-left:1px solid var(--line)}
-.stats b{display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(2.6rem,5vw,3.6rem);line-height:1;letter-spacing:-.02em}
-.stats span{display:block;margin-top:10px;color:var(--mute);font-size:.92rem}
-
-section{padding:96px 0}
-.head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:44px}
-.head h2,.about h2{font-size:clamp(2.2rem,4.6vw,3.4rem);line-height:1.02;letter-spacing:-.02em;max-width:16ch}
-.head h2 em,.about h2 em{font-style:italic;color:var(--mute)}
-.head p{color:var(--mute);max-width:34ch}
-
-/* about */
-.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
-.about h2{margin-top:14px}
-.about .body p{font-size:1.08rem;color:#3a3936}
-.about .body p+p{margin-top:18px}
-
-/* what I do */
-.do{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.do div{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
-.do .n{color:var(--mute)}
-.do h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:1.9rem;line-height:1.05;margin:18px 0 10px}
-.do p{color:var(--mute);font-size:.95rem}
-
-/* work */
-.work{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px}
-.work img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
-.work h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:2.4rem;line-height:1;margin:12px 0}
-.work p{color:var(--mute)}
-.work ul{list-style:none;margin:20px 0 26px;display:grid;gap:8px;font-size:.95rem}
-.work li{padding-left:20px;position:relative}
-.work li::before{content:"";position:absolute;left:0;top:.75em;width:10px;height:1px;background:var(--ink)}
-.dim{color:var(--mute)}
-
-/* orders */
-.orders{background:var(--ink);color:var(--paper);border-radius:28px;padding:clamp(36px,6vw,70px);display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
-.orders .mono{color:rgba(246,245,241,.6)}
-.orders h2{font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.02;letter-spacing:-.02em;margin-top:12px;max-width:17ch}
-.orders h2 em{font-style:italic;color:rgba(246,245,241,.6)}
-.orders p{color:rgba(246,245,241,.7);margin-top:14px;max-width:44ch}
-.orders .btn{border-color:var(--paper);background:var(--paper);color:var(--ink)}
-.orders .btn:hover{background:#e6e4dd}
-
-/* contact + form */
-.contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;margin-top:70px;align-items:start}
-.cinfo h2{font-size:clamp(2.2rem,4.6vw,3.4rem);line-height:1.02;letter-spacing:-.02em;margin:14px 0 16px}
-.cinfo h2 em{font-style:italic;color:var(--mute)}
-.cinfo p{color:#3a3936;margin-bottom:24px}
-.note{margin-top:28px;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--mute);font-size:.9rem}
-.note b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px}
-.cform{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px;display:grid;gap:18px;position:relative}
-.live{display:inline-flex;align-items:center;gap:8px;justify-self:start;padding:6px 12px;border-radius:999px;background:var(--soft);color:var(--mute)}
-.live i{width:7px;height:7px;border-radius:50%;background:#c58b1c}
-.cform .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.cform label{display:block;font-size:.88rem;font-weight:500}
-.cform label input,.cform label select,.cform label textarea{display:block;margin-top:7px}
-.cform label span{color:#b4462f}
-.cform input,.cform select,.cform textarea{width:100%;font:inherit;font-weight:400;font-size:.95rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:0;transition:border-color .15s,background .15s}
-.cform textarea{resize:vertical;min-height:52px}
-.cform input:focus,.cform select:focus,.cform textarea:focus{border-color:var(--ink);background:#fff}
-.cform .bad{border-color:#b4462f}
-.biz{display:grid;gap:18px;padding:18px;border:1px dashed var(--line);border-radius:16px}
-.biz[hidden]{display:none}
-.ferr{color:#b4462f;font-size:.86rem;min-height:1.2em;margin:-6px 0}
-.cform button{justify-self:start}
-.fdone{padding:20px;border-radius:16px;background:var(--soft)}
-.fdone b{display:block;font-weight:600}
-.fdone p{color:var(--mute);margin:6px 0 16px;font-size:.92rem}
-
-footer{padding:40px 0 50px;color:var(--mute);font-size:.86rem}
-footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:28px}
-footer nav{display:flex;gap:22px}
-footer a:hover{color:var(--ink)}
-
-.rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
-.rv.show{opacity:1;transform:none}
-
-@media(max-width:860px){
-  .links{display:none}
-  .hero,.about,.work,.contact{grid-template-columns:1fr}
-  .contact{gap:32px;margin-top:50px}
-  .hero{gap:36px}
-  .portrait{max-width:320px}
-  .do{grid-template-columns:1fr}
-  .head{flex-direction:column;align-items:flex-start;gap:14px}
-  section{padding:68px 0}
-}
-@media(max-width:560px){
-  .stats{grid-template-columns:1fr}
-  .stats div+div{border-left:0;border-top:1px solid var(--line)}
-  .stats div{padding:24px 4px}
-  .nav .btn{padding:9px 14px;font-size:.84rem}
-  .cform{padding:20px}
-  .cform .grid{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+.hero{padding:clamp(70px,13vh,130px) 0 clamp(56px,9vh,90px);display:grid;grid-template-columns:1.35fr .65fr;gap:56px;align-items:end}
+.hero h1{font-size:clamp(3rem,7.4vw,6rem);line-height:.98;letter-spacing:-.025em;margin-top:26px}
+.hero .lead{margin-top:24px;color:var(--mute);font-size:1.12rem;max-width:48ch}
+.idcard{padding:28px}
+.idcard .big{width:88px;height:88px;font-size:3.4rem}
+.idcard>b{display:block;margin-top:20px;font-size:1.15rem;font-weight:600}
+.idcard>.dim{font-size:.9rem}
+.idcard ul{list-style:none;margin-top:20px;border-top:1px solid var(--line)}
+.idcard li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+.idcard li:last-child{border-bottom:0}
+.idcard li span{color:var(--mute)}
+.idcard li b{font-weight:500;text-align:right}
+.tile{display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.tile:hover{transform:translateY(-3px);border-color:#c9c6bd}
+.tile h3{font-size:2rem;line-height:1;margin:16px 0 10px}
+.tile p{color:var(--mute);font-size:.93rem;flex:1}
+.tile .go{margin-top:20px;font-weight:500;font-size:.9rem}
+.feature{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;padding:24px}
+.feature img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+.feature h3{font-size:2.6rem;line-height:1;margin:12px 0}
+.feature p{color:var(--mute)}
+@media(max-width:900px){.hero,.feature{grid-template-columns:1fr}.hero{gap:34px}.idcard{max-width:360px}}
 </style>
 </head>
 <body>
-
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top"><img data-av alt="" src="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=64">Punch</a>
-    <nav class="links" aria-label="Main"><a href="#about">About</a><a href="#services">Services</a><a href="#work">Work</a><a href="#contact">Contact</a></nav>
-    <a class="btn dark" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">Get in touch</a>
+    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">P</span>Punch</a>
+    <nav class="links" aria-label="Main"><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="contact.html">Contact</a></nav>
+    <a class="btn dark" href="contact.html">Start a project</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
   </div>
+  <nav class="mnav" id="mnav" aria-label="Mobile"><a href="index.html" class="on">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="contact.html">Contact</a></nav>
 </header>
-
-<main id="top">
+<main>
   <div class="wrap hero">
     <div>
-      <span class="avail mono"><i id="dot"></i><span id="avail">Web developer</span></span>
+      <span class="pill mono"><i></i>Orders opening soon</span>
       <h1 class="serif">I build websites <em>from scratch.</em></h1>
-      <p class="lead">I'm Punch, a small builder and brand scaler. I design and code websites, and I help brands grow from the ground up.</p>
-      <div class="row">
-        <a class="btn dark" href="#work">See my work</a>
-        <a class="btn line" href="#about">About me</a>
-      </div>
+      <p class="lead">I'm Punch, a small builder and brand scaler. I design and code websites without templates, and I help brands grow from the ground up.</p>
+      <div class="row" style="margin-top:34px"><a class="btn dark" href="contact.html">Start a project</a><a class="btn line" href="work.html">View my work</a></div>
     </div>
-    <aside class="portrait">
-      <img data-av alt="Punch" src="https://cdn.discordapp.com/avatars/1495161901330464801/ce6d6024f799052199c8805ed01ec839.png?size=512">
+    <aside class="card idcard">
+      <span class="mark big" aria-hidden="true">P</span>
       <b>Punch</b>
-      <span>Web developer &amp; brand scaler</span>
+      <span class="dim">Web developer &amp; brand scaler</span>
+      <ul><li><span>Experience</span><b>2 years</b></li><li><span>Focus</span><b>Websites &amp; growth</b></li><li><span>Status</span><b>Building multiple sites</b></li></ul>
     </aside>
   </div>
 
@@ -190,223 +73,55 @@ footer a:hover{color:var(--ink)}
     <div><b>Multiple</b><span>websites in progress right now</span></div>
   </div>
 
-  <section id="about">
-    <div class="wrap about rv">
-      <div><span class="mono dim">About</span><h2 class="serif">A builder <em>first.</em></h2></div>
-      <div class="body">
-        <p>I've spent the last two years working on the web: designing sites, writing code and building brands. Everything I make is built from scratch, without templates, so each project fits the brand it's for.</p>
-        <p>Before this, I ran my own business, and it generated over $10,000. Running it taught me what a website actually needs to do for a brand: look right, load fast, earn trust and bring people in. I build with that in mind.</p>
-        <p>I do a lot of different things. Design, front-end and back-end code, the systems behind a brand, and the growth side once it's live. I'd rather understand the whole picture than hand off half of it.</p>
-        <p>Right now I'm in the middle of creating multiple websites, including my own brand, Larp Hub. My schedule is busy and I keep it strict, so I take on new work carefully and only when I can give it proper attention.</p>
+  <section>
+    <div class="wrap rv">
+      <div class="head"><h2 class="serif">Everything in <em>one place.</em></h2><p>Find out who I am, what I build, what I've made and how to reach me.</p></div>
+      <div class="grid4 tiles">
+        <a class="card pad tile" href="about.html"><span class="mono dim">01</span><h3 class="serif">About</h3><p>My background, how I work and what I'm focused on right now.</p><span class="go">Read more &#8594;</span></a>
+        <a class="card pad tile" href="services.html"><span class="mono dim">02</span><h3 class="serif">Services</h3><p>The kinds of websites I build, what's included and my process.</p><span class="go">See services &#8594;</span></a>
+        <a class="card pad tile" href="work.html"><span class="mono dim">03</span><h3 class="serif">Work</h3><p>A closer look at Larp Hub and the projects I'm building now.</p><span class="go">View work &#8594;</span></a>
+        <a class="card pad tile" href="contact.html"><span class="mono dim">04</span><h3 class="serif">Contact</h3><p>Tell me about your project with a short form. I reply by email.</p><span class="go">Get in touch &#8594;</span></a>
       </div>
     </div>
   </section>
 
-  <section id="services" style="padding-top:0">
+  <section>
     <div class="wrap rv">
-      <div class="head"><h2 class="serif">What I <em>do.</em></h2><p>Three things I spend my time on, all handled by me from start to finish.</p></div>
-      <div class="do">
-        <div><span class="mono n">01</span><h3>Websites</h3><p>Sites designed and built from scratch, made to load fast and look right on every screen.</p></div>
-        <div><span class="mono n">02</span><h3>Code</h3><p>Custom code and tools: the parts of a project that a template can't do for you.</p></div>
-        <div><span class="mono n">03</span><h3>Brand scaling</h3><p>Taking a brand from an idea to something people know, with the site and systems to back it.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="work" style="padding-top:0">
-    <div class="wrap rv">
-      <div class="head"><h2 class="serif">Selected <em>work.</em></h2><p>A brand I built and run.</p></div>
-      <div class="work">
-        <a href="https://larphub.tech" target="_blank" rel="noopener"><img src="img/work-larphub.jpg" alt="Larp Hub website" width="1280" height="800"></a>
+      <div class="card feature">
+        <a href="work.html"><img src="img/work-larphub.jpg" alt="Larp Hub website" width="1280" height="800"></a>
         <div>
-          <span class="mono dim">Brand / larphub.tech</span>
-          <h3>Larp Hub</h3>
-          <p>Clips, photos and tools for content creators, with simple plans and a members' dashboard.</p>
-          <ul><li>Designed and built from scratch</li><li>Plans, dashboard, library and tools</li><li>Run and grown by me</li></ul>
-          <a class="btn line" href="https://larphub.tech" target="_blank" rel="noopener">Visit larphub.tech &#8599;</a>
+          <span class="mono dim">Featured work</span>
+          <h3 class="serif">Larp Hub</h3>
+          <p>A content platform with clips, photos and tools for creators. Designed, built and run by me.</p>
+          <div class="row" style="margin-top:24px"><a class="btn line" href="work.html">Read the case study</a></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contact" style="padding-top:0">
+  <section>
     <div class="wrap rv">
-      <div class="orders">
-        <div>
-          <span class="mono">Website orders</span>
-          <h2 class="serif">Not open yet. <em>Coming soon.</em></h2>
-          <p>I'm not selling websites right now, but I will be. I'm currently building multiple websites, so my time is limited and my schedule is strict.</p>
-        </div>
-        <a class="btn" href="#form">Fill out the contact form &#8595;</a>
-      </div>
-
-      <div class="contact" id="form">
-        <div class="cinfo">
-          <span class="mono dim">Contact</span>
-          <h2 class="serif">Let's <em>talk.</em></h2>
-          <p>I'm mainly on Discord. It's the only way to reach me directly right now. If you'd rather start with details, fill out the form and we can talk from there.</p>
-          <a class="btn dark" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">Message me on Discord &#8599;</a>
-          <div class="note"><b>Before you send</b>The more detail you give, the faster I can tell you if it's a fit. I review every request, but with my current schedule I can't take on everything.</div>
-        </div>
-
-        <form class="cform" id="cform" novalidate>
-          <div class="live mono"><i></i>Form not live yet</div>
-          <div class="grid">
-            <label>Your name<input name="name" autocomplete="name" placeholder="Full name or brand name"></label>
-            <label>Discord username <span>*</span><input name="discord" required placeholder="So I can reach you"></label>
-          </div>
-          <label>Who is this website for? <span>*</span>
-            <select name="who" id="who" required>
-              <option value="">Choose one</option>
-              <option>Myself / personal project</option>
-              <option>A business (for-profit)</option>
-              <option>A non-profit organization</option>
-            </select>
-          </label>
-          <div class="biz" id="biz" hidden>
-            <div class="grid">
-              <label>Business name<input name="business" placeholder="Registered or trading name"></label>
-              <label>Your role<input name="role" placeholder="Owner, founder, manager..."></label>
-            </div>
-            <label>Annual revenue
-              <select name="revenue">
-                <option value="">Choose a range</option>
-                <option>Not making revenue yet</option>
-                <option>Under $10,000</option>
-                <option>$10,000 – $100,000</option>
-                <option>$100,000 – $1,000,000</option>
-                <option>$1,000,000 – $10,000,000</option>
-                <option>$10,000,000+</option>
-              </select>
-            </label>
-            <label>Current website, if any<input name="current" placeholder="https://"></label>
-          </div>
-          <label>What type of website do you need? <span>*</span>
-            <select name="type" required>
-              <option value="">Choose one</option>
-              <option>Business / company website</option>
-              <option>Online store</option>
-              <option>Portfolio / personal site</option>
-              <option>Landing page</option>
-              <option>Web app or dashboard</option>
-              <option>Something else</option>
-            </select>
-          </label>
-          <label>Examples of sites you like<textarea name="examples" rows="2" placeholder="Paste links to websites you like and say what you like about them"></textarea></label>
-          <label>Tell me about the project <span>*</span><textarea name="details" rows="4" required placeholder="What it's for, who it's for, pages you need, anything important"></textarea></label>
-          <div class="grid">
-            <label>What do you want to spend? <span>*</span>
-              <select name="budget" required>
-                <option value="">Choose a range</option>
-                <option>Under $250</option>
-                <option>$250 – $1,000</option>
-                <option>$1,000 – $5,000</option>
-                <option>$5,000 – $15,000</option>
-                <option>$15,000+</option>
-                <option>Not sure yet</option>
-              </select>
-            </label>
-            <label>When do you need it?
-              <select name="timeline">
-                <option value="">Choose one</option>
-                <option>Within a month</option>
-                <option>1 – 3 months</option>
-                <option>3+ months</option>
-                <option>Flexible</option>
-              </select>
-            </label>
-          </div>
-          <p class="ferr" id="ferr"></p>
-          <button class="btn dark" type="submit">Send request</button>
-          <div class="fdone" id="fdone" hidden>
-            <b>Thanks. The form isn't live yet.</b>
-            <p>Nothing was sent. For now, message me on Discord and paste your answers. <span id="copied"></span></p>
-            <a class="btn dark" href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">Open Discord &#8599;</a>
-          </div>
-        </form>
+      <div class="band">
+        <div><span class="mono">Website orders</span><h2 class="serif">Not open yet. <em>Coming soon.</em></h2><p>I'm building multiple websites right now, so my schedule is strict. Send your project details and I'll be in touch when orders open.</p></div>
+        <a class="btn" href="contact.html">Send your details &#8594;</a>
       </div>
     </div>
   </section>
 </main>
-
 <footer>
   <div class="wrap">
-    <span>&copy; 2026 Punch. Built from scratch.<span id="views" hidden> &middot; <b id="vn">0</b> visits</span></span>
-    <nav><a href="https://discord.com/users/1495161901330464801" target="_blank" rel="noopener">Discord</a><a href="https://larphub.tech" target="_blank" rel="noopener">Larp Hub</a><a href="privacy.html">Privacy</a></nav>
+    <div class="fgrid">
+      <div class="fbrand">
+        <a class="brand" href="index.html"><span class="mark" aria-hidden="true">P</span>Punch</a>
+        <p>Web developer and brand scaler. Websites built from scratch.</p>
+      </div>
+      <div class="fcol"><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div>
+      <div class="fcol"><h4>Work</h4><a href="work.html">Larp Hub case study</a><a href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech &#8599;</a></div>
+      <div class="fcol"><h4>Info</h4><a href="contact.html">Contact form</a><a href="services.html#faq">FAQ</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="fbot"><span>&copy; <span data-year>2026</span> Punch. All rights reserved.</span><span id="views" hidden><b id="vn">0</b> visits</span></div>
   </div>
 </footer>
-
-<script>
-const $ = id => document.getElementById(id);
-const ID = "1495161901330464801";
-
-/* reveal on scroll */
-const rv = document.querySelectorAll(".rv");
-if ("IntersectionObserver" in window) {
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold: .1 });
-  rv.forEach(el => io.observe(el));
-} else rv.forEach(el => el.classList.add("show"));
-
-/* availability from Discord (status only) */
-const LABEL = { online: "Available now", idle: "Away", dnd: "Busy", offline: "Offline" };
-function render(d) {
-  const u = d.discord_user || {};
-  if (u.avatar) document.querySelectorAll("[data-av]").forEach(i => i.src = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=512`);
-  const s = d.discord_status || "offline";
-  $("dot").className = s;
-  $("avail").textContent = LABEL[s] || "Web developer";
-}
-fetch("https://api.lanyard.rest/v1/users/" + ID).then(r => r.json()).then(j => j.success && render(j.data)).catch(() => {});
-(function connect(retry = 1000) {
-  let hb;
-  const ws = new WebSocket("wss://api.lanyard.rest/socket");
-  ws.onmessage = e => {
-    const m = JSON.parse(e.data);
-    if (m.op === 1) { ws.send(JSON.stringify({ op: 2, d: { subscribe_to_id: ID } })); hb = setInterval(() => ws.readyState === 1 && ws.send(JSON.stringify({ op: 3 })), m.d.heartbeat_interval); }
-    else if (m.op === 0) render(m.d[ID] || m.d);
-  };
-  ws.onclose = () => { clearInterval(hb); setTimeout(() => connect(Math.min(retry * 2, 30000)), retry); };
-})();
-
-/* contact form: validates and shows a "not live yet" notice. nothing is sent anywhere. */
-const form = $("cform"), who = $("who"), biz = $("biz");
-who.addEventListener("change", () => { biz.hidden = who.value !== "A business (for-profit)"; });
-form.addEventListener("submit", async e => {
-  e.preventDefault();
-  let bad = null;
-  form.querySelectorAll("[required]").forEach(f => {
-    const empty = !f.value.trim();
-    f.classList.toggle("bad", empty);
-    if (empty && !bad) bad = f;
-  });
-  if (bad) { $("ferr").textContent = "Please fill in the required fields."; bad.focus(); return; }
-  $("ferr").textContent = "";
-  const lines = [];
-  form.querySelectorAll("input,select,textarea").forEach(f => {
-    if (f.closest("[hidden]") || !f.value.trim()) return;
-    const label = f.closest("label").childNodes[0].textContent.trim();
-    lines.push(label + ": " + f.value.trim());
-  });
-  let copied = false;
-  try { await navigator.clipboard.writeText(lines.join("\n")); copied = true; } catch (_) {}
-  $("copied").textContent = copied ? "Your answers have been copied so you can paste them." : "";
-  form.querySelector("button[type=submit]").hidden = true;
-  $("fdone").hidden = false;
-});
-form.addEventListener("input", e => { if (e.target.classList.contains("bad") && e.target.value.trim()) e.target.classList.remove("bad"); });
-
-/* visit counter */
-(async () => {
-  try {
-    let first = false;
-    try { first = location.hostname === "heyimpunch.xyz" && !sessionStorage.getItem("hp-view"); } catch (_) {}
-    const r = await fetch("https://abacus.jasoncameron.dev/" + (first ? "hit" : "get") + "/heyimpunch-xyz/visits");
-    const j = await r.json();
-    if (typeof j.value !== "number") throw 0;
-    try { if (first) sessionStorage.setItem("hp-view", "1"); } catch (_) {}
-    $("vn").textContent = j.value.toLocaleString(); $("views").hidden = false;
-  } catch (_) {}
-})();
-</script>
+<script src="assets/site.js"></script>
 </body>
 </html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="img/mark.svg">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<title>Work — Punch</title>
+<meta name="description" content="Selected work, including the Larp Hub case study, plus projects in progress.">
+<meta name="theme-color" content="#f6f5f1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Work — Punch">
+<meta property="og:description" content="Selected work, including the Larp Hub case study, plus projects in progress.">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.case{padding:24px;display:grid;gap:30px}
+.case .shot img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+.cbody{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:start;padding:0 8px 8px}
+.case h2{font-size:clamp(2.6rem,5vw,3.8rem);line-height:1;margin:12px 0}
+.case .lead{color:var(--mute);font-size:1.08rem;max-width:48ch}
+.meta{border-top:1px solid var(--line)}
+.meta div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.meta dt{color:var(--mute)}
+.meta dd{text-align:right;font-weight:500}
+.meta a{text-decoration:underline;text-underline-offset:3px}
+.incl2{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.incl2 div{padding:20px 20px 20px 0;border-bottom:1px solid var(--line)}
+.incl2 b{display:block;font-weight:600}
+.incl2 p{color:var(--mute);font-size:.94rem;margin-top:4px}
+.soon{min-height:200px;display:flex;flex-direction:column;justify-content:flex-end;background:repeating-linear-gradient(135deg,var(--card),var(--card) 12px,var(--paper) 12px,var(--paper) 13px)}
+.soon h3{font-size:2rem;line-height:1;margin:10px 0 4px}
+.soon p{color:var(--mute)}
+@media(max-width:900px){.cbody{grid-template-columns:1fr;gap:24px}}
+@media(max-width:560px){.incl2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">P</span>Punch</a>
+    <nav class="links" aria-label="Main"><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html" class="on" aria-current="page">Work</a><a href="contact.html">Contact</a></nav>
+    <a class="btn dark" href="contact.html">Start a project</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html" class="on">Work</a><a href="contact.html">Contact</a></nav>
+</header>
+<main>
+  <div class="phead"><div class="wrap">
+    <span class="mono">Work</span>
+    <h1 class="serif">Selected <em>work.</em></h1>
+    <p>Brands and websites I've built from scratch. More projects are in progress and will be added here as they launch.</p>
+  </div></div>
+
+  <section>
+    <div class="wrap rv">
+      <div class="case card">
+        <a class="shot" href="https://larphub.tech" target="_blank" rel="noopener"><img src="img/work-larphub.jpg" alt="Larp Hub homepage" width="1280" height="800"></a>
+        <div class="cbody">
+          <div class="cmain">
+            <span class="mono dim">Case study / larphub.tech</span>
+            <h2 class="serif">Larp Hub</h2>
+            <p class="lead">A content platform that gives creators clips, photos and tools in one place, with simple plans and a members' dashboard.</p>
+          </div>
+          <dl class="meta">
+            <div><dt>Role</dt><dd>Design, build and growth</dd></div>
+            <div><dt>Type</dt><dd>Content platform / web app</dd></div>
+            <div><dt>Status</dt><dd>Live and growing</dd></div>
+            <div><dt>Link</dt><dd><a href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech &#8599;</a></dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid3 rv">
+      <div class="card pad feat"><span class="mono n">The goal</span><h3>One place for content</h3><p>Creators needed clips, photos, prompts and tools without digging through scattered sources. Larp Hub puts all of it behind one simple plan.</p></div>
+      <div class="card pad feat"><span class="mono n">What I built</span><h3>Platform &amp; dashboard</h3><p>The marketing site, plans and pricing, a members' dashboard, the content and prompt libraries, and the tools inside it.</p></div>
+      <div class="card pad feat"><span class="mono n">What I focused on</span><h3>Clarity &amp; speed</h3><p>A clear headline, plans that are easy to compare, a straightforward way to pay, and a layout that works just as well on a phone.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split rv">
+      <div><span class="mono kicker">Inside the platform</span><h2 class="serif big">What members <em>get.</em></h2></div>
+      <div class="incl2">
+        <div><b>Content library</b><p>Clips and photos, ready to use.</p></div>
+        <div><b>Prompt library</b><p>Prompts and captions for creating content.</p></div>
+        <div><b>Tools</b><p>Built-in tools included with higher plans.</p></div>
+        <div><b>Plans</b><p>Simple plans with a one-time payment.</p></div>
+        <div><b>Dashboard</b><p>A members' area showing your plan and access.</p></div>
+        <div><b>Built from scratch</b><p>Designed, coded and run by me.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap rv">
+      <div class="head"><h2 class="serif">In <em>progress.</em></h2><p>I'm building multiple websites right now. They'll appear here once they launch.</p></div>
+      <div class="grid2">
+        <div class="card pad soon"><span class="mono dim">Coming soon</span><h3 class="serif">New project</h3><p>Currently in development.</p></div>
+        <div class="card pad soon"><span class="mono dim">Coming soon</span><h3 class="serif">New project</h3><p>Currently in development.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap rv">
+      <div class="band">
+        <div><span class="mono">Website orders</span><h2 class="serif">Want something <em>like this?</em></h2><p>Orders open soon. Send your project details now and I'll reply by email.</p></div>
+        <a class="btn" href="contact.html">Start a project &#8594;</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <a class="brand" href="index.html"><span class="mark" aria-hidden="true">P</span>Punch</a>
+        <p>Web developer and brand scaler. Websites built from scratch.</p>
+      </div>
+      <div class="fcol"><h4>Pages</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="contact.html">Contact</a></div>
+      <div class="fcol"><h4>Work</h4><a href="work.html">Larp Hub case study</a><a href="https://larphub.tech" target="_blank" rel="noopener">larphub.tech &#8599;</a></div>
+      <div class="fcol"><h4>Info</h4><a href="contact.html">Contact form</a><a href="services.html#faq">FAQ</a><a href="privacy.html">Privacy</a></div>
+    </div>
+    <div class="fbot"><span>&copy; <span data-year>2026</span> Punch. All rights reserved.</span><span id="views" hidden><b id="vn">0</b> visits</span></div>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -3,44 +3,65 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="img/mark.svg">
 <link rel="icon" type="image/png" href="img/favicon.png">
-<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<title>privacy policy - punch</title>
-<meta name="robots" content="noindex">
+<title>Privacy — Punch</title>
+<meta name="description" content="How this website handles your information.">
+<meta name="theme-color" content="#f6f5f1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#0a0a0a;color:#f4f4f2;font:400 16px/1.7 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.wrap{width:min(720px,100% - 40px);margin:0 auto;padding:44px 0 80px}
-.back{font:500 .72rem 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:#8b8b8b;text-decoration:none}
-.back:hover{color:#fff}
-h1{font-size:clamp(2rem,6vw,3rem);letter-spacing:-.03em;line-height:1.1;margin:28px 0 8px}
-.date{color:#8b8b8b;font:400 .78rem 'IBM Plex Mono',monospace;margin-bottom:34px}
-h2{font-size:1.15rem;margin:30px 0 8px;letter-spacing:-.01em}
-p,li{color:#c4c4c0}
-ul{padding-left:20px;margin-top:6px}
-li{margin:4px 0}
+.legal{max-width:720px}
+.legal h2{font-size:1.25rem;font-weight:600;margin:34px 0 8px}
+.legal p,.legal li{color:#3a3936}
+.legal ul{padding-left:20px;margin-top:8px}
+.legal li{margin:4px 0}
 </style>
 </head>
 <body>
-<div class="wrap">
-<a class="back" href="./">&larr; back</a>
-<h1>privacy policy</h1>
-<p class="date">last updated october 2026</p>
-<p>this site is run by punch (heyimpunch.xyz). this page explains what information it handles.</p>
-<h2>what i collect</h2>
-<p>only what you choose to type into the request form: the service you want, a description, optional links, your budget, your timeline and your discord username. that is used to reply to you and to scope the work.</p>
-<h2>how it is sent</h2>
-<p>requests are delivered to me privately on discord, or copied by you and sent to me on discord yourself. i do not sell or share your request with anyone else.</p>
-<h2>third-party services</h2>
-<ul><li>an anonymous page-view counter (counts visits, no personal details).</li><li>a live discord status service that shows whether i am online.</li><li>google fonts and discord's image servers for fonts and my profile picture.</li></ul>
-<h2>cookies and storage</h2>
-<p>the site stores a few small values in your browser (for example, so a visit is only counted once per session and the request form can limit repeat sends). there are no advertising or tracking cookies.</p>
-<h2>deleting your information</h2>
-<p>message me on discord and i will delete any request you sent.</p>
-</div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="mark" aria-hidden="true">P</span>Punch</a>
+    <nav class="links" aria-label="Main"><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="contact.html">Contact</a></nav>
+    <a class="btn dark" href="contact.html">Start a project</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="Mobile"><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="contact.html">Contact</a></nav>
+</header>
+
+<main>
+  <div class="phead"><div class="wrap">
+    <span class="mono">Legal</span>
+    <h1 class="serif">Privacy <em>policy.</em></h1>
+    <p>Last updated November 2026.</p>
+  </div></div>
+  <section>
+    <div class="wrap legal">
+      <p>This website is run by Punch. This page explains what information the site handles and why.</p>
+      <h2>The contact form</h2>
+      <p>The contact form is not live yet, so nothing you type into it is sent or stored. When it goes live, it will collect the details you choose to enter, such as your name, email address, project details, budget range and, for businesses or non-profits, information about your organization. That information will only be used to reply to you and to scope your project. It will not be sold or shared.</p>
+      <h2>Analytics</h2>
+      <p>The site uses an anonymous visit counter. It counts visits and does not collect your name, email address or other personal details.</p>
+      <h2>Third-party services</h2>
+      <ul>
+        <li>Google Fonts, to load the fonts used on the site.</li>
+        <li>An anonymous counter service, to count visits.</li>
+      </ul>
+      <h2>Cookies and storage</h2>
+      <p>The site stores a small value in your browser so a visit is only counted once per session. There are no advertising or tracking cookies.</p>
+      <h2>Your information</h2>
+      <p>Once the contact form is live, you can ask for any enquiry you've sent to be deleted by replying to the email you receive.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbot" style="margin-top:0;border-top:0;padding-top:0"><span>&copy; <span data-year>2026</span> Punch. All rights reserved.</span><a href="index.html">Back to home</a></div>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
 </body>
 </html>
